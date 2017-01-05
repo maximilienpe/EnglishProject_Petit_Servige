@@ -1,0 +1,21 @@
+package VocabularySystem;
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class TopicFactory {
+
+	
+	private ArrayList<TopicVocabulary> topics;
+	private Scanner sc;
+	
+	public TopicFactory() {
+	}
+	
+	public ArrayList<TopicVocabulary> makeAllTopic() {
+		this.topics = new ArrayList<TopicVocabulary>();
+		
+		return this.topics;
+	}
+	
+	
+}

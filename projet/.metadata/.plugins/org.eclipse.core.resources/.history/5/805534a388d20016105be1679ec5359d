@@ -1,0 +1,14 @@
+
+public class VocabularyManager {
+	
+	
+	
+	
+	public VocabularyManager() {
+		
+	}
+	
+	public ArrayList<TopicManager> createAllTopic() {
+		
+	}
+}

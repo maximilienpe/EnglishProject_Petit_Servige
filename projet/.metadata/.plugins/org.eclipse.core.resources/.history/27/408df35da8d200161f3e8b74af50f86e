@@ -1,0 +1,114 @@
+package MainSystem;
+import java.util.ArrayList;
+
+import LogSystem.LogLevel;
+import LogSystem.Logger;
+import ObserverSystem.Observer;
+import VocabularySystem.TopicFactory;
+import VocabularySystem.TopicVocabulary;
+
+public class Modele {
+
+	/*
+	 * Initialisation des variables du modèle
+	 */
+	//Variables générales
+	ArrayList<Observer> observers;
+	
+	//variables logger
+	Logger modeleLogger;
+	Boolean showLog;
+	Boolean addLog;
+	
+	//Variables relatives au vocabulaire
+	ArrayList<TopicVocabulary> topics;
+	TopicFactory topicFactory;
+	
+	
+	
+	public Modele() {
+		//general var
+		this.observers = new ArrayList<Observer>();
+		
+		//variable logger
+		this.modeleLogger = new Logger();
+		this.showLog = true;
+		if (this.showLog) {
+			this.modeleLogger.showLogOn();
+		}
+		else {
+			this.modeleLogger.showLogOff();
+		}
+		this.addLog = true;
+		
+		//variables relatives au vocabulaire
+		this.topics = new ArrayList<TopicVocabulary>();
+		this.topicFactory = new TopicFactory(this.modeleLogger, this.addLog);
+	}
+	
+	public void addObserver(Observer o) {
+		this.observers.add(o);
+		if (this.addLog) 
+			this.modeleLogger.addLog("MODELE Observer added.", LogLevel.INFO);
+	}
+	
+	public void notifyObservers() {
+		for (Observer o : this.observers) {
+			o.update();
+		}
+		if (this.addLog)
+			this.modeleLogger.addLog("MODELE Observers notified.", LogLevel.INFO);
+	}
+	
+	public void setLoggerShow(Boolean b) {
+		if (b) {
+			this.modeleLogger.showLogOn();
+			if (this.addLog) {
+				this.modeleLogger.addLog("MODELE ShowLog when added On.", LogLevel.INFO);
+			}
+		}
+		else {
+			this.modeleLogger.showLogOff();
+			if (this.addLog) {
+				this.modeleLogger.addLog("MODELE ShowLog when added Off.", LogLevel.INFO);
+			}
+		}
+	}
+	
+	public void setAddLog(Boolean addLog) {
+		this.addLog = addLog;
+	}
+	
+	public void setAddLogTopicFactory(Boolean addLog) {
+		this.topicFactory.setAddLog(addLog);
+	}
+	
+	public void setAddLogSubClassesTopicFactory(Boolean addLog) {
+		this.topicFactory.setAddLogSubClasses(addLog);
+	}
+	
+	
+	public void loadTopics() {
+		this.topics = topicFactory.makeAllTopic();
+		if (addLog) {
+			this.modeleLogger.addLog("MODELE Ask topicFactory makeAllTopic.", LogLevel.INFO);
+		}
+	}
+	
+	public void showTopics() {
+		if (addLog) {
+			this.modeleLogger.addLog("MODELE Show all topics.", LogLevel.INFO);
+		}
+		for (TopicVocabulary topic : this.topics) {
+			topic.displayTopic();
+		}
+	}
+	
+	
+	public static void main(String args[]) {
+		Modele modeleTest = new Modele();
+		modeleTest.loadTopics();
+		modeleTest.showTopics();
+	}
+	
+}

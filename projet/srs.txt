@@ -1,0 +1,27 @@
+////////////////////////// English Project /////////////////////////////
+
+//////// Functional Requirements /////////////
+
+Ideas : 
+	1. User shall test/improve his vocabulary (by topic)
+		(ie. shall have a base of vocabulary)
+		(ie. user shall upload new topics of vocabulary : by including a csv file
+ in a repository name vocabulary or by add a word from the software application)
+	2. User shall test/improve his grammar (a point or more)
+		(ie. fall the blank test)
+	3. User shall have an access to a view of his results
+		(ie. generate statistics on each test by users)
+	4. User shall launch an oral comprehension 
+		(ie. shall launch an audio file from local)
+	5. User shall launch a written comprehension
+		(ie. shall read specific texts and offer some questions)
+	
+/////// Non-Functional Requirements /////////
+	1. The application shall run on each OS
+	2. The application shall use JAVA/...
+	3. The application shall use MVC patern 
+	4. The application shall use Swing or JavaFX package for the graphic
+environnement
+	5. The system should be composed of a database or a file system to 
+make it easier
+	 

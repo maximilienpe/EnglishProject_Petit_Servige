@@ -1,0 +1,9 @@
+package VocabularySystem;
+import java.io.File;
+import java.util.HashMap;
+
+public interface TopicReader {
+	
+	public HashMap<String,String> extractTopic(File topicFile);
+
+}

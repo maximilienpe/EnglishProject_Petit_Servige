@@ -1,0 +1,9 @@
+package LogSystem;
+
+public interface Logger {
+
+	public void showLogOn();
+	public void showLogOff();
+	public void addLog();
+	public void readLog();
+}

@@ -1,0 +1,36 @@
+package MainSystem;
+import java.util.ArrayList;
+
+import ObserverSystem.Observer;
+import VocabularySystem.TopicVocabulary;
+
+public class Modele {
+
+	/*
+	 * Initialisation des variables du modèle
+	 */
+	//Variables générales
+	ArrayList<Observer> observers;
+	
+	
+	//Variables relatives au vocabulaire
+	ArrayList<TopicVocabulary> topics;
+	
+	
+	
+	public Modele() {
+		this.observers = new ArrayList<Observer>();
+		this.topics = new ArrayList<TopicVocabulary>();
+		
+		
+	}
+	
+	public void addObserver() {
+		
+	}
+	
+	public void notifyObservers() {
+		
+	}
+	
+}

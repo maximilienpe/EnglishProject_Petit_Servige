@@ -1,0 +1,31 @@
+package VocabularySystem;
+import java.io.File;
+import java.util.ArrayList;
+
+
+public class FileTopicExplorer {
+		
+	ArrayList<File> topicFiles;
+	String topicDirectory;
+	
+	public FileTopicExplorer() {
+		this.topicDirectory = "Vocabulary";
+		this.topicFiles = new ArrayList<File>();
+	}
+
+	public ArrayList<File> searchAllTopicFile() {
+		File fd = new File(this.topicDirectory);
+		File[] topicFilesIntermediaire = fd.listFiles();
+		if (topicFilesIntermediaire != null) {
+			for (int i=0 ; i < topicFilesIntermediaire.length -1 ; i++) {
+				if (topicFilesIntermediaire[i].isFile()) {
+					System.out.println();
+				}
+			}
+		}
+		else {
+			System.out.println("No vocab sheet find.");
+		}
+	}
+	
+}
