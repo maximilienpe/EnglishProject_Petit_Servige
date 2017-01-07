@@ -1,31 +1,41 @@
 package MainSystem;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import LogSystem.LogLevel;
 import LogSystem.Logger;
 import ObserverSystem.Observer;
 import VocabularySystem.TopicFactory;
 import VocabularySystem.TopicVocabulary;
+import VocabularySystem.TypeOfGame;
+import VocabularySystem.VocabularyGame;
+import VocabularySystem.Word;
 
 public class Modele {
 
 	/*
 	 * Initialisation des variables du modèle
+	 * 
 	 */
 	//Variables générales
-	ArrayList<Observer> observers;
+	private ArrayList<Observer> observers;
 	
 	//variables logger
-	Logger modeleLogger;
-	Boolean showLog;
-	Boolean addLog;
+	private Logger modeleLogger;
+	private Boolean showLog;
+	private Boolean addLog;
 	
 	//Variables relatives au vocabulaire
-	ArrayList<TopicVocabulary> topics;
-	TopicFactory topicFactory;
+	private ArrayList<TopicVocabulary> topics;
+	private TopicFactory topicFactory;
+	//variable vocabulaire jeu
+	private TopicVocabulary selectedTopic;
 	
 	
-	
+	/*
+	 * Constructor
+	 * 
+	 */
 	public Modele() {
 		//general var
 		this.observers = new ArrayList<Observer>();
@@ -44,8 +54,13 @@ public class Modele {
 		//variables relatives au vocabulaire
 		this.topics = new ArrayList<TopicVocabulary>();
 		this.topicFactory = new TopicFactory(this.modeleLogger, this.addLog);
+		this.selectedTopic = null;
 	}
 	
+	/*
+	 * Observer part
+	 * 
+	 */
 	public void addObserver(Observer o) {
 		this.observers.add(o);
 		if (this.addLog) 
@@ -60,6 +75,11 @@ public class Modele {
 			this.modeleLogger.addLog("MODELE Observers notified.", LogLevel.INFO);
 	}
 	
+	
+	/*
+	 * Logger part
+	 * 
+	 */
 	public void setLoggerShow(Boolean b) {
 		if (b) {
 			this.modeleLogger.showLogOn();
@@ -87,7 +107,15 @@ public class Modele {
 		this.topicFactory.setAddLogSubClasses(addLog);
 	}
 	
+	public Logger getModeleLogger() {
+		return this.modeleLogger;
+	}
 	
+	/*
+	 * Vocabulary Part
+	 * 
+	 */
+	//initialisation
 	public void loadTopics() {
 		this.topics = topicFactory.makeAllTopic();
 		if (addLog) {
@@ -95,6 +123,28 @@ public class Modele {
 		}
 	}
 	
+	public void selectTopic(String titleTopic) {
+		Boolean found = false;
+		for (TopicVocabulary t : this.topics) {
+			if (t.getTitleTopic().equals(titleTopic)) {
+				this.selectedTopic = t;
+				found = true;
+				break;
+			}
+		}
+		if (found) {
+			this.modeleLogger.addLog("MODELE The topic named " + this.selectedTopic.getTitleTopic() + " has been selected.", LogLevel.INFO);
+		}
+		else {
+			this.modeleLogger.addLog("MODELE The topic named " + titleTopic + " can't be found.", LogLevel.ERROR);
+		}
+	}
+	
+	public TopicVocabulary getSelectedTopic() {
+		return this.selectedTopic;
+	}
+	
+	//console part
 	public void showTopics() {
 		if (addLog) {
 			this.modeleLogger.addLog("MODELE Show all topics.", LogLevel.INFO);
@@ -114,10 +164,32 @@ public class Modele {
 	}
 	
 	
+	/*
+	 * Test of the Modele
+	 * 
+	 */
 	public static void main(String args[]) {
 		Modele modeleTest = new Modele();
 		modeleTest.loadTopics();
-		modeleTest.showTopicsDetailed();
-	}
+		//modeleTest.showTopicsDetailed();
+		modeleTest.selectTopic("TestTopic");
+		VocabularyGame game = new VocabularyGame(modeleTest.getSelectedTopic(),TypeOfGame.ENGLISH, modeleTest.getModeleLogger());
+		while (!game.getEndVocabularyGame()) {
+			System.out.println("What is the french for : " + game.getGameAskedExpression());
+			Scanner sc = new Scanner(System.in);
+			String answer = sc.nextLine();
+			if (game.checkVocabAnswer(answer)){
+				System.out.println("Good job !");
+				game.playVocabGame();
+			}
+			else {
+				System.out.println("Sniff, the right answer is : " + game.getFrenchAskedWord() + " ! :(");
+				game.playVocabGame();
+			}
+		}
+		int score = game.getVocabularyGameScore();
+		int scoreMax = game.getVocabularyGameScoreMax();
+		System.out.println("This game is over ! You have " + score + " out of " + scoreMax + "!");
+	}	
 	
 }
