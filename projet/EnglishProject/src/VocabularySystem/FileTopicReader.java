@@ -44,7 +44,7 @@ public class FileTopicReader implements TopicReader {
 				buffer = sc.nextLine();
 				String words[];
 				words = buffer.split(",");
-				System.out.println(words[0] + " : " + words[1]);
+				//System.out.println(words[0] + " : " + words[1]);
 				this.topic.addAWord(words[0], words[1]);
 			}
 		}
