@@ -4,39 +4,57 @@ import java.util.ArrayList;
 
 import LogSystem.LogLevel;
 import LogSystem.Logger;
+import MainSystem.Game;
 
-public class VocabularyGame {
+public class VocabularyGame implements Game{
 
 	//variables logger
-	Logger logger;
-	Boolean addLog;
+	private Logger logger;
+	private Boolean addLog;
 
-	//variable vocabulaire jeu
-	TopicVocabulary selectedTopic;
-	Word askedWord;
-	ArrayList<Integer> wordPlayable;
-	TypeOfGame type;
-	int VocabScore;
-	int VocabScoreMax;
-	Boolean VocabGameEnd;
-	Boolean WordChecked;
+	//variable topic du jeu
+	private TopicVocabulary selectedTopic;
+	
+	//variable words du jeu
+	private int currentIndex;
+	private Word askedWord;
+	/*
+	private String currentAskedExpression;
+	private String currentAnswer;*/
+	private ArrayList<Integer> wordPlayable;
+	private ArrayList<Word> wordsToPlay;
+
+	
+	//données du jeu
+	private TypeOfGame type;
+	private int VocabScoreMax;
+	private int VocabScore;
+	
+	//variables de condition du jeu
+	private Boolean WordChecked;
+	private Boolean VocabGameEnd;
+
+	
 
 	//vocabulary game part
-	public VocabularyGame(TopicVocabulary selectedTopic, TypeOfGame typeOfGame, Logger logger) {
+	public VocabularyGame(TopicVocabulary selectedTopic, TypeOfGame typeOfGame, int numberOfWords, Logger logger) {
 		if (selectedTopic != null && typeOfGame != null) {
 			this.logger = logger;
 			this.selectedTopic = selectedTopic;
 			this.WordChecked = false;
 			this.VocabGameEnd = false;
 			this.VocabScore = 0;
-			this.VocabScoreMax = this.selectedTopic.getTopicVocabulary().size();
+			this.VocabScoreMax = Math.min(numberOfWords, this.selectedTopic.getTopicVocabulary().size());
 			this.type = typeOfGame;
 			this.wordPlayable = new ArrayList<Integer>();
 			for (int i=0; i < this.selectedTopic.getTopicVocabulary().size() ; i++) {
 				this.wordPlayable.add(i);
 				//System.out.println(i+ "has been added.");
 			}
-			askNewWord();
+			this.generateRandomListOfWord(numberOfWords);
+			this.currentIndex = 0;
+			/*this.currentAnswer =null;
+			this.currentAskedExpression= null;*/
 			this.logger.addLog("VOCABULARYGAME Initilisation of a new game.", LogLevel.INFO);
 		}
 		else {
@@ -44,17 +62,24 @@ public class VocabularyGame {
 		}
 	}
 
-	
+	//verify if the word has already been checked and do nothing if the game is finished
 	public void playVocabGame() {
 		if (!this.VocabGameEnd && this.WordChecked) {
-			this.askNewWord();
+			if (this.currentIndex != this.wordsToPlay.size()-1) {
+				this.askedWord = this.wordsToPlay.get(currentIndex);
+				this.currentIndex++;
+			}
+			else {
+				this.VocabGameEnd = true;
+			}
 		}
-		else if (!this.VocabGameEnd && ! this.WordChecked) {
+		else if (!this.WordChecked) {
 			this.logger.addLog("VOCABULARYGAME Can't play a new word without having checked before.", LogLevel.WARNING);
 		}
 		else {
 			this.logger.addLog("VOCABULARYGAME This game has already been finished.", LogLevel.INFO);
 		}
+		this.WordChecked = false;
 	}
 
 	public Boolean checkVocabAnswer(String answer) {
@@ -81,7 +106,7 @@ public class VocabularyGame {
 		return valideAnswer;
 	}
 
-	public void askNewWord() {
+	public boolean askNewWord() {
 		if (this.wordPlayable.size() != 0) {
 			int numberChoice = (int)(Math.random() * ((this.wordPlayable.size()-1) + 1));
 			int choice = this.wordPlayable.get(numberChoice);
@@ -90,25 +115,49 @@ public class VocabularyGame {
 			//System.out.println(choice);
 			this.wordPlayable.remove(numberChoice);
 			this.logger.addLog("VOCABULARYGAME A new word has been asked.", LogLevel.INFO);
+			return true;
 		}
 		else {
 			this.logger.addLog("VOCABULARYGAME No more word to test.", LogLevel.INFO);
-			this.VocabGameEnd = true;
+			return false;
 		}
-
+	}
+	
+	public void generateRandomListOfWord(int numberOfWord) {
+		Boolean outOfBounds = false;
+		
+		this.wordsToPlay = new ArrayList<Word>();
+		for (int i=0 ; i < numberOfWord ; i++) {
+			if (askNewWord()) {
+				this.wordsToPlay.add(this.askedWord);
+			}
+			else {
+				this.logger.addLog("VOCABULARYGAME The number of word wanted exceed the number of word of this topic.", LogLevel.WARNING);
+				outOfBounds = true;
+				break;
+			}
+		}
+		if (!outOfBounds) {
+			this.logger.addLog("VOCABULARYGAME The words to play have been generated successfully.", LogLevel.INFO);
+		}
+		else {
+			this.logger.addLog("VOCABULARYGAME The words to play have been generated.", LogLevel.INFO);
+		}
 	}
 
-	public String getEnglishAskedWord() {
+	private String getEnglishAskedWord() {
 		int numberChoice = (int)(Math.random() * ((this.askedWord.getEnglishWords().size()-1) + 1));
 		return this.askedWord.getEnglishWords().get(numberChoice);
 	}
 
-	public String getFrenchAskedWord() {
+	private String getFrenchAskedWord() {
 		int numberChoice = (int)(Math.random() * ((this.askedWord.getFrenchWords().size()-1) + 1));
 		return this.askedWord.getFrenchWords().get(numberChoice);
 	}
+	
+	
 
-	public Word getAskedWord() {
+	private Word getAskedWord() {
 		return this.askedWord;
 	}
 
@@ -120,15 +169,52 @@ public class VocabularyGame {
 	//if typeOfGame = TypeOfGame.FRENCH it return a french word and the player have to give the english one
 	public String getGameAskedExpression() {
 		if (this.type.equals(TypeOfGame.ENGLISH)) {
-			return getEnglishAskedWord();
+			this.logger.addLog("VOCABULARYGAME An english word is given.", LogLevel.INFO);
+			return this.getEnglishAskedWord();
 		}
 		else if (this.type.equals(TypeOfGame.FRENCH)) {
-			return getFrenchAskedWord();
+			this.logger.addLog("VOCABULARYGAME A french word is given.", LogLevel.INFO);
+			return this.getFrenchAskedWord();
 		}
+		/*else if (this.type.equals(TypeOfGame.RANDOM)) {
+			this.logger.addLog("VOCABULARYGAME An english of a french word is given.", LogLevel.INFO);
+			int numberChoice = (int)(Math.random() * ((1) + 1));
+			if (numberChoice == 0) {
+				return this.getEnglishAskedWord();
+			}
+			else {
+				return this.getFrenchAskedWord();
+			}
+		}*/
 		else {
 			this.logger.addLog("VOCABULARYGAME Wrong type of game.", LogLevel.ERROR);
+			return null;
 		}
-		return null;
+	}
+	
+	public String getGameAnswerExpression() {
+		if (this.type.equals(TypeOfGame.ENGLISH)) {
+			this.logger.addLog("VOCABULARYGAME The answer in french is given.", LogLevel.INFO);
+			return this.getFrenchAskedWord();
+		}
+		else if (this.type.equals(TypeOfGame.FRENCH)) {
+			this.logger.addLog("VOCABULARYGAME The answer in english is given.", LogLevel.INFO);
+			return this.getEnglishAskedWord();
+		}
+		/*else if (this.type.equals(TypeOfGame.RANDOM)) {
+			this.logger.addLog("VOCABULARYGAME An english of a french word is given.", LogLevel.INFO);
+			int numberChoice = (int)(Math.random() * ((1) + 1));
+			if (numberChoice == 0) {
+				return this.getEnglishAskedWord();
+			}
+			else {
+				return this.getFrenchAskedWord();
+			}
+		}*/
+		else {
+			this.logger.addLog("VOCABULARYGAME Wrong type of game.", LogLevel.ERROR);
+			return null;
+		}
 	}
 	
 	public int getVocabularyGameScore() {
@@ -143,7 +229,9 @@ public class VocabularyGame {
 		return this.VocabGameEnd;
 	}
 	
-	
-	
+	public ArrayList<Word> getWordsToPlay() {
+		return this.wordsToPlay;
+	}
+ 	
 
 }

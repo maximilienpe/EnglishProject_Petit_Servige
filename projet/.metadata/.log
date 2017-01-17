@@ -802,3 +802,23 @@ Java Model Exception: Java Model Status [VocabularyGame() [in VocabularyGame [in
 	at org.eclipse.jface.text.TextViewerHoverManager$4.run(TextViewerHoverManager.java:165)
 !SUBENTRY 1 org.eclipse.jdt.core 4 969 2017-01-07 17:02:30.987
 !MESSAGE VocabularyGame() [in VocabularyGame [in [Working copy] VocabularyGame.java [in VocabularySystem [in src [in EnglishProject]]]]] does not exist
+!SESSION 2017-01-09 13:22:47.610 -----------------------------------------------
+eclipse.buildId=4.6.1.M20160907-1200
+java.version=1.8.0_65
+java.vendor=Oracle Corporation
+BootLoader constants: OS=macosx, ARCH=x86_64, WS=cocoa, NL=fr_FR
+Framework arguments:  -product org.eclipse.epp.package.java.product -product org.eclipse.epp.package.java.product -keyring /Users/Max/.eclipse_keyring
+Command-line arguments:  -os macosx -ws cocoa -arch x86_64 -product org.eclipse.epp.package.java.product -data /Users/Max/workspace/Cours/Deuxième année TNCY/Anglais/EnglishProject_Petit_Servige/projet -product org.eclipse.epp.package.java.product -keyring /Users/Max/.eclipse_keyring
+
+!ENTRY org.eclipse.core.net 1 0 2017-01-09 13:22:52.554
+!MESSAGE System property http.nonProxyHosts has been set to local|*.local|169.254/16|*.169.254/16 by an external source. This value will be overwritten using the values from the preferences
+!SESSION 2017-01-17 10:40:29.400 -----------------------------------------------
+eclipse.buildId=4.6.1.M20160907-1200
+java.version=1.8.0_65
+java.vendor=Oracle Corporation
+BootLoader constants: OS=macosx, ARCH=x86_64, WS=cocoa, NL=fr_FR
+Framework arguments:  -product org.eclipse.epp.package.java.product -keyring /Users/Max/.eclipse_keyring
+Command-line arguments:  -os macosx -ws cocoa -arch x86_64 -product org.eclipse.epp.package.java.product -keyring /Users/Max/.eclipse_keyring
+
+!ENTRY org.eclipse.core.net 1 0 2017-01-17 10:40:52.210
+!MESSAGE System property http.nonProxyHosts has been set to local|*.local|169.254/16|*.169.254/16 by an external source. This value will be overwritten using the values from the preferences

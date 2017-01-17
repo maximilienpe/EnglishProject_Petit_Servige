@@ -30,6 +30,7 @@ public class Modele {
 	private TopicFactory topicFactory;
 	//variable vocabulaire jeu
 	private TopicVocabulary selectedTopic;
+	private VocabularyGame vocabGame;
 	
 	
 	/*
@@ -55,6 +56,7 @@ public class Modele {
 		this.topics = new ArrayList<TopicVocabulary>();
 		this.topicFactory = new TopicFactory(this.modeleLogger, this.addLog);
 		this.selectedTopic = null;
+		this.vocabGame = null;
 	}
 	
 	/*
@@ -144,7 +146,55 @@ public class Modele {
 		return this.selectedTopic;
 	}
 	
+	//vocab game part
+	public void launchVocabGame(String titleTopic, TypeOfGame type, int numberOfWords) {
+		this.selectTopic(titleTopic);
+		this.vocabGame = new VocabularyGame(this.selectedTopic,type,numberOfWords,this.modeleLogger);
+		this.modeleLogger.addLog("MODELE A new game is launched.", LogLevel.INFO);
+	}
+	
+	public void nextWordVocabGame() {
+		this.vocabGame.playVocabGame();
+	}
+	
+	public Boolean checkAnswerVocabGame(String answer) {
+		return this.vocabGame.checkVocabAnswer(answer);
+	}
+	
+	public String getTheWordToAskVocabGame() {
+		return this.vocabGame.getGameAskedExpression();
+	}
+	
+	public String getAnAnswer() {
+		return this.vocabGame.getGameAnswerExpression();
+	}
+	
+	public int getVocabGameScore() {
+		return this.vocabGame.getVocabularyGameScore();
+	}
+	
+	public int getVocabGameScoreMax() {
+		return this.vocabGame.getVocabularyGameScoreMax();
+	}
+	
+	public Boolean isVocabGameEndded() {
+		return this.vocabGame.getEndVocabularyGame();
+	}
+	
+	public ArrayList<Word> getWordsToPlay() {
+		return this.vocabGame.getWordsToPlay();
+	}
+	
 	//console part
+	public void showTopicsTitle() {
+		if (addLog) {
+			this.modeleLogger.addLog("MODELE Show all topics title.", LogLevel.INFO);
+		}
+		for (TopicVocabulary topic : this.topics) {
+			System.out.println(topic.getTitleTopic());
+		}
+	}
+	
 	public void showTopics() {
 		if (addLog) {
 			this.modeleLogger.addLog("MODELE Show all topics.", LogLevel.INFO);
@@ -171,24 +221,32 @@ public class Modele {
 	public static void main(String args[]) {
 		Modele modeleTest = new Modele();
 		modeleTest.loadTopics();
-		//modeleTest.showTopicsDetailed();
-		modeleTest.selectTopic("TestTopic");
-		VocabularyGame game = new VocabularyGame(modeleTest.getSelectedTopic(),TypeOfGame.ENGLISH, modeleTest.getModeleLogger());
-		while (!game.getEndVocabularyGame()) {
-			System.out.println("What is the french for : " + game.getGameAskedExpression());
-			Scanner sc = new Scanner(System.in);
+		modeleTest.showTopicsTitle();
+		System.out.println("Please choose a topic :");
+		Scanner sc = new Scanner(System.in);
+		String titleTopic = sc.nextLine();
+		System.out.println("Please enter how many word you want :");
+		sc = new Scanner(System.in);
+		int numberOfWord = sc.nextInt();
+		modeleTest.launchVocabGame(titleTopic,TypeOfGame.ENGLISH, numberOfWord);
+		for (Word w : modeleTest.getWordsToPlay()) {
+			w.showWord();
+		}
+		while (!modeleTest.isVocabGameEndded()) {
+			System.out.println("What is the french for : " + modeleTest.getTheWordToAskVocabGame());
+			sc = new Scanner(System.in);
 			String answer = sc.nextLine();
-			if (game.checkVocabAnswer(answer)){
+			if (modeleTest.checkAnswerVocabGame(answer)) {
 				System.out.println("Good job !");
-				game.playVocabGame();
+				modeleTest.nextWordVocabGame();
 			}
 			else {
-				System.out.println("Sniff, the right answer is : " + game.getFrenchAskedWord() + " ! :(");
-				game.playVocabGame();
+				System.out.println("Sniff, the right answer is : " + modeleTest.getAnAnswer() + " ! :(");
+				modeleTest.nextWordVocabGame();
 			}
 		}
-		int score = game.getVocabularyGameScore();
-		int scoreMax = game.getVocabularyGameScoreMax();
+		int score = modeleTest.getVocabGameScore();
+		int scoreMax = modeleTest.getVocabGameScoreMax();
 		System.out.println("This game is over ! You have " + score + " out of " + scoreMax + "!");
 	}	
 	

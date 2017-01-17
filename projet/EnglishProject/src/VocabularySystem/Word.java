@@ -42,4 +42,29 @@ public class Word {
 		return this.frenchWords;
 	}
 	
+	public void showWord() {
+		Boolean first = true;
+		for (String ew : this.getEnglishWords()) {
+			if (!first) {
+				System.out.print(", ");
+			}
+			else {
+				first = false;
+			}
+			System.out.print(ew);
+		}
+		System.out.print(" : ");
+		first = true;
+		for (String ef : this.getFrenchWords()) {
+			if (!first) {
+				System.out.print(", ");
+			}
+			else {
+				first = false;
+			}
+			System.out.print(ef);
+		}
+		System.out.println();
+	}
+	
 }
