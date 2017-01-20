@@ -53,6 +53,30 @@ public class TopicVocabulary {
 		}
 	}
 	
+	public void addAWord(Word newWord) {
+		Boolean found = false;
+		for (Word w : this.englishToFrench) {
+			if (w.getEnglishWords().contains(newWord.getEnglishWords().get(0)) && w.getFrenchWords().contains(newWord.getFrenchWords().get(0))) {
+				found = true;
+				break;
+			}
+			else if (w.getEnglishWords().contains(newWord.getEnglishWords().get(0))) {
+				w.addFrenchWord(newWord.getFrenchWords().get(0));
+				found = true;
+				break;
+			}
+			else if (w.getFrenchWords().contains(newWord.getFrenchWords().get(0))) {
+				w.addEnglishWord(newWord.getEnglishWords().get(0));
+				found = true;
+				break;
+			}
+		}
+		if (!found) {
+			//System.out.println("Word not found");
+			this.englishToFrench.add(newWord);
+		}
+	}
+	
 	/*public void rmWord(String englishExpression, String frenshExpression) {
 		this.englishToFrench.remove(englishExpression);
 	}

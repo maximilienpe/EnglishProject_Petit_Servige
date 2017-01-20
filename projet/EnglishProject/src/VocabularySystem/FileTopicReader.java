@@ -1,6 +1,7 @@
 package VocabularySystem;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -39,13 +40,32 @@ public class FileTopicReader implements TopicReader {
 		try {
 			sc = new Scanner(topicFile);
 			buffer = sc.nextLine();
-			this.topic.setTitleTopic(buffer);
+			this.topic.setTitleTopic(buffer.trim());
 			while (sc.hasNextLine()) {
 				buffer = sc.nextLine();
 				String words[];
 				words = buffer.split(",");
+				/*
 				//System.out.println(words[0] + " : " + words[1]);
 				this.topic.addAWord(words[0], words[1]);
+				*/
+				ArrayList<String> englishExpressions = new ArrayList<String>();
+				ArrayList<String> frenchExpressions = new ArrayList<String>();
+				
+				String englishWords[];
+				String frenchWords[];
+				
+				englishWords = words[0].split(";");
+				frenchWords = words[1].split(";");
+				
+				for (String Eexp : englishWords) {
+					englishExpressions.add(Eexp.trim());
+				}
+				for (String Fexp : frenchWords) {
+					frenchExpressions.add(Fexp.trim());
+				}
+				Word newWord = new Word(englishExpressions,frenchExpressions);
+				this.topic.addAWord(newWord);
 			}
 		}
 		catch (FileNotFoundException e) {

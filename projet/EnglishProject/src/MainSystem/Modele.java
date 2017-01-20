@@ -128,7 +128,7 @@ public class Modele {
 	public void selectTopic(String titleTopic) {
 		Boolean found = false;
 		for (TopicVocabulary t : this.topics) {
-			if (t.getTitleTopic().equals(titleTopic)) {
+			if (t.getTitleTopic().equals(titleTopic.trim())) {
 				this.selectedTopic = t;
 				found = true;
 				break;

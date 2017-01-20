@@ -1,6 +1,5 @@
 TestTopic
-hello,salut
-goodmorning,bonjour
+hi;hello;goodmorning,salut;bonjour;yo
 cat,chat
 dog,chien
 drug,médicament
@@ -13,4 +12,4 @@ Yutian,alcolique
 Rémi,voleur
 Pierre-arnaud,joueur
 Graziella,chaton mignon
-chicken, poulet
+chicken,poulet

@@ -18,6 +18,12 @@ public class Word {
 		this.frenchWords.add(frenchWord);
 	}
 	
+	public Word(ArrayList<String> englishExpressions, ArrayList<String> frenchExpressions) {
+		this();
+		this.englishWords = englishExpressions;
+		this.frenchWords = frenchExpressions;
+	}
+	
 	public void addEnglishWord(String ew) {
 		this.englishWords.add(ew);
 	}

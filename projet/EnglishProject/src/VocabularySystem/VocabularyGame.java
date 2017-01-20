@@ -86,7 +86,7 @@ public class VocabularyGame implements Game{
 		Boolean valideAnswer = false;
 		if (this.type.equals(TypeOfGame.ENGLISH)) {
 			for (String fw : this.askedWord.getFrenchWords()) {
-				if (fw.equals(answer)) {
+				if (fw.equals(answer.trim())) {
 					this.VocabScore++;
 					valideAnswer = true;
 					break;
@@ -95,7 +95,7 @@ public class VocabularyGame implements Game{
 		}
 		else if (this.type.equals(TypeOfGame.FRENCH)) {
 			for (String ew : this.askedWord.getEnglishWords()) {
-				if (ew.equals(answer)) {
+				if (ew.equals(answer.trim())) {
 					this.VocabScore++;
 					valideAnswer = true;
 					break;
