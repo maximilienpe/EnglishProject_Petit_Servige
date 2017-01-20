@@ -2,6 +2,10 @@ package MainSystem;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import GrammarSystem.GrammarFactory;
+import GrammarSystem.GrammarGame;
+import GrammarSystem.GrammarQuestion;
+import GrammarSystem.TopicGrammar;
 import LogSystem.LogLevel;
 import LogSystem.Logger;
 import ObserverSystem.Observer;
@@ -13,10 +17,12 @@ import VocabularySystem.Word;
 
 public class Modele {
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	/*
 	 * Initialisation des variables du modèle
 	 * 
 	 */
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//Variables générales
 	private ArrayList<Observer> observers;
 	
@@ -32,11 +38,19 @@ public class Modele {
 	private TopicVocabulary selectedTopic;
 	private VocabularyGame vocabGame;
 	
-	
+	//variables relatives à la grammaire
+	private ArrayList<TopicGrammar> grammarTopics;
+	private GrammarFactory grammarFactory;
+	//variable grammaire jeu
+	private TopicGrammar selectedGrammarTopic;
+	private GrammarGame grammarGame;
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	/*
 	 * Constructor
 	 * 
 	 */
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	public Modele() {
 		//general var
 		this.observers = new ArrayList<Observer>();
@@ -57,12 +71,20 @@ public class Modele {
 		this.topicFactory = new TopicFactory(this.modeleLogger, this.addLog);
 		this.selectedTopic = null;
 		this.vocabGame = null;
+		
+		//variables relatives à la grammaire
+		this.grammarTopics = new ArrayList<TopicGrammar>();
+		this.grammarFactory = new GrammarFactory(this.modeleLogger, this.addLog);
+		this.selectedGrammarTopic = null;
+		this.grammarGame = null;
 	}
-	
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	/*
 	 * Observer part
 	 * 
 	 */
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	public void addObserver(Observer o) {
 		this.observers.add(o);
 		if (this.addLog) 
@@ -77,11 +99,12 @@ public class Modele {
 			this.modeleLogger.addLog("MODELE Observers notified.", LogLevel.INFO);
 	}
 	
-	
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
 	/*
 	 * Logger part
 	 * 
 	 */
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	public void setLoggerShow(Boolean b) {
 		if (b) {
 			this.modeleLogger.showLogOn();
@@ -113,10 +136,12 @@ public class Modele {
 		return this.modeleLogger;
 	}
 	
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	/*
 	 * Vocabulary Part
 	 * 
 	 */
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//initialisation
 	public void loadTopics() {
 		this.topics = topicFactory.makeAllTopic();
@@ -212,6 +237,113 @@ public class Modele {
 			topic.displayTopicDetailed();
 		}
 	}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
+	/*
+	 * Grammar part
+	 * 
+	 */
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
+	public void loadGrammarTopics() {
+		this.grammarTopics = this.grammarFactory.makeAllTopic();
+		if (addLog) {
+			this.modeleLogger.addLog("MODELE Ask GrammarFactory makeAllTopic.", LogLevel.INFO);
+		}
+	}
+	
+	public void selectGrammarTopic(String titleTopic) {
+		Boolean found = false;
+		for (TopicGrammar t : this.grammarTopics) {
+			if (t.getTopicTitle().equals(titleTopic.trim())) {
+				this.selectedGrammarTopic = t;
+				found = true;
+				break;
+			}
+		}
+		if (found) {
+			this.modeleLogger.addLog("MODELE The grammar topic named " + this.selectedGrammarTopic.getTopicTitle() + " has been selected.", LogLevel.INFO);
+		}
+		else {
+			this.modeleLogger.addLog("MODELE The grammar topic named " + titleTopic + " can't be found.", LogLevel.ERROR);
+		}
+	}
+	
+	public TopicGrammar getSelectedGrammarTopic() {
+		return this.selectedGrammarTopic;
+	}
+	
+	//grammar game part
+	public void launchGrammarGame(String titleTopic, int numberOfQuestions) {
+		this.selectGrammarTopic(titleTopic);
+		this.grammarGame= new GrammarGame(this.selectedGrammarTopic,numberOfQuestions,this.modeleLogger);
+		this.modeleLogger.addLog("MODELE A new game is launched.", LogLevel.INFO);
+	}
+	
+	public void nextQuestionGrammarGame() {
+		this.grammarGame.playGrammarGame();
+	}
+	
+	public Boolean checkAnswerGrammarGame(String answer) {
+		//System.out.println("Check the validity of the answer.");
+		return this.grammarGame.checkGrammarAnswer(answer);
+	}
+	
+	public String getTheQuestionToAskGrammarGame() {
+		return this.grammarGame.getGameAskedExpression();
+	}
+	
+	public ArrayList<String> getThPropositionsGrammarGame() {
+		return this.grammarGame.getGameAskedPropositions();
+	}
+	
+	public String getAGrammarAnswer() {
+		return this.grammarGame.getGameAnswerExpression();
+	}
+	
+	public int getGrammarGameScore() {
+		return this.grammarGame.getGrammarGameScore();
+	}
+	
+	public int getGrammarGameScoreMax() {
+		return this.grammarGame.getGrammarGameScoreMax();
+	}
+	
+	public Boolean isGrammarGameEndded() {
+		return this.grammarGame.getEndGrammarGame();
+	}
+	
+	public ArrayList<GrammarQuestion> getQuestionsToPlay() {
+		return this.grammarGame.getQuestionsToPlay();
+	}
+	
+	//console part
+	public void showGrammarTopicsTitle() {
+		if (addLog) {
+			this.modeleLogger.addLog("MODELE Show all grammar topics title.", LogLevel.INFO);
+		}
+		for (TopicGrammar topic : this.grammarTopics) {
+			System.out.println(topic.getTopicTitle());
+		}
+	}
+	
+	public void showGrammarTopics() {
+		if (addLog) {
+			this.modeleLogger.addLog("MODELE Show all grammar topics.", LogLevel.INFO);
+		}
+		for (TopicGrammar topic : this.grammarTopics) {
+			topic.displayGrammarTopic();
+		}
+	}
+	
+	public void showGrammarTopicsDetailed() {
+		if (addLog) {
+			this.modeleLogger.addLog("MODELE Show all grammar topics in detail.", LogLevel.INFO);
+		}
+		for (TopicGrammar topic : this.grammarTopics) {
+			topic.displayGrammarTopicDetailed();
+		}
+	}
+
 	
 	
 	/*
@@ -220,34 +352,75 @@ public class Modele {
 	 */
 	public static void main(String args[]) {
 		Modele modeleTest = new Modele();
-		modeleTest.loadTopics();
-		modeleTest.showTopicsTitle();
-		System.out.println("Please choose a topic :");
 		Scanner sc = new Scanner(System.in);
-		String titleTopic = sc.nextLine();
-		System.out.println("Please enter how many word you want :");
-		sc = new Scanner(System.in);
-		int numberOfWord = sc.nextInt();
-		modeleTest.launchVocabGame(titleTopic,TypeOfGame.ENGLISH, numberOfWord);
-		for (Word w : modeleTest.getWordsToPlay()) {
-			w.showWord();
-		}
-		while (!modeleTest.isVocabGameEndded()) {
-			System.out.println("What is the french for : " + modeleTest.getTheWordToAskVocabGame());
+		System.out.println("Vocab Game or Grammar Game ? (answer v ou g)");
+		String g = sc.nextLine().trim();
+		if (g.equals("v")) {
+			modeleTest.loadTopics();
+			modeleTest.showTopicsTitle();
+			System.out.println("Please choose a topic :");
 			sc = new Scanner(System.in);
-			String answer = sc.nextLine();
-			if (modeleTest.checkAnswerVocabGame(answer)) {
-				System.out.println("Good job !");
-				modeleTest.nextWordVocabGame();
+			String titleTopic = sc.nextLine();
+			System.out.println("Please enter how many word you want :");
+			sc = new Scanner(System.in);
+			int numberOfWord = sc.nextInt();
+			modeleTest.launchVocabGame(titleTopic,TypeOfGame.ENGLISH, numberOfWord);
+			for (Word w : modeleTest.getWordsToPlay()) {
+				w.showWord();
 			}
-			else {
-				System.out.println("Sniff, the right answer is : " + modeleTest.getAnAnswer() + " ! :(");
-				modeleTest.nextWordVocabGame();
+			while (!modeleTest.isVocabGameEndded()) {
+				System.out.println("What is the french for : " + modeleTest.getTheWordToAskVocabGame());
+				sc = new Scanner(System.in);
+				String answer = sc.nextLine();
+				if (modeleTest.checkAnswerVocabGame(answer)) {
+					System.out.println("Good job !");
+					modeleTest.nextWordVocabGame();
+				}
+				else {
+					System.out.println("Sniff, the right answer is : " + modeleTest.getAnAnswer() + " ! :(");
+					modeleTest.nextWordVocabGame();
+				}
+			}
+			int score = modeleTest.getVocabGameScore();
+			int scoreMax = modeleTest.getVocabGameScoreMax();
+			System.out.println("This game is over ! You have " + score + " out of " + scoreMax + "!");
+		}
+		else if (g.equals("g")) {
+			modeleTest.loadGrammarTopics();
+			modeleTest.showGrammarTopicsTitle();
+			System.out.println("Please choose a topic :");
+			sc = new Scanner(System.in);
+			String titleTopic = sc.nextLine();
+			System.out.println("Please enter how many questions you want :");
+			sc = new Scanner(System.in);
+			int numberOfQuestions = sc.nextInt();
+			modeleTest.launchGrammarGame(titleTopic, numberOfQuestions);
+			for (GrammarQuestion gq : modeleTest.getQuestionsToPlay()) {
+				System.out.println(gq.getGrammarQuestion());
+			}
+			while (!modeleTest.isGrammarGameEndded()) {
+				System.out.println("Choose the right answer : (write all the proposition without the number)");
+				System.out.println(modeleTest.getTheQuestionToAskGrammarGame());
+				int counter = 1;
+				for (String p : modeleTest.getThPropositionsGrammarGame()) {
+					System.out.println(counter + ". " + p);
+					counter++;
+				}
+				sc = new Scanner(System.in);
+				String answer = sc.nextLine();
+				if (modeleTest.checkAnswerGrammarGame(answer)) {
+					System.out.println("Good job !");
+					modeleTest.nextQuestionGrammarGame();
+				}
+				else {
+					System.out.println("Sniff, the right answer is : " + modeleTest.getAGrammarAnswer() + " ! :(");
+					modeleTest.nextQuestionGrammarGame();
+				}
+				int score = modeleTest.getGrammarGameScore();
+				int scoreMax = modeleTest.getGrammarGameScoreMax();
+				System.out.println("This game is over ! You have " + score + " out of " + scoreMax + "!");
 			}
 		}
-		int score = modeleTest.getVocabGameScore();
-		int scoreMax = modeleTest.getVocabGameScoreMax();
-		System.out.println("This game is over ! You have " + score + " out of " + scoreMax + "!");
 	}	
 	
 }

@@ -1,17 +1,16 @@
-package VocabularySystem;
+package GrammarSystem;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Scanner;
 
 import LogSystem.LogLevel;
 import LogSystem.Logger;
 
-public class FileTopicReader implements TopicReader {
+public class FileGrammarReader {
 
 	//main variables
-	private TopicVocabulary topic;
+	private TopicGrammar topic;
 	private Scanner sc;
 	private File topicFile;
 	
@@ -19,65 +18,65 @@ public class FileTopicReader implements TopicReader {
 	private Logger logger;
 	private Boolean addLog;
 	
-	public FileTopicReader() {
-		this.topic = new TopicVocabulary();
+	public FileGrammarReader() {
+		this.topic = new TopicGrammar();
 		this.topicFile = null;
 		this.logger = null;
 		this.addLog = false;
 	}
 	
-	public FileTopicReader(Logger logger, Boolean addLog) {
+	public FileGrammarReader(Logger logger, Boolean addLog) {
 		this();
 		this.logger = logger;
 		this.addLog = addLog;
 	}
 	
-	@Override
-	public TopicVocabulary extractTopic(File topicFile) throws FileNotFoundException {
+	public TopicGrammar extractTopic(File topicFile) throws FileNotFoundException {
 		this.topicFile = topicFile;
-		this.topic = new TopicVocabulary();
+		this.topic = new TopicGrammar();
 		String buffer = "";
 		try {
 			sc = new Scanner(topicFile);
 			buffer = sc.nextLine();
-			this.topic.setTitleTopic(buffer.trim());
+			this.topic.setTopicTitle(buffer.trim());
 			while (sc.hasNextLine()) {
 				buffer = sc.nextLine();
 				if (!(buffer.trim().equals(""))) {
-					String words[];
-					words = buffer.split(",");
-					/*
-					//System.out.println(words[0] + " : " + words[1]);
-					this.topic.addAWord(words[0], words[1]);
-					*/
-					ArrayList<String> englishExpressions = new ArrayList<String>();
-					ArrayList<String> frenchExpressions = new ArrayList<String>();
-					
-					String englishWords[];
-					String frenchWords[];
-					
-					englishWords = words[0].split(";");
-					frenchWords = words[1].split(";");
-					
-					for (String Eexp : englishWords) {
-						englishExpressions.add(Eexp.trim());
+					String question = buffer.trim();
+					ArrayList<String> propositions = new ArrayList<String>();
+					int answer = -1;
+					if (sc.hasNextLine()) {
+						buffer = sc.nextLine();
+						String props[];
+						props = buffer.split(";");
+						for (String p : props) {
+							propositions.add(p);
+						}
+						if (sc.hasNextLine()) {
+							answer = sc.nextInt();
+						}
+						else {
+							this.logger.addLog("FILEGRAMMARREADER File not correctly constructed.", LogLevel.ERROR);
+						}
 					}
-					for (String Fexp : frenchWords) {
-						frenchExpressions.add(Fexp.trim());
+					else {
+						this.logger.addLog("FILEGRAMMARREADER File not correctly constructed.", LogLevel.ERROR);
 					}
-					Word newWord = new Word(englishExpressions,frenchExpressions);
-					this.topic.addAWord(newWord);
+					if (answer != -1) {
+						GrammarQuestion gq = new GrammarQuestion(question,propositions,answer);
+						this.topic.addQuestion(gq);
+					}
 				}
 			}
 		}
 		catch (FileNotFoundException e) {
 			if (logger != null && this.addLog) {
-				this.logger.addLog("FILETOPICREADER File not found.", LogLevel.ERROR);
+				this.logger.addLog("FILEGRAMMARREADER File not found.", LogLevel.ERROR);
 			}
 		}
 		
 		if (logger != null && this.addLog) {
-			this.logger.addLog("FILETOPICREADER Topic extracted successfully.", LogLevel.INFO);
+			this.logger.addLog("FILEGRAMMARREADER Topic extracted successfully.", LogLevel.INFO);
 		}
 		return this.topic;
 	}

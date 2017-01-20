@@ -4,9 +4,8 @@ import java.util.ArrayList;
 
 import LogSystem.LogLevel;
 import LogSystem.Logger;
-import MainSystem.Game;
 
-public class VocabularyGame implements Game{
+public class VocabularyGame {
 
 	//variables logger
 	private Logger logger;
