@@ -1,6 +1,8 @@
 package VocabularySystem;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 
 import LogSystem.LogLevel;
 import LogSystem.Logger;
@@ -34,7 +36,6 @@ public class VocabularyGame {
 	private Boolean VocabGameEnd;
 
 	
-
 	//vocabulary game part
 	public VocabularyGame(TopicVocabulary selectedTopic, TypeOfGame typeOfGame, int numberOfWords, Logger logger) {
 		if (selectedTopic != null && typeOfGame != null) {
@@ -50,7 +51,8 @@ public class VocabularyGame {
 				this.wordPlayable.add(i);
 				//System.out.println(i+ "has been added.");
 			}
-			this.generateRandomListOfWord(numberOfWords);
+			this.wordsToPlay = new ArrayList<Word>();
+			this.wordsToPlay = this.generateRandomListOfWord(numberOfWords);
 			this.currentIndex = 0;
 			/*this.currentAnswer =null;
 			this.currentAskedExpression= null;*/
@@ -122,13 +124,13 @@ public class VocabularyGame {
 		}
 	}
 	
-	public void generateRandomListOfWord(int numberOfWord) {
+	public ArrayList<Word> generateRandomListOfWord(int numberOfWord) {
 		Boolean outOfBounds = false;
 		
-		this.wordsToPlay = new ArrayList<Word>();
+		ArrayList<Word> listOfWords = new ArrayList<Word>();
 		for (int i=0 ; i < numberOfWord ; i++) {
 			if (askNewWord()) {
-				this.wordsToPlay.add(this.askedWord);
+				listOfWords.add(this.askedWord);
 			}
 			else {
 				this.logger.addLog("VOCABULARYGAME The number of word wanted exceed the number of word of this topic.", LogLevel.WARNING);
@@ -142,6 +144,7 @@ public class VocabularyGame {
 		else {
 			this.logger.addLog("VOCABULARYGAME The words to play have been generated.", LogLevel.INFO);
 		}
+		return listOfWords;
 	}
 
 	private String getEnglishAskedWord() {
@@ -232,5 +235,33 @@ public class VocabularyGame {
 		return this.wordsToPlay;
 	}
  	
-
+	public ArrayList<String> getPropositions(int numberProps) {
+		if (this.selectedTopic.getTopicVocabulary().size() >= numberProps) {
+			ArrayList<String> props = new ArrayList<String>();
+			String answer;
+			if (this.type.equals(TypeOfGame.ENGLISH)) {
+				answer = this.getFrenchAskedWord();
+			}
+			else {
+				answer = this.getEnglishAskedWord();
+			}
+			for (int i=0 ; i < this.wordsToPlay.size() ; i++) {
+				if (i != this.currentIndex) {
+					if (this.type.equals(TypeOfGame.ENGLISH)) {
+						props.add(this.wordsToPlay.get(i).getFrenchWords().get(1));
+					}
+					else {
+						props.add(this.wordsToPlay.get(i).getEnglishWords().get(1));
+					}
+				}
+			}
+			props.add(answer);
+			Collections.sort(props.subList(1, props.size()));
+			return props;
+		}
+		else {
+			this.logger.addLog("VOCABULARYGAME There are not enough words in this topic.", LogLevel.ERROR);
+			return null;
+		}
+	}
 }

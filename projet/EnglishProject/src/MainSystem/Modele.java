@@ -13,6 +13,7 @@ import VocabularySystem.TopicFactory;
 import VocabularySystem.TopicVocabulary;
 import VocabularySystem.TypeOfGame;
 import VocabularySystem.VocabularyGame;
+import VocabularySystem.VocabularyGame2;
 import VocabularySystem.Word;
 
 public class Modele {
@@ -37,6 +38,7 @@ public class Modele {
 	//variable vocabulaire jeu
 	private TopicVocabulary selectedTopic;
 	private VocabularyGame vocabGame;
+	private VocabularyGame2 vocabGameGraphic;
 	
 	//variables relatives à la grammaire
 	private ArrayList<TopicGrammar> grammarTopics;
@@ -71,6 +73,7 @@ public class Modele {
 		this.topicFactory = new TopicFactory(this.modeleLogger, this.addLog);
 		this.selectedTopic = null;
 		this.vocabGame = null;
+		this.vocabGameGraphic = null;
 		
 		//variables relatives à la grammaire
 		this.grammarTopics = new ArrayList<TopicGrammar>();
@@ -179,35 +182,93 @@ public class Modele {
 	}
 	
 	public void nextWordVocabGame() {
-		this.vocabGame.playVocabGame();
+		if (!(this.vocabGame == null)) {
+			this.vocabGame.playVocabGame();
+		}
+		else {
+			this.modeleLogger.addLog("MODELE There is no vocabulary game launched.", LogLevel.ERROR);
+		}
 	}
 	
 	public Boolean checkAnswerVocabGame(String answer) {
-		return this.vocabGame.checkVocabAnswer(answer);
+		if (!(this.vocabGame == null)) {
+			return this.vocabGame.checkVocabAnswer(answer);
+		}
+		else {
+			this.modeleLogger.addLog("MODELE There is no vocabulary game launched.", LogLevel.ERROR);
+			return false;
+		}
 	}
 	
 	public String getTheWordToAskVocabGame() {
-		return this.vocabGame.getGameAskedExpression();
+		if (!(this.vocabGame == null)) {
+			return this.vocabGame.getGameAskedExpression();
+		}
+		else {
+			this.modeleLogger.addLog("MODELE There is no vocabulary game launched.", LogLevel.ERROR);
+			return null;
+		}
 	}
 	
 	public String getAnAnswer() {
-		return this.vocabGame.getGameAnswerExpression();
+		if (!(this.vocabGame == null)) {
+			return this.vocabGame.getGameAnswerExpression();
+		}
+		else {
+			this.modeleLogger.addLog("MODELE There is no vocabulary game launched.", LogLevel.ERROR);
+			return null;
+		}
 	}
 	
 	public int getVocabGameScore() {
-		return this.vocabGame.getVocabularyGameScore();
+		if (!(this.vocabGame == null)) {
+			return this.vocabGame.getVocabularyGameScore();
+		}
+		else {
+			this.modeleLogger.addLog("MODELE There is no vocabulary game launched.", LogLevel.ERROR);
+			return -1;
+		}
+
 	}
 	
 	public int getVocabGameScoreMax() {
-		return this.vocabGame.getVocabularyGameScoreMax();
+		if (!(this.vocabGame == null)) {
+			return this.vocabGame.getVocabularyGameScoreMax();
+		}
+		else {
+			this.modeleLogger.addLog("MODELE There is no vocabulary game launched.", LogLevel.ERROR);
+			return -1;
+		}
 	}
 	
 	public Boolean isVocabGameEndded() {
-		return this.vocabGame.getEndVocabularyGame();
+		if (!(this.vocabGame == null)) {
+			return this.vocabGame.getEndVocabularyGame();
+		}
+		else {
+			this.modeleLogger.addLog("MODELE There is no vocabulary game launched.", LogLevel.ERROR);
+			return false;
+		}
 	}
 	
 	public ArrayList<Word> getWordsToPlay() {
-		return this.vocabGame.getWordsToPlay();
+		if (!(this.vocabGame == null)) {
+			return this.vocabGame.getWordsToPlay();
+		}
+		else {
+			this.modeleLogger.addLog("MODELE There is no vocabulary game launched.", LogLevel.ERROR);
+			return null;
+		}
+	}
+	
+	public ArrayList<String> getVocabGamePropositions(int numberProps) {
+		if (!(this.vocabGame == null)) {
+			return this.vocabGame.getPropositions(numberProps);
+		}
+		else {
+			this.modeleLogger.addLog("MODELE There is no vocabulary game launched.", LogLevel.ERROR);
+			return null;
+		}
 	}
 	
 	//console part
@@ -345,12 +406,104 @@ public class Modele {
 	}
 
 	
+	/*
+	 * Part of the VocabularyGame for the graphic interface
+	 * 
+	 */
+	public void launchVocabGameGraphic(String titleTopic, TypeOfGame type, int numberOfWords, int numberOfPropositions) {
+		this.selectTopic(titleTopic);
+		this.vocabGameGraphic = new VocabularyGame2(this.selectedTopic,type,numberOfWords,numberOfPropositions,this.modeleLogger);
+		this.modeleLogger.addLog("MODELE A new game is launched.", LogLevel.INFO);
+	}
+	
+
+	
+	public ArrayList<String> getAllTheAskedWordsVocabGameGraphic() {
+		if (!(this.vocabGameGraphic == null)) {
+			return this.vocabGameGraphic.getAllTheAskedWords();
+		}
+		else {
+			this.modeleLogger.addLog("MODELE There is no vocabulary game graphic launched.", LogLevel.ERROR);
+			return null;
+		}
+	}
+	
+	public ArrayList<String> getLeftPropositionsVocabGameGraphic(int indexOfTheWord) {
+		if (!(this.vocabGameGraphic == null)) {
+			return this.vocabGameGraphic.getLeftPropositions(indexOfTheWord);
+		}
+		else {
+			this.modeleLogger.addLog("MODELE There is no vocabulary game graphic launched.", LogLevel.ERROR);
+			return null;
+		}
+	}
+	
+	public ArrayList<String> getRightPropositionsVocabGameGraphic(int indexOfTheWord) {
+		if (!(this.vocabGameGraphic == null)) {
+			return this.vocabGameGraphic.getRightPropositions(indexOfTheWord);
+		}
+		else {
+			this.modeleLogger.addLog("MODELE There is no vocabulary game graphic launched.", LogLevel.ERROR);
+			return null;
+		}
+	}
+	
+	public Boolean playVocabGameGraphic(String word, String answer) {
+		if (!(this.vocabGameGraphic == null)) {
+			return this.vocabGameGraphic.playVocabGame(word, answer);
+		}
+		else {
+			this.modeleLogger.addLog("MODELE There is no vocabulary game graphic launched.", LogLevel.ERROR);
+			return null;
+		}
+	}
+	
+	public int getVocabGameGraphicScore() {
+		if (!(this.vocabGameGraphic == null)) {
+			return this.vocabGameGraphic.getVocabularyGameScore();
+		}
+		else {
+			this.modeleLogger.addLog("MODELE There is no vocabulary game graphic launched.", LogLevel.ERROR);
+			return -1;
+		}
+
+	}
+	
+	public int getVocabGameGraphicScoreMax() {
+		if (!(this.vocabGameGraphic == null)) {
+			return this.vocabGameGraphic.getVocabularyGameScoreMax();
+		}
+		else {
+			this.modeleLogger.addLog("MODELE There is no vocabulary game graphic launched.", LogLevel.ERROR);
+			return -1;
+		}
+	}
+	
+	public Boolean isVocabGameGraphicEndded() {
+		if (!(this.vocabGameGraphic == null)) {
+			return this.vocabGameGraphic.getEndVocabularyGame();
+		}
+		else {
+			this.modeleLogger.addLog("MODELE There is no vocabulary game graphic launched.", LogLevel.ERROR);
+			return false;
+		}
+	}
+	
+	public void setVocabGameGraphicEndded(Boolean b) {
+		if (!(this.vocabGameGraphic == null)) {
+			this.vocabGameGraphic.setEndVocabularyGame(b);
+		}
+		else {
+			this.modeleLogger.addLog("MODELE There is no vocabulary game graphic launched.", LogLevel.ERROR);
+		}
+	}
+	
 	
 	/*
 	 * Test of the Modele
 	 * 
 	 */
-	public static void main(String args[]) {
+	/*public static void main(String args[]) {
 		Modele modeleTest = new Modele();
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Vocab Game or Grammar Game ? (answer v ou g)");
@@ -362,6 +515,7 @@ public class Modele {
 			sc = new Scanner(System.in);
 			String titleTopic = sc.nextLine();
 			System.out.println("Please enter how many word you want :");
+			sc.close();
 			sc = new Scanner(System.in);
 			int numberOfWord = sc.nextInt();
 			modeleTest.launchVocabGame(titleTopic,TypeOfGame.ENGLISH, numberOfWord);
@@ -421,6 +575,7 @@ public class Modele {
 				System.out.println("This game is over ! You have " + score + " out of " + scoreMax + "!");
 			}
 		}
+		sc.close();
 	}	
-	
+	*/
 }
