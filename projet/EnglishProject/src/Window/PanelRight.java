@@ -19,7 +19,7 @@ public class PanelRight extends JPanel {
 		this.mainmodele = mainmodele;
 		this.props = props / 2;
 
-		this.setBounds(500, 0, 100, 600);
+		this.setBounds(500, 100, 100, 500);
 
 		GridLayout layout = new GridLayout(props, 1);
 		layout.setHgap(5);
@@ -55,6 +55,12 @@ public class PanelRight extends JPanel {
 	public void setProp(int p) {
 		for (int j = 0; j < this.allbuttons.size(); j++) {
 			allbuttons.get(j).setText(mainmodele.getRightPropositionsVocabGameGraphic(p).get(j));
+		}
+	}
+
+	public void setScorePanel(ScorePanel score) {
+		for (int j = 0; j < this.allbuttons.size(); j++) {
+			allbuttons.get(j).setScorePanel(score);
 		}
 	}
 
