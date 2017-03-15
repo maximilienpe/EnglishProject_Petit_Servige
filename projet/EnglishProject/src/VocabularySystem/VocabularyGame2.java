@@ -39,6 +39,7 @@ public class VocabularyGame2 {
 	private Boolean VocabGameEnd;
 
 	// vocabulary game part
+	//if life < 0 : the game start with the no-life mode
 	public VocabularyGame2(TopicVocabulary selectedTopic, TypeOfGame typeOfGame, int numberOfWords,
 			int numberOfPropositions, Logger logger, int initialeLife) {
 		if (selectedTopic != null && typeOfGame != null) {
@@ -164,7 +165,12 @@ public class VocabularyGame2 {
 			} else {
 				// what should we do if he choose a bad answer ?
 				System.out.println("Bad answer !");
-				this.life--;
+				if (this.life > 0) {
+					this.life--;
+					if (this.life == 0) {
+						this.VocabGameEnd = true;
+					}
+				}
 				return false;
 			}
 		} else {
