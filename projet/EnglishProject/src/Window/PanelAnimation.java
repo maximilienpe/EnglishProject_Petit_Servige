@@ -20,6 +20,8 @@ public class PanelAnimation extends JPanel {
 
 	ArrayList<Nenuphar> allchoice;
 
+	private Nenuphar justforend;
+
 	public PanelAnimation(Modele mainmodele, PanelLeft left, PanelRight right, ScorePanel score) {
 
 		this.pane = this;
@@ -34,6 +36,9 @@ public class PanelAnimation extends JPanel {
 		this.setLayout(null);
 
 		allchoice = new ArrayList<Nenuphar>();
+		justforend = new Nenuphar(mainmodele.getAllTheAskedWordsVocabGameGraphic().get(0), mainmodele, left, right, 0);
+
+		allchoice.add(justforend);
 
 		Runnable r = new Runnable() {
 			public void run() {
@@ -42,6 +47,11 @@ public class PanelAnimation extends JPanel {
 							right, p);
 					pane.add(n);
 					allchoice.add(n);
+					if (p == mainmodele.getAllTheAskedWordsVocabGameGraphic().size() - 1) {
+						allchoice.remove(justforend);
+					}
+					left.setAllChoice(pane);
+					right.setAllChoice(pane);
 					runItem(n);
 					try {
 						Thread.sleep(4000);
@@ -72,8 +82,8 @@ public class PanelAnimation extends JPanel {
 					}
 				}
 				if (allchoice.contains(n)) {
-					mainmodele.playVocabGameGraphic("v", "f");
 					allchoice.remove(n);
+					WaitEnd();
 					n.setVisible(false);
 					score.refresh();
 				}
@@ -86,10 +96,14 @@ public class PanelAnimation extends JPanel {
 	}
 
 	public void WaitEnd() {
-		while (allchoice.size() != 0) {
-
+		System.out.println(allchoice.size());
+		if (allchoice.size() == 0) {
+			new WindowRetry(mainmodele);
 		}
-		mainmodele.setVocabGameGraphicEndded(true);
+	}
+
+	public void removeNenu(Nenuphar n) {
+		this.allchoice.remove(n);
 	}
 
 }
