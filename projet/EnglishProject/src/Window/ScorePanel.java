@@ -9,9 +9,18 @@ public class ScorePanel extends JPanel {
 
 	Modele mainmodele;
 
+	JLabel score;
+
 	public ScorePanel(Modele mainmodele) {
 		this.mainmodele = mainmodele;
-		this.add(new JLabel(mainmodele.getVocabGameScore() + "/" + mainmodele.getVocabGameGraphicScoreMax()));
+		this.setBounds(0, 0, 600, 100);
+		score = new JLabel(mainmodele.getVocabGameGraphicScore() + "/" + mainmodele.getVocabGameGraphicScoreMax());
+		this.add(score);
+	}
+
+	public void refresh() {
+		score.setText((mainmodele.getVocabGameGraphicScore() + "/" + mainmodele.getVocabGameGraphicScoreMax()));
+		this.validate();
 	}
 
 }

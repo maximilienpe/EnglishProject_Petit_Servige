@@ -12,6 +12,7 @@ public class ButtonRight extends JButton implements MouseListener {
 	Nenuphar choice;
 	PanelRight right;
 	PanelLeft left;
+	ScorePanel score;
 	Modele mainmodele;
 	int rank;
 
@@ -60,11 +61,16 @@ public class ButtonRight extends JButton implements MouseListener {
 		this.left = left;
 	}
 
+	public void setScorePanel(ScorePanel score) {
+		this.score = score;
+	}
+
 	public void answer() {
 		this.mainmodele.playVocabGameGraphic(this.choice.getText(), this.getText());
 		this.choice.setVisible(false);
 		this.right.setButtonsNull();
 		this.left.setButtonsNull();
+		score.refresh();
 		Main.window.getContentPane().validate();
 	}
 

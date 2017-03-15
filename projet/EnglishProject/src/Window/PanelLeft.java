@@ -18,7 +18,7 @@ public class PanelLeft extends JPanel {
 		this.mainmodele = mainmodele;
 		this.props = props / 2;
 
-		this.setBounds(0, 0, 100, 600);
+		this.setBounds(0, 100, 100, 500);
 
 		GridLayout layout = new GridLayout(props, 1);
 		layout.setHgap(5);
@@ -48,6 +48,12 @@ public class PanelLeft extends JPanel {
 	public void setButtonsNull() {
 		for (int j = 0; j < this.allbuttons.size(); j++) {
 			allbuttons.get(j).setText(null);
+		}
+	}
+
+	public void setScorePanel(ScorePanel score) {
+		for (int j = 0; j < this.allbuttons.size(); j++) {
+			allbuttons.get(j).setScorePanel(score);
 		}
 	}
 
