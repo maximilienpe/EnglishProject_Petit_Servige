@@ -17,7 +17,7 @@ public class BoxTopic extends JPanel {
 
 	ArrayList<ButtonAddRemoveTopic> allchoosedtopics;
 
-	ArrayList<ButtonAddRemoveTopic> alltruetopics;
+	ArrayList<String> alltruetopics;
 
 	public BoxTopic(Modele mainmodele) {
 		this.mainmodele = mainmodele;
@@ -43,11 +43,11 @@ public class BoxTopic extends JPanel {
 		return this.allchoosedtopics;
 	}
 
-	public ArrayList<ButtonAddRemoveTopic> getAllChoosedTopics() {
-		alltruetopics = new ArrayList<ButtonAddRemoveTopic>();
+	public ArrayList<String> getAllChoosedTopics() {
+		alltruetopics = new ArrayList<String>();
 		for (int j = 0; j < allchoosedtopics.size(); j++) {
 			if (allchoosedtopics.get(j).getStatus()) {
-				alltruetopics.add(allchoosedtopics.get(j));
+				alltruetopics.add(allchoosedtopics.get(j).getNameButton());
 			}
 		}
 		return alltruetopics;
