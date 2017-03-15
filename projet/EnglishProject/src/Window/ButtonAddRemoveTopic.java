@@ -65,4 +65,8 @@ public class ButtonAddRemoveTopic extends JButton implements MouseListener {
 		return this.status;
 	}
 
+	public String getNameButton() {
+		return this.name;
+	}
+
 }
