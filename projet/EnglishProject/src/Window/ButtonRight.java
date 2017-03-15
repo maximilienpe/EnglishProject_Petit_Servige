@@ -5,13 +5,22 @@ import java.awt.event.MouseListener;
 
 import javax.swing.JButton;
 
+import MainSystem.Modele;
+
 public class ButtonRight extends JButton implements MouseListener {
 
 	Nenuphar choice;
+	ButtonLeft buttonleft;
+	Modele mainmodele;
+
+	public ButtonRight(Modele mainmodele) {
+		this.mainmodele = mainmodele;
+		this.addMouseListener(this);
+	}
 
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
-		// TODO Auto-generated method stub
+		answer();
 
 	}
 
@@ -41,6 +50,18 @@ public class ButtonRight extends JButton implements MouseListener {
 
 	public void setChoice(Nenuphar choice) {
 		this.choice = choice;
+	}
+
+	public void setLeftButtons(ButtonLeft buttonleft) {
+		this.buttonleft = buttonleft;
+	}
+
+	public void answer() {
+		mainmodele.playVocabGameGraphic(choice.getText(), this.getText());
+		choice.setVisible(false);
+		this.setText(null);
+		buttonleft.setText(null);
+		Main.window.getContentPane().validate();
 	}
 
 }

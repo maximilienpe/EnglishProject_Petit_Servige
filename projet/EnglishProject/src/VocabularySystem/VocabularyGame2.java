@@ -41,6 +41,8 @@ public class VocabularyGame2 {
 	public VocabularyGame2(TopicVocabulary selectedTopic, TypeOfGame typeOfGame, int numberOfWords,
 			int numberOfPropositions, Logger logger) {
 		if (selectedTopic != null && typeOfGame != null) {
+			this.numberOfWords = numberOfWords;
+			this.numberOfPropositions = numberOfPropositions;
 			this.logger = logger;
 			this.selectedTopic = selectedTopic;
 			this.VocabGameEnd = false;

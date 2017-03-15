@@ -49,12 +49,10 @@ public class Nenuphar extends JButton implements MouseListener {
 
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
-		System.out.println(mainmodele.getRightPropositionsVocabGameGraphic(p).size());
 		left.setChoice(this);
 		right.setChoice(this);
-		left.setText("test");
-		// left.setText(mainmodele.getLeftPropositionsVocabGameGraphic(p).get(0));
-		// right.setText(mainmodele.getRightPropositionsVocabGameGraphic(p).get(0));
+		left.setText(mainmodele.getLeftPropositionsVocabGameGraphic(p).get(0));
+		right.setText(mainmodele.getRightPropositionsVocabGameGraphic(p).get(0));
 		left.validate();
 		right.validate();
 	}

@@ -13,10 +13,13 @@ public class PanelGameWindow extends JPanel {
 	public PanelGameWindow(Modele mainmodele) {
 		this.mainmodele = mainmodele;
 		this.setLayout(new BorderLayout());
-		ButtonLeft left = new ButtonLeft();
-		ButtonRight right = new ButtonRight();
+		ButtonLeft left = new ButtonLeft(mainmodele);
+		ButtonRight right = new ButtonRight(mainmodele);
+		left.setRightButtons(right);
+		right.setLeftButtons(left);
+		this.add(new ScorePanel(mainmodele), BorderLayout.NORTH);
 		this.add(left, BorderLayout.WEST);
-		this.add(new ButtonRight(), BorderLayout.EAST);
+		this.add(right, BorderLayout.EAST);
 		this.add(new PanelAnimation(mainmodele, left, right));
 	}
 
