@@ -31,13 +31,11 @@ public class ButtonTopicPlay extends JButton implements MouseListener {
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
 		if (boxtopic.getAllChoosedTopics().size() != 0) {
-			for (int y = 0; y < boxtopic.getAllChoosedTopics().size(); y++) {
-				System.out.println(boxtopic.getAllChoosedTopics().get(y));
-			}
-			mainmodele.launchVocabGameGraphic(boxtopic.getAllChoosedTopics(), TypeOfGame.ENGLISH, 10, 4, 10);
+			mainmodele.launchVocabGameGraphic(boxtopic.getAllChoosedTopics(), TypeOfGame.ENGLISH, nbwords, nbprops,
+					life);
 			Main.window.remove(Main.window.getContentPane());
 			Main.window.setSize(600, 600);
-			// Main.window.setContentPane(new PanelGameWindow(mainmodele, "4"));
+			Main.window.setContentPane(new PanelGameWindow(mainmodele, nbprops));
 			Main.window.getContentPane().validate();
 		}
 	}

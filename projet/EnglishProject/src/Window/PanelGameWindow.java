@@ -12,8 +12,8 @@ public class PanelGameWindow extends JPanel {
 
 	int nbprops;
 
-	public PanelGameWindow(Modele mainmodele, String nbprops) {
-		this.nbprops = Integer.parseInt(nbprops);
+	public PanelGameWindow(Modele mainmodele, int nbprops) {
+		this.nbprops = nbprops;
 		this.mainmodele = mainmodele;
 		Main.window.setSize(600, 600);
 
