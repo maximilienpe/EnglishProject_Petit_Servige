@@ -64,7 +64,8 @@ public class VocabularyGame2 {
 				// proposition w to have an access to the answer
 				ArrayList<Word> wPropositions = generateRandomListOfWord(numberOfPropositions - 1, this.selectedTopic,
 						this.selectedTopic.getTopicVocabulary().indexOf(w));
-				int randomNumber = (int) (Math.random() * (numberOfPropositions) - 1);
+				int randomNumber = (int) (Math.random() * (numberOfPropositions));
+				System.out.println(randomNumber);
 				wPropositions.add(randomNumber, w);
 				// add propositions to the list of propositions
 				this.wordsPropositions.add(wPropositions);
