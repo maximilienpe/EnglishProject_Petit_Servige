@@ -101,9 +101,9 @@ public class TopicVocabulary {
 				found = true;
 				break;
 			}
-		}
-		
+		}	
 	}
+	
 
 	public void setTitleTopic(String topicTitle) {
 		this.title = topicTitle;

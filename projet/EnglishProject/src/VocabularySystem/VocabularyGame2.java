@@ -32,6 +32,7 @@ public class VocabularyGame2 {
 	private int numberOfPropositions;
 	private int VocabScoreMax;
 	private int VocabScore;
+	private int life;
 
 	// variables de condition du jeu
 	private Boolean WordChecked;
@@ -39,8 +40,9 @@ public class VocabularyGame2 {
 
 	// vocabulary game part
 	public VocabularyGame2(TopicVocabulary selectedTopic, TypeOfGame typeOfGame, int numberOfWords,
-			int numberOfPropositions, Logger logger) {
+			int numberOfPropositions, Logger logger, int initialeLife) {
 		if (selectedTopic != null && typeOfGame != null) {
+			this.life = initialeLife;
 			this.numberOfWords = numberOfWords;
 			this.numberOfPropositions = numberOfPropositions;
 			this.logger = logger;
@@ -139,25 +141,30 @@ public class VocabularyGame2 {
 		ArrayList<String> allAnswerWords = new ArrayList<String>();
 		for (Word w : this.wordsToPlay) {
 			if (this.type.equals(TypeOfGame.ENGLISH)) {
+				System.out.println(w.getFrenchWords().get(this.frenchWordsIndex.get(this.wordsToPlay.indexOf(w))));
 				allAnswerWords.add(w.getFrenchWords().get(this.frenchWordsIndex.get(this.wordsToPlay.indexOf(w))));
 			} else if (this.type.equals(TypeOfGame.FRENCH)) {
 				allAnswerWords.add(w.getEnglishWords().get(this.englishWordsIndex.get(this.wordsToPlay.indexOf(w))));
 			}
 		}
-		return allAskedWords;
+		return allAnswerWords;
 	}
 
 	// verify if the word has already been checked and do nothing if the game is
 	// finished
 	public boolean playVocabGame(String words, String selectedProposition) {
 		if (!this.VocabGameEnd) {
+			//System.out.println("Start to compare the expressions : " + selectedProposition + " et " + this.allAnswer.get(0));
 			// while the game hasn't finished yet
 			if (selectedProposition.equals(this.allAnswer.get(this.allAskedWords.indexOf(words)))) {
+				System.out.println("Good answer.");
 				this.VocabScore++;
 				this.indexOfWordsOff.add(this.allAskedWords.indexOf(words));
 				return true;
 			} else {
 				// what should we do if he choose a bad answer ?
+				System.out.println("Bad answer !");
+				this.life--;
 				return false;
 			}
 		} else {
@@ -202,6 +209,7 @@ public class VocabularyGame2 {
 	}
 
 	public int getVocabularyGameScore() {
+		//System.out.println(this.VocabScore);
 		return this.VocabScore;
 	}
 
@@ -219,6 +227,10 @@ public class VocabularyGame2 {
 
 	public ArrayList<Word> getWordsToPlay() {
 		return this.wordsToPlay;
+	}
+	
+	public int getLife() {
+		return this.life;
 	}
 
 }
