@@ -220,6 +220,15 @@ public class Modele {
 	public TopicVocabulary getSelectedTopic() {
 		return this.selectedTopic;
 	}
+	
+	public ArrayList<TopicVocabulary> getTopics() {
+		if (this.topics != null) {
+			return this.topics;
+		}
+		else {
+			return null;
+		}
+	}
 
 	// vocab game part
 	public void launchVocabGame(String titleTopic, TypeOfGame type, int numberOfWords) {
