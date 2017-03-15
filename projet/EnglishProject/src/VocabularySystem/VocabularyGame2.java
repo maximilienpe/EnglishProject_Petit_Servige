@@ -142,7 +142,7 @@ public class VocabularyGame2 {
 		ArrayList<String> allAnswerWords = new ArrayList<String>();
 		for (Word w : this.wordsToPlay) {
 			if (this.type.equals(TypeOfGame.ENGLISH)) {
-				System.out.println(w.getFrenchWords().get(this.frenchWordsIndex.get(this.wordsToPlay.indexOf(w))));
+				//System.out.println(w.getFrenchWords().get(this.frenchWordsIndex.get(this.wordsToPlay.indexOf(w))));
 				allAnswerWords.add(w.getFrenchWords().get(this.frenchWordsIndex.get(this.wordsToPlay.indexOf(w))));
 			} else if (this.type.equals(TypeOfGame.FRENCH)) {
 				allAnswerWords.add(w.getEnglishWords().get(this.englishWordsIndex.get(this.wordsToPlay.indexOf(w))));
@@ -233,6 +233,10 @@ public class VocabularyGame2 {
 
 	public ArrayList<Word> getWordsToPlay() {
 		return this.wordsToPlay;
+	}
+	
+	public void setLife(int newLife) {
+		this.life = newLife;
 	}
 	
 	public int getLife() {

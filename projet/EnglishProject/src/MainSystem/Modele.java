@@ -483,6 +483,16 @@ public class Modele {
 			return null;
 		}
 	}
+	
+	public void launchVocabGameGraphic(ArrayList<String> titlesTopics,  TypeOfGame type, int numberOfWords, int numberOfPropositions, int life) {
+		for (String s: titlesTopics) {
+			this.addSelectedTopic(s);
+		}
+		this.mergeTopicVocabulary();
+		this.vocabGameGraphic = new VocabularyGame2(this.selectedTopic, type, numberOfWords, numberOfPropositions,
+				this.modeleLogger,life);
+		this.modeleLogger.addLog("MODELE A new game is launched.", LogLevel.INFO);
+	}
 
 	public ArrayList<String> getLeftPropositionsVocabGameGraphic(int indexOfTheWord) {
 		if (!(this.vocabGameGraphic == null)) {
