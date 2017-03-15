@@ -182,7 +182,7 @@ public class Modele {
 		}
 		if (found) {
 			this.modeleLogger.addLog(
-					"MODELE The topic named " + this.selectedTopic.getTitleTopic() + " has been selected.",
+					"MODELE The topic named " + titleTopic + " has been selected.",
 					LogLevel.INFO);
 		} else {
 			this.modeleLogger.addLog("MODELE The topic named " + titleTopic + " can't be found.", LogLevel.ERROR);
@@ -200,7 +200,7 @@ public class Modele {
 		}
 		if (found) {
 			this.modeleLogger.addLog(
-					"MODELE The topic named " + this.selectedTopic.getTitleTopic() + " has been selected.",
+					"MODELE The topic named " + titleTopic + " has been diselected.",
 					LogLevel.INFO);
 		} else {
 			this.modeleLogger.addLog("MODELE The topic named " + titleTopic + " can't be found.", LogLevel.ERROR);
