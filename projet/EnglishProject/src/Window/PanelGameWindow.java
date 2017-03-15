@@ -10,16 +10,26 @@ public class PanelGameWindow extends JPanel {
 
 	Modele mainmodele;
 
-	public PanelGameWindow(Modele mainmodele) {
+	int nbprops;
+
+	public PanelGameWindow(Modele mainmodele, String nbprops) {
+		this.nbprops = Integer.parseInt(nbprops);
 		this.mainmodele = mainmodele;
+		Main.window.setSize(600, 600);
+
 		this.setLayout(new BorderLayout());
-		ButtonLeft left = new ButtonLeft(mainmodele);
-		ButtonRight right = new ButtonRight(mainmodele);
-		left.setRightButtons(right);
-		right.setLeftButtons(left);
+
+		PanelLeft left = new PanelLeft(mainmodele, this.nbprops);
+		PanelRight right = new PanelRight(mainmodele, this.nbprops);
+
+		left.setPanelRight(right);
+		right.setPanelLeft(left);
+
 		this.add(new ScorePanel(mainmodele), BorderLayout.NORTH);
+
 		this.add(left, BorderLayout.WEST);
 		this.add(right, BorderLayout.EAST);
+
 		this.add(new PanelAnimation(mainmodele, left, right));
 	}
 

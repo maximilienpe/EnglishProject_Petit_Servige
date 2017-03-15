@@ -10,11 +10,15 @@ import MainSystem.Modele;
 public class ButtonLeft extends JButton implements MouseListener {
 
 	Nenuphar choice;
-	ButtonRight buttonright;
+	PanelRight right;
+	PanelLeft left;
 	Modele mainmodele;
+	int rank;
 
-	public ButtonLeft(Modele mainmodele) {
+	public ButtonLeft(Modele mainmodele, int rank, PanelLeft left) {
 		this.mainmodele = mainmodele;
+		this.rank = rank;
+		this.left = left;
 		this.addMouseListener(this);
 	}
 
@@ -52,17 +56,16 @@ public class ButtonLeft extends JButton implements MouseListener {
 		this.choice = choice;
 	}
 
-	public void setRightButtons(ButtonRight buttonright) {
-		this.buttonright = buttonright;
+	public void setPanelRight(PanelRight right) {
+		this.right = right;
 	}
 
 	public void answer() {
 		mainmodele.playVocabGameGraphic(choice.getText(), this.getText());
 		choice.setVisible(false);
-		this.setText(null);
-		buttonright.setText(null);
+		right.setButtonsNull();
+		left.setButtonsNull();
 		Main.window.getContentPane().validate();
-		System.out.println(mainmodele.getVocabGameGraphicScore());
 	}
 
 }

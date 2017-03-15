@@ -7,25 +7,34 @@ import javax.swing.JButton;
 
 import MainSystem.Modele;
 
-public class ButtonRight extends JButton implements MouseListener {
+public class ButtonAddRemoveTopic extends JButton implements MouseListener {
 
-	Nenuphar choice;
-	PanelRight right;
-	PanelLeft left;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	Modele mainmodele;
-	int rank;
 
-	public ButtonRight(Modele mainmodele, int rank, PanelRight right) {
+	String name;
+
+	Boolean status;
+
+	public ButtonAddRemoveTopic(Modele mainmodele, String name) {
+		super(name);
+		this.name = name;
 		this.mainmodele = mainmodele;
-		this.rank = rank;
-		this.right = right;
+		this.status = false;
 		this.addMouseListener(this);
 	}
 
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
-		answer();
-
+		if (!this.status) {
+			this.status = true;
+		} else {
+			this.status = false;
+		}
 	}
 
 	@Override
@@ -52,20 +61,8 @@ public class ButtonRight extends JButton implements MouseListener {
 
 	}
 
-	public void setChoice(Nenuphar choice) {
-		this.choice = choice;
-	}
-
-	public void setPanelLeft(PanelLeft left) {
-		this.left = left;
-	}
-
-	public void answer() {
-		this.mainmodele.playVocabGameGraphic(this.choice.getText(), this.getText());
-		this.choice.setVisible(false);
-		this.right.setButtonsNull();
-		this.left.setButtonsNull();
-		Main.window.getContentPane().validate();
+	public Boolean getStatus() {
+		return this.status;
 	}
 
 }
