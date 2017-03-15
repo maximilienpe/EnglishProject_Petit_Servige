@@ -39,6 +39,7 @@ public class VocabularyGame2 {
 	private Boolean VocabGameEnd;
 
 	// vocabulary game part
+	//if life < 0 : the game start with the no-life mode
 	public VocabularyGame2(TopicVocabulary selectedTopic, TypeOfGame typeOfGame, int numberOfWords,
 			int numberOfPropositions, Logger logger, int initialeLife) {
 		if (selectedTopic != null && typeOfGame != null) {
@@ -141,7 +142,7 @@ public class VocabularyGame2 {
 		ArrayList<String> allAnswerWords = new ArrayList<String>();
 		for (Word w : this.wordsToPlay) {
 			if (this.type.equals(TypeOfGame.ENGLISH)) {
-				System.out.println(w.getFrenchWords().get(this.frenchWordsIndex.get(this.wordsToPlay.indexOf(w))));
+				//System.out.println(w.getFrenchWords().get(this.frenchWordsIndex.get(this.wordsToPlay.indexOf(w))));
 				allAnswerWords.add(w.getFrenchWords().get(this.frenchWordsIndex.get(this.wordsToPlay.indexOf(w))));
 			} else if (this.type.equals(TypeOfGame.FRENCH)) {
 				allAnswerWords.add(w.getEnglishWords().get(this.englishWordsIndex.get(this.wordsToPlay.indexOf(w))));
@@ -164,7 +165,12 @@ public class VocabularyGame2 {
 			} else {
 				// what should we do if he choose a bad answer ?
 				System.out.println("Bad answer !");
-				this.life--;
+				if (this.life > 0) {
+					this.life--;
+					if (this.life == 0) {
+						this.VocabGameEnd = true;
+					}
+				}
 				return false;
 			}
 		} else {
@@ -227,6 +233,10 @@ public class VocabularyGame2 {
 
 	public ArrayList<Word> getWordsToPlay() {
 		return this.wordsToPlay;
+	}
+	
+	public void setLife(int newLife) {
+		this.life = newLife;
 	}
 	
 	public int getLife() {
