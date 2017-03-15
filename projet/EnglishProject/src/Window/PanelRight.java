@@ -64,6 +64,12 @@ public class PanelRight extends JPanel {
 		}
 	}
 
+	public void setAllChoice(PanelAnimation anim) {
+		for (int j = 0; j < this.allbuttons.size(); j++) {
+			allbuttons.get(j).setPanelAnim(anim);
+		}
+	}
+
 	public ArrayList<ButtonRight> getAllRightButtons() {
 		return this.allbuttons;
 	}

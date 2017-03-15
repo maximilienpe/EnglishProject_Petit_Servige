@@ -15,6 +15,7 @@ public class ButtonRight extends JButton implements MouseListener {
 	ScorePanel score;
 	Modele mainmodele;
 	int rank;
+	PanelAnimation anim;
 
 	public ButtonRight(Modele mainmodele, int rank, PanelRight right) {
 		this.mainmodele = mainmodele;
@@ -65,11 +66,17 @@ public class ButtonRight extends JButton implements MouseListener {
 		this.score = score;
 	}
 
+	public void setPanelAnim(PanelAnimation anim) {
+		this.anim = anim;
+	}
+
 	public void answer() {
 		this.mainmodele.playVocabGameGraphic(this.choice.getText(), this.getText());
 		this.choice.setVisible(false);
 		this.right.setButtonsNull();
 		this.left.setButtonsNull();
+		this.anim.removeNenu(choice);
+		this.anim.WaitEnd();
 		score.refresh();
 		Main.window.getContentPane().validate();
 	}
