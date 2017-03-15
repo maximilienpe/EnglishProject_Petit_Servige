@@ -14,13 +14,13 @@ public class ButtonPlay extends JButton implements MouseListener {
 	public ButtonPlay(Modele mainmodele) {
 		super("Play");
 		this.mainmodele = mainmodele;
+		this.setBounds(45, 50, 90, 30);
 		this.addMouseListener(this);
 	}
 
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
 		Main.window.remove(Main.window.getContentPane());
-		Main.window.setSize(600, 600);
 		Main.window.setContentPane(new PanelTopicPlay(mainmodele));
 		Main.window.getContentPane().validate();
 	}

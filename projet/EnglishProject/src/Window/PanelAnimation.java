@@ -10,11 +10,11 @@ public class PanelAnimation extends JPanel {
 
 	Modele mainmodele;
 
-	ButtonLeft left;
+	PanelLeft left;
 
-	ButtonRight right;
+	PanelRight right;
 
-	public PanelAnimation(Modele mainmodele, ButtonLeft left, ButtonRight right) {
+	public PanelAnimation(Modele mainmodele, PanelLeft left, PanelRight right) {
 
 		this.pane = this;
 
@@ -28,8 +28,7 @@ public class PanelAnimation extends JPanel {
 		Runnable r = new Runnable() {
 			public void run() {
 				for (int p = 0; p < mainmodele.getAllTheAskedWordsVocabGameGraphic().size(); p++) {
-					Nenuphar n = new Nenuphar(mainmodele.getAllTheAskedWordsVocabGameGraphic().get(p), mainmodele, left,
-							right, p);
+					Nenuphar n = new Nenuphar(mainmodele.getAllTheAskedWordsVocabGameGraphic().get(p), mainmodele, left, right, p);
 					pane.add(n);
 					runItem(n);
 					try {

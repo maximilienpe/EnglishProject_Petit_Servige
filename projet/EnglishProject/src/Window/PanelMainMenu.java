@@ -10,7 +10,10 @@ public class PanelMainMenu extends JPanel {
 
 	public PanelMainMenu(Modele mainmodele) {
 		this.mainmodele = mainmodele;
-		this.add(new ButtonPlay(mainmodele));
+		this.setLayout(null);
+		ButtonPlay buttonplay = new ButtonPlay(mainmodele);
+		this.add(buttonplay);
+
 	}
 
 }

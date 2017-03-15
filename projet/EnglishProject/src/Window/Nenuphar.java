@@ -14,13 +14,13 @@ public class Nenuphar extends JButton implements MouseListener {
 
 	Modele mainmodele;
 
-	ButtonLeft left;
+	PanelLeft left;
 
-	ButtonRight right;
+	PanelRight right;
 
 	int p;
 
-	public Nenuphar(String name, Modele mainmodele, ButtonLeft left, ButtonRight right, int p) {
+	public Nenuphar(String name, Modele mainmodele, PanelLeft left, PanelRight right, int p) {
 		super(name);
 		this.left = left;
 		this.right = right;
@@ -51,8 +51,8 @@ public class Nenuphar extends JButton implements MouseListener {
 	public void mouseClicked(MouseEvent arg0) {
 		left.setChoice(this);
 		right.setChoice(this);
-		left.setText(mainmodele.getLeftPropositionsVocabGameGraphic(p).get(0));
-		right.setText(mainmodele.getRightPropositionsVocabGameGraphic(p).get(0));
+		left.setProp(p);
+		right.setProp(p);
 		left.validate();
 		right.validate();
 	}
