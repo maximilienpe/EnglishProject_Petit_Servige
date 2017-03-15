@@ -3,6 +3,7 @@ package Window;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.util.ArrayList;
 
@@ -71,8 +72,8 @@ public class PanelLessons extends JPanel {
 		this.buttonPanel.setLayout(this.gridlayout);
 		this.left = new JButton("	<<	");
 		this.right = new JButton("	>>	");
-		this.left.setPreferredSize(new Dimension(25,25));
-		this.right.setPreferredSize(new Dimension(25,25));
+		this.left.setPreferredSize(new Dimension(50,25));
+		this.right.setPreferredSize(new Dimension(50,25));
 		this.listenerLeft = new ListenerLeftButtonLesson(this);
 		this.listenerRight = new ListenerRightButtonLesson(this);
 		this.left.addActionListener(listenerLeft);
@@ -99,7 +100,7 @@ public class PanelLessons extends JPanel {
 		this.centerPanel.revalidate();
 		
 		//add to the PanelLessons
-		this.setLayout(new BoxLayout(this,BoxLayout.PAGE_AXIS));
+		this.setLayout(new FlowLayout());
 		this.add(this.northPanel);
 		this.add(this.centerPanel);
 		this.repaint();
