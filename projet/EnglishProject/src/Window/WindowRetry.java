@@ -3,11 +3,12 @@ package Window;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import MainSystem.Modele;
 
-public class WindowRetry extends JPanel {
+public class WindowRetry {
 
 	JPanel pan;
 
@@ -15,11 +16,25 @@ public class WindowRetry extends JPanel {
 
 	public WindowRetry(Modele mainmodele) {
 		this.mainmodele = mainmodele;
-		Main.window.getContentPane().removeAll();
-		Main.window.setSize(250, 500);
 		SetPanel();
-		Main.window.setContentPane(pan);
-		Main.window.getContentPane().validate();
+		Object[] options = { "Retry", "Quit" };
+		int output = JOptionPane.showOptionDialog(null,
+				"Your score is : " + this.mainmodele.getVocabGameGraphicScore() + "/"
+						+ this.mainmodele.getVocabGameGraphicScoreMax(),
+				"End", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
+		
+		if (output == 0) {
+			Main.window.remove(Main.window.getContentPane());
+			// modele.launchVocabGameGraphic();
+			Main.window.setContentPane(new PanelGameWindow(mainmodele, 4));
+			Main.window.getContentPane().validate();
+		}
+
+		if (output == 1) {
+			Main.window.remove(Main.window.getContentPane());
+			Main.window.setContentPane(new PanelMainMenu(mainmodele));
+			Main.window.getContentPane().validate();
+		}
 	}
 
 	public void SetPanel() {

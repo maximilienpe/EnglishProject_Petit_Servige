@@ -181,9 +181,7 @@ public class Modele {
 			}
 		}
 		if (found) {
-			this.modeleLogger.addLog(
-					"MODELE The topic named " + titleTopic + " has been selected.",
-					LogLevel.INFO);
+			this.modeleLogger.addLog("MODELE The topic named " + titleTopic + " has been selected.", LogLevel.INFO);
 		} else {
 			this.modeleLogger.addLog("MODELE The topic named " + titleTopic + " can't be found.", LogLevel.ERROR);
 		}
@@ -199,9 +197,7 @@ public class Modele {
 			}
 		}
 		if (found) {
-			this.modeleLogger.addLog(
-					"MODELE The topic named " + titleTopic + " has been diselected.",
-					LogLevel.INFO);
+			this.modeleLogger.addLog("MODELE The topic named " + titleTopic + " has been diselected.", LogLevel.INFO);
 		} else {
 			this.modeleLogger.addLog("MODELE The topic named " + titleTopic + " can't be found.", LogLevel.ERROR);
 		}
@@ -220,12 +216,11 @@ public class Modele {
 	public TopicVocabulary getSelectedTopic() {
 		return this.selectedTopic;
 	}
-	
+
 	public ArrayList<TopicVocabulary> getTopics() {
 		if (this.topics != null) {
 			return this.topics;
-		}
-		else {
+		} else {
 			return null;
 		}
 	}
@@ -492,14 +487,15 @@ public class Modele {
 			return null;
 		}
 	}
-	
-	public void launchVocabGameGraphic(ArrayList<String> titlesTopics,  TypeOfGame type, int numberOfWords, int numberOfPropositions, int life) {
-		for (String s: titlesTopics) {
+
+	public void launchVocabGameGraphic(ArrayList<String> titlesTopics, TypeOfGame type, int numberOfWords,
+			int numberOfPropositions, int life) {
+		for (String s : titlesTopics) {
 			this.addSelectedTopic(s);
 		}
 		this.mergeTopicVocabulary();
 		this.vocabGameGraphic = new VocabularyGame2(this.selectedTopic, type, numberOfWords, numberOfPropositions,
-				this.modeleLogger,life);
+				this.modeleLogger, life);
 		this.modeleLogger.addLog("MODELE A new game is launched.", LogLevel.INFO);
 	}
 

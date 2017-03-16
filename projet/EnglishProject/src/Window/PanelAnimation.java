@@ -29,9 +29,11 @@ public class PanelAnimation extends JPanel {
 		this.left = left;
 		this.right = right;
 
+		this.score = score;
+
 		this.mainmodele = mainmodele;
 
-		//this.setBounds(100, 100, 400, 400);
+		// this.setBounds(100, 100, 400, 400);
 
 		this.setLayout(null);
 
@@ -72,9 +74,9 @@ public class PanelAnimation extends JPanel {
 				for (int j = 50; j < Main.window.getHeight(); j++) {
 					Main.window.validate();
 					n.move(n.getPosX(), n.getPosY());
-					/*int y = n.getPosY();
-					y++;
-					n.setPosY(y);*/
+					/*
+					 * int y = n.getPosY(); y++; n.setPosY(y);
+					 */
 					n.nextPosition();
 					try {
 						Thread.sleep(50);
