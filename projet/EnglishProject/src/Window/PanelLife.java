@@ -32,22 +32,33 @@ public class PanelLife extends JPanel {
 		this.lifePanels = new ArrayList<JPanel>();
 		
 		//initialize Panel and layout
-		this.mainGridLayout = new GridLayout(1,this.maxLife);
-		for (int i = 0; i < this.maxLife  ; i++) {
+		if (this.maxLife >= 0) {
+			this.mainGridLayout = new GridLayout(1,this.maxLife);
+			for (int i = 0; i < this.maxLife  ; i++) {
+				JPanel lp = new JPanel();
+				JLabel ll = new JLabel("<3");
+				lp.add(ll);
+				this.lifeLabel.add(ll);
+				this.lifePanels.add(lp);
+				this.add(lp);
+				} 
+			}	else {
+			this.mainGridLayout = new GridLayout(1,this.maxLife);
 			JPanel lp = new JPanel();
-			JLabel ll = new JLabel("<3");
+			JLabel ll = new JLabel("INFINI");
 			lp.add(ll);
 			this.lifeLabel.add(ll);
 			this.lifePanels.add(lp);
-			this.add(lp);
+			this.add(lp);	
 		}
 	}
 	
 	public void updateLife() {
-
-		this.life = this.modele.getVocabGameGraphicLife();
-		System.out.println(this.life);
-		this.lifeLabel.get(this.life).setText("");
+		if (this.life > this.modele.getVocabGameGraphicLife()) {
+			this.life = this.modele.getVocabGameGraphicLife();
+			System.out.println(this.life);
+			this.lifeLabel.get(this.life).setText("");
+		}
 	}
 	
 	

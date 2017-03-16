@@ -71,9 +71,10 @@ public class PanelAnimation extends JPanel {
 		Runnable r2 = new Runnable() {
 			@SuppressWarnings("deprecation")
 			public void run() {
+				System.out.println("test end");
 				for (int j = 50; j < Main.window.getHeight() - 200; j++) {
 					Main.window.validate();
-					n.move(n.getPosX(), n.getPosY());
+					n.setLocation(n.getPosX(), n.getPosY());
 					/*
 					 * int y = n.getPosY(); y++; n.setPosY(y);
 					 */
@@ -85,6 +86,7 @@ public class PanelAnimation extends JPanel {
 					}
 				}
 				if (allchoice.contains(n)) {
+					System.out.println("test end");
 					allchoice.remove(n);
 					WaitEnd();
 					n.setVisible(false);
@@ -101,7 +103,13 @@ public class PanelAnimation extends JPanel {
 	public void WaitEnd() {
 		System.out.println(allchoice.size());
 		if (allchoice.size() == 0) {
+			this.mainmodele.setVocabGameGraphicEndded(true);
 			new WindowRetry(mainmodele);
+			//we have to add some lines to stop the threads
+		}
+		if (this.mainmodele.getVocabGameGraphicLife() == 0) {
+			new WindowRetry(mainmodele);
+			//we have to add some lines to stop the threads
 		}
 	}
 

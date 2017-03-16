@@ -29,12 +29,31 @@ public class ButtonTopicPlay extends JButton implements MouseListener {
 		this.addMouseListener(this);
 		this.setPreferredSize(new Dimension(300,50));
 	}
+	
+	public void setNbWords(int nbw) {
+		this.nbwords = nbw;
+	}
+	
+	public void setNbProps(int nbp) {
+		this.nbprops = nbp;
+	}
+	
+	public void setNbLife(int nbl) {
+		this.life = nbl;
+	}
 
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
 		if (boxtopic.getAllChoosedTopics().size() != 0) {
-			mainmodele.launchVocabGameGraphic(this.boxtopic.getAllChoosedTopics(), TypeOfGame.ENGLISH, this.nbwords, this.nbprops,
-					2);
+			if (this.life == 0) {
+				mainmodele.launchVocabGameGraphic(this.boxtopic.getAllChoosedTopics(), TypeOfGame.ENGLISH, this.nbwords, this.nbprops,
+						-1);
+			}
+			else {
+				mainmodele.launchVocabGameGraphic(this.boxtopic.getAllChoosedTopics(), TypeOfGame.ENGLISH, this.nbwords, this.nbprops,
+						life);
+			}
+
 			System.out.println("A new game launch with parameters : " +
 					TypeOfGame.ENGLISH  + ", " +
 					nbwords + ", " +

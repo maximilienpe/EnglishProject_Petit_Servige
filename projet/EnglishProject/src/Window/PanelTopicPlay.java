@@ -3,6 +3,8 @@ package Window;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.LayoutManager;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
@@ -17,9 +19,14 @@ public class PanelTopicPlay extends JPanel {
 
 	BoxTopic alltopics;
 
-	JComboBox<String> nbwords;
-	JComboBox<String> nbprops;
-	JComboBox<String> nblife;
+	private JComboBox<String> nbwordsComboBox;
+	private JComboBox<String> nbpropsComboBox;
+	private JComboBox<String> nblifeComboBox;
+	private ButtonTopicPlay buttonPlay;
+	
+	private int nbwords;
+	private int nbprops;
+	private int nblife;
 	
 	private JPanel optionPanel;
 	private JPanel buttonTopicPanel;
@@ -67,24 +74,55 @@ public class PanelTopicPlay extends JPanel {
 		this.gridPanel.add(this.alltopics);
 
 		String[] choosewords = { "5", "10", "20" };
-		nbwords = new JComboBox<String>(choosewords);
+		nbwordsComboBox = new JComboBox<String>(choosewords);
+		nbwordsComboBox.addActionListener(new ActionListener() {
 
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				nbwords = Integer.parseInt((String) nbwordsComboBox.getSelectedItem());
+				System.out.println("nbwords is now of : " + nbwords);
+				buttonPlay.setNbWords(nbwords);
+			}
+			
+		});
 
 		String[] chooseprops = { "2", "4", "6" };
-		nbprops = new JComboBox<String>(chooseprops);
+		nbpropsComboBox = new JComboBox<String>(chooseprops);
+		nbpropsComboBox.addActionListener(new ActionListener() {
 
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				nbprops = Integer.parseInt((String) nbpropsComboBox.getSelectedItem());
+				System.out.println("nbprops is now of : " + nbprops);
+				buttonPlay.setNbProps(nbprops);
+			}
+			
+		});
+		
+		
 		String[] chooselife = { "0", "3", "5" };
-	    nblife = new JComboBox<String>(chooselife);
+	    nblifeComboBox = new JComboBox<String>(chooselife);
+	    nblifeComboBox.addActionListener(new ActionListener() {
 
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				nblife = Integer.parseInt((String) nblifeComboBox.getSelectedItem());
+				System.out.println("nblife is now of : " + nblife);
+				buttonPlay.setNbLife(nblife);
+			}
+			
+		});
+	    
 		//this.add(new OptionsGamePanel(nbwords, nbprops, nblife));
-		this.optionPanel.add(new OptionsGamePanel(nbwords, nbprops, nblife));
+		this.optionPanel.add(new OptionsGamePanel(nbwordsComboBox, nbpropsComboBox, nblifeComboBox));
 		this.gridPanel.add(this.optionPanel);
 		this.encapsulateGridPanel.add(this.gridPanel);
 		
 		//this.add(new ButtonTopicPlay(mainmodele, nbwords.getSelectedItem().toString(),
 		//		nbprops.getSelectedItem().toString(), nblife.getSelectedItem().toString(), alltopics));
-		this.buttonTopicPanel.add(new ButtonTopicPlay(mainmodele, nbwords.getSelectedItem().toString(),
-			nbprops.getSelectedItem().toString(), nblife.getSelectedItem().toString(), alltopics));
+		buttonPlay = new ButtonTopicPlay(mainmodele, nbwordsComboBox.getSelectedItem().toString(),
+				nbpropsComboBox.getSelectedItem().toString(), nblifeComboBox.getSelectedItem().toString(), alltopics);
+		this.buttonTopicPanel.add(buttonPlay);
 		this.encapsulateGridPanel.add(this.buttonTopicPanel);
 		
 		this.add(this.encapsulateGridPanel);
