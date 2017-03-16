@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.Toolkit;
 
 import javax.swing.JPanel;
@@ -18,6 +19,9 @@ public class PanelMainMenu extends JPanel {
 	private Dimension buttonSize;
 
 	public PanelMainMenu(Modele mainmodele) {
+		
+		
+		
 		//initialize the "this panel"
 		this.setLayout(new FlowLayout());
 		this.mainmodele = mainmodele;
@@ -48,4 +52,5 @@ public class PanelMainMenu extends JPanel {
 		this.gridPanel.add(new JPanel());
 		this.add(gridPanel);
 	}
+	
 }
