@@ -1,8 +1,13 @@
 package Window;
 
+import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.JButton;
 
 import MainSystem.Modele;
@@ -24,10 +29,14 @@ public class Nenuphar extends JButton implements MouseListener {
 
 	PanelRight right;
 
+	String name;
+
 	int p;
 
 	public Nenuphar(String name, Modele mainmodele, PanelLeft left, PanelRight right, int p) {
 		super(name);
+		this.name = name;
+
 		this.left = left;
 		this.right = right;
 
@@ -35,7 +44,7 @@ public class Nenuphar extends JButton implements MouseListener {
 		this.posY = this.initialePosY;
 		this.freq = 10;
 		this.time = 0.0;
-		
+
 		this.mainmodele = mainmodele;
 		this.p = p;
 		this.setBounds(posX, posY, 80, 40);
@@ -57,25 +66,35 @@ public class Nenuphar extends JButton implements MouseListener {
 	public void setPosY(int posY) {
 		this.posY = posY;
 	}
-	
+
 	public void nextPosition() {
 		this.r++;
 		this.theta++;
-		this.posX = posX + (int) (this.r*Math.cos(this.theta));
-		this.posY = posY + (int) (this.r*Math.sin(this.theta));
+		this.posX = posX + (int) (this.r * Math.cos(this.theta));
+		this.posY = posY + (int) (this.r * Math.sin(this.theta));
 	}
-	
+
 	public void nextPositionSinus() {
 		this.time = this.time + 0.01;
 		this.posY = this.posY + 1;
-		this.posX = this.initialePosX + (int) (150 *  Math.sin(this.freq*(this.time)));
-		//System.out.println(this.posX);
+		this.posX = this.initialePosX + (int) (150 * Math.sin(this.freq * (this.time)));
+		// System.out.println(this.posX);
 	}
-	
+
 	public void nextPositionCardioide() {
 		this.time = this.time + 0.03;
-		this.posX = this.initialePosX + (int) ( 150 * Math.cos(this.time*(1+Math.cos(this.time))));
-		this.posY = this.initialePosY + (int) ( 150 * Math.sin(this.time*(1+Math.sin(this.time))));
+		this.posX = this.initialePosX + (int) (150 * Math.cos(this.time * (1 + Math.cos(this.time))));
+		this.posY = this.initialePosY + (int) (150 * Math.sin(this.time * (1 + Math.sin(this.time))));
+	}
+
+	public void paintComponent(Graphics g) {
+		try {
+			Image img = ImageIO.read(new File("Image\\vert.jpg"));
+			g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
+			g.drawString(this.name, 12, 25);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override

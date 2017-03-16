@@ -1,5 +1,11 @@
 package Window;
 
+import java.awt.Graphics;
+import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -21,6 +27,15 @@ public class ScorePanel extends JPanel {
 	public void refresh() {
 		score.setText((mainmodele.getVocabGameGraphicScore() + "/" + mainmodele.getVocabGameGraphicScoreMax()));
 		this.validate();
+	}
+
+	public void paintComponent(Graphics g) {
+		try {
+			Image img = ImageIO.read(new File("Image\\marron.jpg"));
+			g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 }
