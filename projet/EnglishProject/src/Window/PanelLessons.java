@@ -41,12 +41,16 @@ public class PanelLessons extends JPanel {
 	private JButton right;
 	private ListenerLeftButtonLesson listenerLeft;
 	private ListenerRightButtonLesson listenerRight;
+		//return button
+		private int ySIZE;
+	
 	
 	//content variables
 	private Modele modele;
 	private ArrayList<TopicVocabulary> topics;
 	private int currentTopicIndex;
 	private String contentVocabulary;
+	
 	
 	public PanelLessons(Modele m) {
 		
@@ -112,6 +116,9 @@ public class PanelLessons extends JPanel {
 		this.setLayout(new FlowLayout());
 		this.add(this.northPanel);
 		this.add(this.centerPanel);
+		
+		
+		
 		//this.add(this.goToMainMenu);
 		this.repaint();
 		this.revalidate();

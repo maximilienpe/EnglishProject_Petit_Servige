@@ -25,7 +25,11 @@ public class PanelTopicPlay extends JPanel {
 	private JPanel buttonTopicPanel;
 	private JPanel topicPanel;
 	private JPanel gridPanel;
+	private GridLayout gridPanelLayout;
 	private JPanel encapsulateGridPanel;
+	private GridLayout encapsulateGridLayout;
+	private JPanel returnMainMenuPanel;
+	private GridLayout returnMainMenuGridLayout;
 
 	ArrayList<String> topics = new ArrayList<String>();
 
@@ -48,8 +52,17 @@ public class PanelTopicPlay extends JPanel {
 		this.optionPanel.setLayout(new FlowLayout());
 		this.buttonTopicPanel.setLayout(new FlowLayout());
 		this.topicPanel.setLayout(new FlowLayout());
-		this.gridPanel.setLayout(new GridLayout(1,2));
-		this.encapsulateGridPanel.setLayout(new GridLayout(2,1));
+		//this.gridPanel.setLayout(new GridLayout(1,2));
+		this.gridPanelLayout = new GridLayout(1,2);
+		this.gridPanelLayout.setHgap(200);
+		this.gridPanel.setLayout(this.gridPanelLayout);
+		//this.encapsulateGridPanel.setLayout(new GridLayout(2,1));
+		this.encapsulateGridLayout = new GridLayout(3,1);
+		this.encapsulateGridLayout.setVgap(250);
+		this.encapsulateGridPanel.setLayout(this.encapsulateGridLayout);
+		//
+		this.returnMainMenuPanel = new JPanel();
+		this.returnMainMenuGridLayout = new GridLayout(1,3);
 		
 		this.gridPanel.add(this.alltopics);
 
