@@ -9,8 +9,12 @@ import MainSystem.Modele;
 
 public class Nenuphar extends JButton implements MouseListener {
 
-	private int posX = 300;
-	private int posY = 200;
+	private int initialePosX = 300;
+	private int initialePosY = 0;
+	private int freq;
+	private int posX;
+	private int posY;
+	private double time;
 	private int r = 0;
 	private int theta = 0;
 
@@ -27,6 +31,11 @@ public class Nenuphar extends JButton implements MouseListener {
 		this.left = left;
 		this.right = right;
 
+		this.posX = this.initialePosX;
+		this.posY = this.initialePosY;
+		this.freq = 10;
+		this.time = 0.0;
+		
 		this.mainmodele = mainmodele;
 		this.p = p;
 		this.setBounds(posX, posY, 80, 40);
@@ -54,6 +63,13 @@ public class Nenuphar extends JButton implements MouseListener {
 		this.theta++;
 		this.posX = posX + (int) (this.r*Math.cos(this.theta));
 		this.posY = posY + (int) (this.r*Math.sin(this.theta));
+	}
+	
+	public void nextPositionSinus() {
+		this.time = this.time + 0.01;
+		this.posY = this.posY + 1;
+		this.posX = this.initialePosX + (int) (150 *  Math.sin(this.freq*(this.time)));
+		System.out.println(this.posX);
 	}
 
 	@Override

@@ -621,7 +621,6 @@ public class Modele {
 			this.modeleLogger.addLog("MODELE There is no vocabulary game graphic launched.", LogLevel.ERROR);
 			return null;
 		}
-
 	}
 
 	/*
