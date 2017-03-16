@@ -67,16 +67,14 @@ public class PanelTopicPlay extends JPanel {
 		this.gridPanel.add(this.alltopics);
 
 		String[] choosewords = { "5", "10", "20" };
-		JComboBox<String> nbwords = new JComboBox<String>(choosewords);
-		this.nbwords = nbwords;
+		nbwords = new JComboBox<String>(choosewords);
+
 
 		String[] chooseprops = { "2", "4", "6" };
-		JComboBox<String> nbprops = new JComboBox<String>(chooseprops);
-		this.nbprops = nbprops;
+		nbprops = new JComboBox<String>(chooseprops);
 
 		String[] chooselife = { "0", "3", "5" };
-		JComboBox<String> nblife = new JComboBox<String>(chooselife);
-		this.nblife = nblife;
+	    nblife = new JComboBox<String>(chooselife);
 
 		//this.add(new OptionsGamePanel(nbwords, nbprops, nblife));
 		this.optionPanel.add(new OptionsGamePanel(nbwords, nbprops, nblife));

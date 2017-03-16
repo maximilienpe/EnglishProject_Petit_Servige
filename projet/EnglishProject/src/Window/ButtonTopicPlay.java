@@ -13,10 +13,10 @@ public class ButtonTopicPlay extends JButton implements MouseListener {
 
 	Modele mainmodele;
 
-	int nbwords;
-	int nbprops;
-	int life;
-	BoxTopic boxtopic;
+	private int nbwords;
+	private int nbprops;
+	private int life;
+	private BoxTopic boxtopic;
 
 	public ButtonTopicPlay(Modele mainmodele, String nbwords, String nbprops, String life, BoxTopic boxtopic) {
 		super("Play");
@@ -33,7 +33,12 @@ public class ButtonTopicPlay extends JButton implements MouseListener {
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
 		if (boxtopic.getAllChoosedTopics().size() != 0) {
-			mainmodele.launchVocabGameGraphic(boxtopic.getAllChoosedTopics(), TypeOfGame.ENGLISH, nbwords, nbprops,
+			mainmodele.launchVocabGameGraphic(this.boxtopic.getAllChoosedTopics(), TypeOfGame.ENGLISH, this.nbwords, this.nbprops,
+					2);
+			System.out.println("A new game launch with parameters : " +
+					TypeOfGame.ENGLISH  + ", " +
+					nbwords + ", " +
+					nbprops + ", " +
 					life);
 			Main.window.remove(Main.window.getContentPane());
 			Main.window.setContentPane(new PanelGameWindow(mainmodele, nbprops));

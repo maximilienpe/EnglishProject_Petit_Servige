@@ -13,10 +13,16 @@ public class PanelLeft extends JPanel {
 	int props;
 	Modele mainmodele;
 	ArrayList<ButtonLeft> allbuttons;
+	
+	private ScorePanel scorepanel;
+	private PanelLife lifepanel;
 
-	public PanelLeft(Modele mainmodele, int props) {
+	public PanelLeft(Modele mainmodele, int props, ScorePanel scorepanel, PanelLife lifepanel) {
 		this.mainmodele = mainmodele;
 		this.props = props / 2;
+		
+		this.scorepanel = scorepanel;
+		this.lifepanel = lifepanel;
 
 		//this.setBounds(0, 100, 100, 500);
 
@@ -63,6 +69,12 @@ public class PanelLeft extends JPanel {
 		}
 	}
 
+	public void setPanelLife(PanelLife lifepanel) {
+		for (int i = 0; i < this.allbuttons.size(); i++) {
+			allbuttons.get(i).setLifePanel(lifepanel);
+		}
+	}
+	
 	public void setProp(int p) {
 		for (int j = 0; j < this.allbuttons.size(); j++) {
 			allbuttons.get(j).setText(mainmodele.getLeftPropositionsVocabGameGraphic(p).get(j));

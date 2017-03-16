@@ -15,10 +15,16 @@ public class PanelRight extends JPanel {
 	Modele mainmodele;
 	ArrayList<ButtonRight> allbuttons;
 
-	public PanelRight(Modele mainmodele, int props) {
+	private ScorePanel scorepanel;
+	private PanelLife lifepanel;
+	
+	public PanelRight(Modele mainmodele, int props, ScorePanel scorepanel, PanelLife lifepanel) {
 		this.mainmodele = mainmodele;
 		this.props = props / 2;
 
+		this.scorepanel = scorepanel;
+		this.lifepanel = lifepanel;
+		
 		//this.setBounds(500, 100, 100, 500);
 
 		GridLayout layout = new GridLayout(props, 1);
@@ -67,6 +73,12 @@ public class PanelRight extends JPanel {
 	public void setAllChoice(PanelAnimation anim) {
 		for (int j = 0; j < this.allbuttons.size(); j++) {
 			allbuttons.get(j).setPanelAnim(anim);
+		}
+	}
+	
+	public void setPanelLife(PanelLife lifepanel) {
+		for (int i = 0; i < this.allbuttons.size(); i++) {
+			allbuttons.get(i).setLifePanel(lifepanel);
 		}
 	}
 

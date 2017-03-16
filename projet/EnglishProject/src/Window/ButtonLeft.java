@@ -16,6 +16,8 @@ public class ButtonLeft extends JButton implements MouseListener {
 	Modele mainmodele;
 	int rank;
 	PanelAnimation anim;
+	
+	private PanelLife lifePanel;
 
 	public ButtonLeft(Modele mainmodele, int rank, PanelLeft left) {
 		this.mainmodele = mainmodele;
@@ -65,6 +67,10 @@ public class ButtonLeft extends JButton implements MouseListener {
 	public void setScorePanel(ScorePanel score) {
 		this.score = score;
 	}
+	
+	public void setLifePanel(PanelLife lifepanel) {
+		this.lifePanel = lifepanel;
+	}
 
 	public void setPanelAnim(PanelAnimation anim) {
 		this.anim = anim;
@@ -78,6 +84,8 @@ public class ButtonLeft extends JButton implements MouseListener {
 		this.anim.removeNenu(choice);
 		this.anim.WaitEnd();
 		score.refresh();
+		this.lifePanel.updateLife();
+		
 		Main.window.getContentPane().validate();
 	}
 

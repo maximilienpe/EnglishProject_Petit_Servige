@@ -69,7 +69,7 @@ public class Nenuphar extends JButton implements MouseListener {
 		this.time = this.time + 0.01;
 		this.posY = this.posY + 1;
 		this.posX = this.initialePosX + (int) (150 *  Math.sin(this.freq*(this.time)));
-		System.out.println(this.posX);
+		//System.out.println(this.posX);
 	}
 
 	@Override
