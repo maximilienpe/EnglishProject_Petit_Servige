@@ -1,8 +1,13 @@
 package Window;
 
+import java.awt.Graphics;
 import java.awt.GridLayout;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.util.ArrayList;
 
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -14,11 +19,17 @@ public class PanelLife extends JPanel {
 	private GridLayout mainGridLayout;
 	private ArrayList<JPanel> lifePanels;
 	private ArrayList<JLabel> lifeLabel;
+	
 
 	//content
 	private int maxLife;
 	private int life;
 	private Modele modele;
+	
+	//images
+	private String imageDirPath = "Graphics";
+	private ImageIcon heart;
+	private ImageIcon deadheart;
 	
 	public PanelLife(Modele m){
 		//System.out.println("System of life start");
@@ -33,16 +44,19 @@ public class PanelLife extends JPanel {
 		
 		//initialize Panel and layout
 		if (this.maxLife >= 0) {
+			this.heart = new ImageIcon(imageDirPath + "/smallheart2.png");
+			this.deadheart = new ImageIcon(imageDirPath + "/smalldeadheart2.png");
 			this.mainGridLayout = new GridLayout(1,this.maxLife);
 			for (int i = 0; i < this.maxLife  ; i++) {
 				JPanel lp = new JPanel();
-				JLabel ll = new JLabel("<3");
+				JLabel ll = new JLabel();
+				ll.setIcon((Icon) this.heart);
 				lp.add(ll);
 				this.lifeLabel.add(ll);
 				this.lifePanels.add(lp);
 				this.add(lp);
-				} 
-			}	else {
+			} 
+		}else {
 			this.mainGridLayout = new GridLayout(1,this.maxLife);
 			JPanel lp = new JPanel();
 			JLabel ll = new JLabel("INFINI");
@@ -56,8 +70,9 @@ public class PanelLife extends JPanel {
 	public void updateLife() {
 		if (this.life > this.modele.getVocabGameGraphicLife()) {
 			this.life = this.modele.getVocabGameGraphicLife();
-			System.out.println(this.life);
-			this.lifeLabel.get(this.life).setText("");
+			this.lifeLabel.get(this.life).setIcon(this.deadheart);
+			//System.out.println(this.life);
+			//this.lifeLabel.get(this.life).setText("");
 		}
 	}
 	
