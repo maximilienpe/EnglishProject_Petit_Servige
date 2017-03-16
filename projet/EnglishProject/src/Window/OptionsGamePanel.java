@@ -17,7 +17,7 @@ public class OptionsGamePanel extends JPanel {
 		this.nbwords = nbwords;
 		this.nbprops = nbprops;
 		this.nblife = nblife;
-		this.setBounds(175, 25, 150, 200);
+		//this.setBounds(175, 25, 150, 200);
 		this.setLayout(new GridLayout(6, 1));
 
 		this.add(new JLabel("Choose nb words"));

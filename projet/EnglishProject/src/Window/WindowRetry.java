@@ -32,7 +32,7 @@ public class WindowRetry extends JPanel {
 		JPanel buttons = new JPanel();
 		buttons.setLayout(new BoxLayout(buttons, BoxLayout.LINE_AXIS));
 		buttons.add(new JButton("Retry"));
-		buttons.add(new JButton("Quitter"));
+		buttons.add(new ButtonMainMenuQuit("Quit"));
 
 		pan = new JPanel();
 		this.pan.setLayout(new BoxLayout(this.pan, BoxLayout.PAGE_AXIS));

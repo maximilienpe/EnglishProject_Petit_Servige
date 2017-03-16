@@ -14,7 +14,7 @@ public class ButtonPlay extends JButton implements MouseListener {
 	public ButtonPlay(Modele mainmodele) {
 		super("Play");
 		this.mainmodele = mainmodele;
-		this.setBounds(45, 50, 90, 30);
+		//this.setBounds(45, 50, 90, 30);
 		this.addMouseListener(this);
 	}
 

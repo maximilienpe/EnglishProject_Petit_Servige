@@ -15,7 +15,7 @@
 		<item value="true" key="org.eclipse.jdt.ui.typecomment.deprecated"/>
 	</section>
 	<section name="quick_assist_proposal_size">
-		<item value="896" key="size.y"/>
+		<item value="1024" key="size.y"/>
 		<item value="272" key="size.x"/>
 	</section>
 	<section name="NewPackageWizardPage">

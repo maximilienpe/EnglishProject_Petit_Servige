@@ -10,8 +10,8 @@ import LogSystem.Logger;
 public class FileTopicExplorer {
 		
 	//main variables
-	ArrayList<File> topicFiles;
-	String topicDirectory;
+	private ArrayList<File> topicFiles;
+	private String topicDirectory;
 	
 	//logger variables
 	private Logger logger;

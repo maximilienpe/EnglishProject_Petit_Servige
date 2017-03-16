@@ -24,7 +24,7 @@ public class ButtonTopicPlay extends JButton implements MouseListener {
 		this.life = Integer.parseInt(life);
 		this.boxtopic = boxtopic;
 		this.mainmodele = mainmodele;
-		this.setBounds(25, 400, 60, 30);
+		//this.setBounds(25, 400, 60, 30);
 		this.addMouseListener(this);
 	}
 
@@ -34,7 +34,6 @@ public class ButtonTopicPlay extends JButton implements MouseListener {
 			mainmodele.launchVocabGameGraphic(boxtopic.getAllChoosedTopics(), TypeOfGame.ENGLISH, nbwords, nbprops,
 					life);
 			Main.window.remove(Main.window.getContentPane());
-			Main.window.setSize(600, 600);
 			Main.window.setContentPane(new PanelGameWindow(mainmodele, nbprops));
 			Main.window.getContentPane().validate();
 		}

@@ -1,5 +1,7 @@
 package Window;
 
+import java.awt.BorderLayout;
+
 import javax.swing.JPanel;
 
 import MainSystem.Modele;
@@ -13,9 +15,10 @@ public class PanelGameWindow extends JPanel {
 	public PanelGameWindow(Modele mainmodele, int nbprops) {
 		this.nbprops = nbprops;
 		this.mainmodele = mainmodele;
-		Main.window.setSize(600, 600);
+		Main.window.setSize(900, 600);
 
-		this.setLayout(null);
+		//this.setLayout(null);
+		this.setLayout(new BorderLayout());
 
 		ScorePanel score = new ScorePanel(mainmodele);
 
@@ -30,12 +33,12 @@ public class PanelGameWindow extends JPanel {
 
 		score.refresh();
 
-		this.add(score);
+		this.add(score, BorderLayout.NORTH);
 
-		this.add(left);
-		this.add(right);
+		this.add(left, BorderLayout.WEST);
+		this.add(right, BorderLayout.EAST);
 
-		this.add(new PanelAnimation(mainmodele, left, right, score));
+		this.add(new PanelAnimation(mainmodele, left, right, score), BorderLayout.CENTER);
 	}
 
 }

@@ -24,7 +24,7 @@ public class ButtonLessons extends JButton implements MouseListener {
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
 		Main.window.remove(Main.window.getContentPane());
-		Main.window.setSize(600, 600);
+		Main.window.setSize(899, 600);
 		Main.window.setContentPane(new PanelLessons(mainmodele));
 		Main.window.getContentPane().validate();
 	}

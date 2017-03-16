@@ -28,9 +28,11 @@ public class PanelLessons extends JPanel {
 	//main variables
 	private JPanel centerPanel;
 	private JPanel northPanel;
+	private JPanel northFlowPanel;
 	private JLabel titleLabel;
 	private JScrollPane scrollContent;
 	private JTextArea contentTextArea;
+	private JPanel goToMainMenu;
 	
 	//buttons
 	private JPanel buttonPanel;
@@ -54,6 +56,8 @@ public class PanelLessons extends JPanel {
 		this.currentTopicIndex = 0;
 		
 		//north panel initialisation
+		this.northFlowPanel = new JPanel();
+		this.northFlowPanel.setLayout(new FlowLayout());
 		this.northPanel = new JPanel();
 		this.northPanel.setLayout(new GridLayout(2,1));
 		Border line = BorderFactory.createLineBorder(Color.BLACK, 1);
@@ -81,11 +85,11 @@ public class PanelLessons extends JPanel {
 		this.buttonPanel.add(this.left);
 		this.buttonPanel.add(this.right);
 		this.northPanel.add(this.buttonPanel);
-		
-		
+		this.northFlowPanel.add(this.northPanel);
 		
 		//center panel initialisation
 		this.centerPanel = new JPanel();
+		this.centerPanel.setLayout(new FlowLayout());
 		
 		//initialize content 
 		this.contentVocabulary = getContent(this.topics.get(currentTopicIndex));
@@ -95,14 +99,20 @@ public class PanelLessons extends JPanel {
 		this.scrollContent.setPreferredSize(new Dimension(400,400));
 		this.scrollContent.repaint();
 		this.scrollContent.revalidate();
-		this.centerPanel.add(this.scrollContent, BorderLayout.CENTER);
+		this.centerPanel.add(this.scrollContent);
 		this.centerPanel.repaint();
 		this.centerPanel.revalidate();
+		
+		//initialize go to main menu	
+		this.goToMainMenu = new JPanel();
+		this.goToMainMenu.setLayout(new BorderLayout());
+		this.goToMainMenu.add(new ButtonGoToMainMenu(this.modele,"	<<	Screen Title"));
 		
 		//add to the PanelLessons
 		this.setLayout(new FlowLayout());
 		this.add(this.northPanel);
 		this.add(this.centerPanel);
+		//this.add(this.goToMainMenu);
 		this.repaint();
 		this.revalidate();
 	}
@@ -162,6 +172,7 @@ public class PanelLessons extends JPanel {
 		this.contentVocabulary = getContent(this.topics.get(currentTopicIndex));
 		this.contentTextArea.setText(contentVocabulary);
 		
+		this.contentTextArea.setCaretPosition(0);
 		this.contentTextArea.repaint();
 		this.contentTextArea.revalidate();
 		

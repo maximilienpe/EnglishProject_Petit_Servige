@@ -19,7 +19,7 @@ public class PanelRight extends JPanel {
 		this.mainmodele = mainmodele;
 		this.props = props / 2;
 
-		this.setBounds(500, 100, 100, 500);
+		//this.setBounds(500, 100, 100, 500);
 
 		GridLayout layout = new GridLayout(props, 1);
 		layout.setHgap(5);

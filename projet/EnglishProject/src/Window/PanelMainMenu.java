@@ -1,27 +1,51 @@
 package Window;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.Toolkit;
 
 import javax.swing.JPanel;
 
 import MainSystem.Modele;
 
+
 public class PanelMainMenu extends JPanel {
 
-	Modele mainmodele;
+	private Modele mainmodele;
+	private JPanel gridPanel;
+	private Dimension buttonSize;
 
 	public PanelMainMenu(Modele mainmodele) {
-		this.setLayout(new GridLayout(5,1));
+		//initialize the "this panel"
+		this.setLayout(new FlowLayout());
 		this.mainmodele = mainmodele;
-		Main.window.setSize(200, 400);
-		this.add(new JPanel());
+		Main.window.setSize(900, 600);
+		
+		//grid Panel
+		this.gridPanel = new JPanel();
+		this.gridPanel.setLayout(new GridLayout(7,1));
+		
+		//button add to the main panel
+		this.gridPanel.add(new JPanel());
+		
+		this.buttonSize = new Dimension(500, 50);
+		
 		ButtonPlay buttonplay = new ButtonPlay(mainmodele);
-		this.add(buttonplay);
-		this.add(new JPanel());
+		buttonplay.setPreferredSize(this.buttonSize);
+		this.gridPanel.add(buttonplay);
+		this.gridPanel.add(new JPanel());
+		
 		ButtonLessons buttonlessons = new ButtonLessons(mainmodele,"Lessons");
-		this.add(buttonlessons);
-		this.add(new JPanel());
+		buttonlessons.setPreferredSize(this.buttonSize);
+		this.gridPanel.add(buttonlessons);
+		this.gridPanel.add(new JPanel());
+		
+		ButtonMainMenuQuit buttonquit = new ButtonMainMenuQuit("Quit");
+		buttonquit.setPreferredSize(this.buttonSize);
+		this.gridPanel.add(buttonquit);
+		this.gridPanel.add(new JPanel());
+		this.add(gridPanel);
 	}
-
 }
