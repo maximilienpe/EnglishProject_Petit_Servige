@@ -1,7 +1,12 @@
 package Window;
 
+import java.awt.Graphics;
+import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 import MainSystem.Modele;
@@ -104,11 +109,20 @@ public class PanelAnimation extends JPanel {
 		if (allchoice.size() == 0) {
 			this.mainmodele.setVocabGameGraphicEndded(true);
 			new WindowRetry(mainmodele);
-			//we have to add some lines to stop the threads
+			// we have to add some lines to stop the threads
 		}
 		if (this.mainmodele.getVocabGameGraphicLife() == 0) {
 			new WindowRetry(mainmodele);
-			//we have to add some lines to stop the threads
+			// we have to add some lines to stop the threads
+		}
+	}
+
+	public void paintComponent(Graphics g) {
+		try {
+			Image img = ImageIO.read(new File("Image\\bleu.jpg"));
+			g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 
