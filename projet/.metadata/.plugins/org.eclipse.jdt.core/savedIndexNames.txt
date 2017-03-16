@@ -13,7 +13,6 @@ INDEX VERSION 1.129+/Users/Max/workspace/Cours/Deuxième année TNCY/Anglais/Eng
 1165542491.index
 3785765040.index
 3369272816.index
-2787470662.index
 3302703152.index
 1271342938.index
 3321539481.index

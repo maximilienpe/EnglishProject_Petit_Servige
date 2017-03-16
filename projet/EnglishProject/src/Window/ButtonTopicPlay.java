@@ -1,5 +1,6 @@
 package Window;
 
+import java.awt.Dimension;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -26,6 +27,7 @@ public class ButtonTopicPlay extends JButton implements MouseListener {
 		this.mainmodele = mainmodele;
 		//this.setBounds(25, 400, 60, 30);
 		this.addMouseListener(this);
+		this.setPreferredSize(new Dimension(300,50));
 	}
 
 	@Override

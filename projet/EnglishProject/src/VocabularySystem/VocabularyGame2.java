@@ -32,6 +32,7 @@ public class VocabularyGame2 {
 	private int numberOfPropositions;
 	private int VocabScoreMax;
 	private int VocabScore;
+	private int maxLife;
 	private int life;
 
 	// variables de condition du jeu
@@ -43,6 +44,7 @@ public class VocabularyGame2 {
 	public VocabularyGame2(TopicVocabulary selectedTopic, TypeOfGame typeOfGame, int numberOfWords,
 			int numberOfPropositions, Logger logger, int initialeLife) {
 		if (selectedTopic != null && typeOfGame != null) {
+			this.maxLife = initialeLife;
 			this.life = initialeLife;
 			this.numberOfWords = numberOfWords;
 			this.numberOfPropositions = numberOfPropositions;
@@ -242,6 +244,22 @@ public class VocabularyGame2 {
 	
 	public int getLife() {
 		return this.life;
+	}
+	
+	public int getMaxLife() {
+		return this.maxLife;
+	}
+	
+	public int getNumberOfWords() {
+		return this.numberOfWords;
+	}
+	
+	public int getNumberOfPropositions() {
+		return this.numberOfPropositions;
+	}
+	
+	public TypeOfGame getTypeOfGame() {
+		return this.type;
 	}
 
 }

@@ -216,6 +216,14 @@ public class Modele {
 		}
 		this.selectedTopic = mergedTopic;
 	}
+	
+	public ArrayList<String> getAllTitleSelectedTopic() {
+		ArrayList<String> allTitles = new ArrayList<String>();
+		for (TopicVocabulary tv : this.allSelectedTopics) {
+			allTitles.add(tv.getTitleTopic());
+		}
+		return allTitles;
+	}
 
 	public TopicVocabulary getSelectedTopic() {
 		return this.selectedTopic;
@@ -572,6 +580,46 @@ public class Modele {
 		} else {
 			this.modeleLogger.addLog("MODELE There is no vocabulary game graphic launched.", LogLevel.ERROR);
 			return -1;
+		}
+
+	}
+	
+	public int getVocabGameGraphicMaxLife() {
+		if (!(this.vocabGameGraphic == null)) {
+			return this.vocabGameGraphic.getMaxLife();
+		} else {
+			this.modeleLogger.addLog("MODELE There is no vocabulary game graphic launched.", LogLevel.ERROR);
+			return -1;
+		}
+
+	}
+	
+	public int getVocabGameGraphicNumberOfWords() {
+		if (!(this.vocabGameGraphic == null)) {
+			return this.vocabGameGraphic.getNumberOfWords();
+		} else {
+			this.modeleLogger.addLog("MODELE There is no vocabulary game graphic launched.", LogLevel.ERROR);
+			return -1;
+		}
+
+	}
+	
+	public int getVocabGameGraphicNumberOfPropositions() {
+		if (!(this.vocabGameGraphic == null)) {
+			return this.vocabGameGraphic.getNumberOfPropositions();
+		} else {
+			this.modeleLogger.addLog("MODELE There is no vocabulary game graphic launched.", LogLevel.ERROR);
+			return -1;
+		}
+
+	}
+	
+	public TypeOfGame getVocabGameGraphicTypeOfGame() {
+		if (!(this.vocabGameGraphic == null)) {
+			return this.vocabGameGraphic.getTypeOfGame();
+		} else {
+			this.modeleLogger.addLog("MODELE There is no vocabulary game graphic launched.", LogLevel.ERROR);
+			return null;
 		}
 
 	}
