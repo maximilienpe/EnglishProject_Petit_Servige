@@ -5,12 +5,9 @@ import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.Image;
-<<<<<<< HEAD
 import java.awt.Toolkit;
-=======
 import java.io.File;
 import java.io.IOException;
->>>>>>> adc9799455f513bdd5dc5b324172a102d991895d
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
@@ -24,14 +21,9 @@ public class PanelMainMenu extends JPanel {
 	private Dimension buttonSize;
 
 	public PanelMainMenu(Modele mainmodele) {
-<<<<<<< HEAD
-		
-		
-		
-		//initialize the "this panel"
-=======
+
 		// initialize the "this panel"
->>>>>>> adc9799455f513bdd5dc5b324172a102d991895d
+
 		this.setLayout(new FlowLayout());
 		this.mainmodele = mainmodele;
 		Main.window.setSize(900, 600);
@@ -74,7 +66,7 @@ public class PanelMainMenu extends JPanel {
 
 	public void paintComponent(Graphics g) {
 		try {
-			Image img = ImageIO.read(new File("Image\\rose.jpg"));
+			Image img = ImageIO.read(new File("Image" + File.separator + "rose.jpg"));
 			g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
 		} catch (IOException e) {
 			e.printStackTrace();
