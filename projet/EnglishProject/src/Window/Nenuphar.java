@@ -67,7 +67,7 @@ public class Nenuphar extends JButton implements MouseListener {
 		this.posY = posY;
 	}
 
-	public void nextPosition() {
+	public void nextPositionSpiral() {
 		this.r++;
 		this.theta++;
 		this.posX = posX + (int) (this.r * Math.cos(this.theta));
@@ -89,7 +89,7 @@ public class Nenuphar extends JButton implements MouseListener {
 
 	public void paintComponent(Graphics g) {
 		try {
-			Image img = ImageIO.read(new File("Image\\vert.jpg"));
+			Image img = ImageIO.read(new File("Image" + File.separator + "vert.jpg"));
 			g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
 			g.drawString(this.name, 12, 25);
 		} catch (IOException e) {

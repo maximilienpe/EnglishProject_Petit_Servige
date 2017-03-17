@@ -5,6 +5,7 @@ import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.Toolkit;
 import java.io.File;
 import java.io.IOException;
 
@@ -20,7 +21,9 @@ public class PanelMainMenu extends JPanel {
 	private Dimension buttonSize;
 
 	public PanelMainMenu(Modele mainmodele) {
+
 		// initialize the "this panel"
+
 		this.setLayout(new FlowLayout());
 		this.mainmodele = mainmodele;
 		Main.window.setSize(900, 600);
@@ -69,4 +72,5 @@ public class PanelMainMenu extends JPanel {
 			e.printStackTrace();
 		}
 	}
+	
 }

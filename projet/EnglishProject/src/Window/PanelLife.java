@@ -45,8 +45,8 @@ public class PanelLife extends JPanel {
 
 		// initialize Panel and layout
 		if (this.maxLife >= 0) {
-			this.heart = new ImageIcon(imageDirPath + "/smallheart2.png");
-			this.deadheart = new ImageIcon(imageDirPath + "/smalldeadheart2.png");
+			this.heart = new ImageIcon(imageDirPath + File.separator + "smallheart2.png");
+			this.deadheart = new ImageIcon(imageDirPath + File.separator + "smalldeadheart2.png");
 			this.mainGridLayout = new GridLayout(1, this.maxLife);
 			for (int i = 0; i < this.maxLife; i++) {
 				JPanel lp = new JPanel();
@@ -79,7 +79,7 @@ public class PanelLife extends JPanel {
 
 	public void paintComponent(Graphics g) {
 		try {
-			Image img = ImageIO.read(new File("Image\\rose.jpg"));
+			Image img = ImageIO.read(new File("Image" + File.separator + "rose.jpg"));
 			g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
 		} catch (IOException e) {
 			e.printStackTrace();
