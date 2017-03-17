@@ -5,7 +5,6 @@ import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.Image;
-import java.awt.Toolkit;
 import java.io.File;
 import java.io.IOException;
 
@@ -66,11 +65,11 @@ public class PanelMainMenu extends JPanel {
 
 	public void paintComponent(Graphics g) {
 		try {
-			Image img = ImageIO.read(new File("Image" + File.separator + "rose.jpg"));
+			Image img = ImageIO.read(new File("Graphics" + File.separator + "rose.jpg"));
 			g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 }
