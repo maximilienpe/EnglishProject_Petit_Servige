@@ -62,6 +62,7 @@ public class PanelLessons extends JPanel {
 		this.northFlowPanel = new JPanel();
 		this.northFlowPanel.setLayout(new FlowLayout());
 		this.northPanel = new JPanel();
+		this.northPanel.setOpaque(false);
 		this.northPanel.setLayout(new GridLayout(2, 1));
 		Border line = BorderFactory.createLineBorder(Color.BLACK, 1);
 		this.titleLabel = new JLabel(
@@ -73,6 +74,7 @@ public class PanelLessons extends JPanel {
 		this.titleLabel.setPreferredSize(new Dimension(300, 50));
 
 		this.buttonPanel = new JPanel();
+		this.buttonPanel.setOpaque(false);
 		this.gridlayout = new GridLayout(1, 2);
 		this.gridlayout.setHgap(400);
 		this.buttonPanel.setLayout(this.gridlayout);
@@ -189,7 +191,7 @@ public class PanelLessons extends JPanel {
 
 	public void paintComponent(Graphics g) {
 		try {
-			Image img = ImageIO.read(new File("Image" + File.separator + "bleu.jpg"));
+			Image img = ImageIO.read(new File("Graphics" + File.separator + "bleu.jpg"));
 			g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
 		} catch (IOException e) {
 			e.printStackTrace();
