@@ -15,7 +15,7 @@ import MainSystem.Modele;
 public class Nenuphar extends JButton implements MouseListener {
 
 	private int initialePosX = 300;
-	private int initialePosY = 200;
+	private int initialePosY = 0;
 	private int freq;
 	private int posX;
 	private int posY;

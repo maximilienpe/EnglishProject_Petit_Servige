@@ -61,7 +61,7 @@ public class PanelAnimation extends JPanel {
 					right.setAllChoice(pane);
 					runItem(n);
 					try {
-						Thread.sleep(1000);
+						Thread.sleep(5000);
 					} catch (InterruptedException e1) {
 						e1.printStackTrace();
 					}
@@ -76,15 +76,15 @@ public class PanelAnimation extends JPanel {
 		Runnable r2 = new Runnable() {
 			@SuppressWarnings("deprecation")
 			public void run() {
-				for (int j = 50; j < Main.window.getHeight() - 200; j++) {
+				for (int j = 50; j < Main.window.getHeight() ; j++) {
 					Main.window.validate();
 					n.setLocation(n.getPosX(), n.getPosY());
 					/*
 					 * int y = n.getPosY(); y++; n.setPosY(y);
 					 */
-					n.nextPositionCardioide();
+					n.nextPositionSinus();
 					try {
-						Thread.sleep(50);
+						Thread.sleep(5);
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
