@@ -74,7 +74,6 @@ public class PanelAnimation extends JPanel {
 
 	public void runItem(Nenuphar n) {
 		Runnable r2 = new Runnable() {
-			@SuppressWarnings("deprecation")
 			public void run() {
 				for (int j = 50; j < Main.window.getHeight() ; j++) {
 					Main.window.validate();
@@ -119,7 +118,7 @@ public class PanelAnimation extends JPanel {
 
 	public void paintComponent(Graphics g) {
 		try {
-			Image img = ImageIO.read(new File("Graphics" + File.separator + "bleu.jpg"));
+			Image img = ImageIO.read(new File("Graphics" + File.separator + "water.jpg"));
 			g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
 		} catch (IOException e) {
 			e.printStackTrace();

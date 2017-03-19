@@ -1,5 +1,6 @@
 package Window;
 
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.Image;
@@ -31,6 +32,7 @@ public class PanelRight extends JPanel {
 		this.lifepanel = lifepanel;
 
 		// this.setBounds(500, 100, 100, 500);
+		this.setPreferredSize(new Dimension(200, 400));
 
 		GridLayout layout = new GridLayout(props, 1);
 		layout.setHgap(5);
@@ -47,7 +49,7 @@ public class PanelRight extends JPanel {
 
 	public void paintComponent(Graphics g) {
 		try {
-			Image img = ImageIO.read(new File("Graphics" + File.separator +  "rouge.jpg"));
+			Image img = ImageIO.read(new File("Graphics" + File.separator + "rouge.jpg"));
 			g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
 		} catch (IOException e) {
 			e.printStackTrace();

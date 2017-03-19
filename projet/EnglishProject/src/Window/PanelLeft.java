@@ -1,5 +1,6 @@
 package Window;
 
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.Image;
@@ -30,6 +31,7 @@ public class PanelLeft extends JPanel {
 		this.lifepanel = lifepanel;
 
 		// this.setBounds(0, 100, 100, 500);
+		this.setPreferredSize(new Dimension(200, 400));
 
 		GridLayout layout = new GridLayout(props, 1);
 		layout.setHgap(5);
