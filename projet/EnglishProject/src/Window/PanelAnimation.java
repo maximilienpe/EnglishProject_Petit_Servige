@@ -43,7 +43,7 @@ public class PanelAnimation extends JPanel {
 		this.setLayout(null);
 
 		allchoice = new ArrayList<Nenuphar>();
-		justforend = new Nenuphar(mainmodele.getAllTheAskedWordsVocabGameGraphic().get(0), mainmodele, left, right, 0);
+		justforend = new Nenuphar(mainmodele.getAllTheAskedWordsVocabGameGraphic().get(0), mainmodele, left, right, 0, Main.window.getWidth()/4, 0);
 
 		allchoice.add(justforend);
 
@@ -51,7 +51,7 @@ public class PanelAnimation extends JPanel {
 			public void run() {
 				for (int p = 0; p < mainmodele.getAllTheAskedWordsVocabGameGraphic().size(); p++) {
 					Nenuphar n = new Nenuphar(mainmodele.getAllTheAskedWordsVocabGameGraphic().get(p), mainmodele, left,
-							right, p);
+							right, p, Main.window.getWidth()/4, 0 );
 					pane.add(n);
 					allchoice.add(n);
 					if (p == mainmodele.getAllTheAskedWordsVocabGameGraphic().size() - 1) {
@@ -83,7 +83,7 @@ public class PanelAnimation extends JPanel {
 					 */
 					n.nextPositionSinus();
 					try {
-						Thread.sleep(5);
+						Thread.sleep(15);
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
