@@ -14,8 +14,8 @@ import MainSystem.Modele;
 
 public class Nenuphar extends JButton implements MouseListener {
 
-	private int initialePosX = 300;
-	private int initialePosY = 200;
+	private int initialePosX;
+	private int initialePosY;
 	private int freq;
 	private int posX;
 	private int posY;
@@ -33,16 +33,18 @@ public class Nenuphar extends JButton implements MouseListener {
 
 	int p;
 
-	public Nenuphar(String name, Modele mainmodele, PanelLeft left, PanelRight right, int p) {
+	public Nenuphar(String name, Modele mainmodele, PanelLeft left, PanelRight right, int p, int initialPosX, int initialPosY) {
 		super(name);
 		this.name = name;
 
 		this.left = left;
 		this.right = right;
 
+		this.initialePosX = (int) ((Main.window.getWidth()/3)*(1 - (1+ 0.5*p)/mainmodele.getAllTheAskedWordsVocabGameGraphic().size()));
+		this.initialePosY = initialPosY;
 		this.posX = this.initialePosX;
 		this.posY = this.initialePosY;
-		this.freq = 10;
+		this.freq = 2 + p;
 		this.time = 0.0;
 
 		this.mainmodele = mainmodele;
@@ -75,8 +77,10 @@ public class Nenuphar extends JButton implements MouseListener {
 	}
 
 	public void nextPositionSinus() {
+		//System.out.println((int) ((Main.window.getWidth()/3)*(1 - (1+ 0.5*p)/mainmodele.getAllTheAskedWordsVocabGameGraphic().size())));
+		this.initialePosX = (int) ((Main.window.getWidth()/3)*(1 - (1+ 0.5*p)/mainmodele.getAllTheAskedWordsVocabGameGraphic().size()));
 		this.time = this.time + 0.01;
-		this.posY = this.posY + 1;
+		this.posY = this.posY + 1 + (int) (0.3 *p);
 		this.posX = this.initialePosX + (int) (150 * Math.sin(this.freq * (this.time)));
 		// System.out.println(this.posX);
 	}

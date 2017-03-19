@@ -14,6 +14,7 @@ public class Main {
 		window = new WindowGame();
 		window.setContentPane(new PanelMainMenu(mainmodele));
 		window.validate();
+		window.setResizable(true);
 		window.setLocationRelativeTo(null);
 	}
 
