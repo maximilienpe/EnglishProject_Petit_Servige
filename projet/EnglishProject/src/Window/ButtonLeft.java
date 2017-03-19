@@ -104,7 +104,10 @@ public class ButtonLeft extends JButton implements MouseListener {
 			g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
 			g.setFont(new Font("default", Font.BOLD, 12));
 			g.setColor(Color.white);
-			g.drawString(this.getText(), this.getWidth() / 2 - (this.getWidth() / 2 - 10), (this.getHeight() / 2) + 6);
+			if (this.getText() != null) {
+				g.drawString(this.getText(), this.getWidth() / 2 - (this.getWidth() / 2 - 10),
+						(this.getHeight() / 2) + 6);
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

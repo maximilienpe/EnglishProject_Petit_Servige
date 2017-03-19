@@ -134,11 +134,17 @@ public class PanelTopicPlay extends JPanel {
 		// nbwords.getSelectedItem().toString(),
 		// nbprops.getSelectedItem().toString(),
 		// nblife.getSelectedItem().toString(), alltopics));
-		this.buttonTopicPanel.setLayout(new GridLayout(2, 1));
+		this.buttonTopicPanel.setLayout(new GridLayout(4, 1));
+		JPanel invi = new JPanel();
+		invi.setOpaque(false);
+		this.add(invi);
 		buttonPlay = new ButtonTopicPlay(mainmodele, nbwordsComboBox.getSelectedItem().toString(),
 				nbpropsComboBox.getSelectedItem().toString(), nblifeComboBox.getSelectedItem().toString(), alltopics);
 		this.buttonTopicPanel.add(buttonPlay);
 		this.buttonTopicPanel.add(new ButtonGoToMainMenu(this.mainmodele, "Previous"));
+		JPanel invi2 = new JPanel();
+		invi2.setOpaque(false);
+		this.add(invi2);
 		this.encapsulateGridPanel.add(this.buttonTopicPanel);
 
 		this.add(this.encapsulateGridPanel);
