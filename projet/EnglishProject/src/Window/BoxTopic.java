@@ -24,6 +24,8 @@ public class BoxTopic extends JPanel {
 
 	ArrayList<String> alltruetopics;
 
+	JPanel pane;
+
 	public BoxTopic(Modele mainmodele) {
 		this.mainmodele = mainmodele;
 		this.topics = mainmodele.getAllTopics();

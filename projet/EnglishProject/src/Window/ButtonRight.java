@@ -1,8 +1,16 @@
 package Window;
 
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.JButton;
 
 import MainSystem.Modele;
@@ -18,8 +26,9 @@ public class ButtonRight extends JButton implements MouseListener {
 	PanelAnimation anim;
 
 	private PanelLife lifePanel;
-	
+
 	public ButtonRight(Modele mainmodele, int rank, PanelRight right) {
+		this.setSize(new Dimension(200, 100));
 		this.mainmodele = mainmodele;
 		this.rank = rank;
 		this.right = right;
@@ -71,7 +80,7 @@ public class ButtonRight extends JButton implements MouseListener {
 	public void setLifePanel(PanelLife lifepanel) {
 		this.lifePanel = lifepanel;
 	}
-	
+
 	public void setPanelAnim(PanelAnimation anim) {
 		this.anim = anim;
 	}
@@ -86,6 +95,18 @@ public class ButtonRight extends JButton implements MouseListener {
 		score.refresh();
 		this.lifePanel.updateLife();
 		Main.window.getContentPane().validate();
+	}
+
+	public void paintComponent(Graphics g) {
+		try {
+			Image img = ImageIO.read(new File("Graphics" + File.separator + "PanelGame.jpg"));
+			g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
+			g.setFont(new Font("default", Font.BOLD, 12));
+			g.setColor(Color.white);
+			g.drawString(this.getText(), this.getWidth() / 2 - (this.getWidth() / 2 - 10), (this.getHeight() / 2) + 6);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 }

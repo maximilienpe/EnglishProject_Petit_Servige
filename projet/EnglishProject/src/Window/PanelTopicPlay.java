@@ -14,6 +14,7 @@ import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 import MainSystem.Modele;
 
@@ -70,11 +71,11 @@ public class PanelTopicPlay extends JPanel {
 		this.topicPanel.setLayout(new FlowLayout());
 		// this.gridPanel.setLayout(new GridLayout(1,2));
 		this.gridPanelLayout = new GridLayout(1, 2);
-		this.gridPanelLayout.setHgap(200);
+		this.gridPanelLayout.setHgap(150);
 		this.gridPanel.setLayout(this.gridPanelLayout);
 		// this.encapsulateGridPanel.setLayout(new GridLayout(2,1));
 		this.encapsulateGridLayout = new GridLayout(3, 1);
-		this.encapsulateGridLayout.setVgap(250);
+		this.encapsulateGridLayout.setVgap(200);
 		this.encapsulateGridPanel.setLayout(this.encapsulateGridLayout);
 		//
 		this.returnMainMenuPanel = new JPanel();
@@ -82,6 +83,8 @@ public class PanelTopicPlay extends JPanel {
 		this.returnMainMenuGridLayout = new GridLayout(1, 3);
 
 		this.gridPanel.add(this.alltopics);
+		this.gridPanel.add(new JScrollPane(this.alltopics, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+				JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED));
 
 		String[] choosewords = { "5", "10", "20" };
 		nbwordsComboBox = new JComboBox<String>(choosewords);
@@ -131,9 +134,11 @@ public class PanelTopicPlay extends JPanel {
 		// nbwords.getSelectedItem().toString(),
 		// nbprops.getSelectedItem().toString(),
 		// nblife.getSelectedItem().toString(), alltopics));
+		this.buttonTopicPanel.setLayout(new GridLayout(2, 1));
 		buttonPlay = new ButtonTopicPlay(mainmodele, nbwordsComboBox.getSelectedItem().toString(),
 				nbpropsComboBox.getSelectedItem().toString(), nblifeComboBox.getSelectedItem().toString(), alltopics);
 		this.buttonTopicPanel.add(buttonPlay);
+		this.buttonTopicPanel.add(new ButtonGoToMainMenu(this.mainmodele, "Previous"));
 		this.encapsulateGridPanel.add(this.buttonTopicPanel);
 
 		this.add(this.encapsulateGridPanel);

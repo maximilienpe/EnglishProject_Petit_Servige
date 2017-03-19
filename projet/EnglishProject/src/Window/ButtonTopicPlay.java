@@ -1,7 +1,6 @@
 package Window;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -27,6 +26,7 @@ public class ButtonTopicPlay extends JButton implements MouseListener {
 
 	public ButtonTopicPlay(Modele mainmodele, String nbwords, String nbprops, String life, BoxTopic boxtopic) {
 		super("Play");
+		// this.setPreferredSize(new Dimension(300, 20));
 		this.nbwords = Integer.parseInt(nbwords);
 		this.nbprops = Integer.parseInt(nbprops);
 		this.life = Integer.parseInt(life);
@@ -34,7 +34,6 @@ public class ButtonTopicPlay extends JButton implements MouseListener {
 		this.mainmodele = mainmodele;
 		// this.setBounds(25, 400, 60, 30);
 		this.addMouseListener(this);
-		this.setPreferredSize(new Dimension(300, 50));
 	}
 
 	public void setNbWords(int nbw) {

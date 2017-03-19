@@ -60,6 +60,7 @@ public class PanelLife extends JPanel {
 		} else {
 			this.mainGridLayout = new GridLayout(1, this.maxLife);
 			JPanel lp = new JPanel();
+			lp.setOpaque(false);
 			JLabel ll = new JLabel("INFINI");
 			lp.add(ll);
 			this.lifeLabel.add(ll);

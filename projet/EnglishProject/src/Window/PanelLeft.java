@@ -31,24 +31,32 @@ public class PanelLeft extends JPanel {
 		this.lifepanel = lifepanel;
 
 		// this.setBounds(0, 100, 100, 500);
-		this.setPreferredSize(new Dimension(200, 400));
+		this.setPreferredSize(new Dimension(200, Main.window.getHeight() - 100));
 
-		GridLayout layout = new GridLayout(props, 1);
-		layout.setHgap(5);
+		GridLayout layout = new GridLayout(props + 2, 1);
+		layout.setHgap(2);
 		this.setLayout(layout);
 
 		allbuttons = new ArrayList<ButtonLeft>();
+
+		JPanel invi = new JPanel();
+		invi.setOpaque(false);
+		this.add(invi);
 
 		for (int i = 0; i < this.props; i++) {
 			ButtonLeft k = new ButtonLeft(mainmodele, i, this);
 			this.add(k);
 			allbuttons.add(k);
 		}
+
+		JPanel invi2 = new JPanel();
+		invi2.setOpaque(false);
+		this.add(invi2);
 	}
 
 	public void paintComponent(Graphics g) {
 		try {
-			Image img = ImageIO.read(new File("Graphics" + File.separator + "vert.jpg"));
+			Image img = ImageIO.read(new File("Graphics" + File.separator + "PanelGame.jpg"));
 			g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
 		} catch (IOException e) {
 			e.printStackTrace();
