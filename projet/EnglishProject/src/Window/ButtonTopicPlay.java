@@ -56,6 +56,9 @@ public class ButtonTopicPlay extends JButton implements MouseListener {
 			Main.window.getMusic().stopMusic();
 			Main.window.getMusic().setMusic("Music" + File.separator + "add072.wav");
 			Main.window.getMusic().play();
+			/*for (String title : this.boxtopic.getAllChoosedTopics()) {
+				System.out.println(title);
+			}*/
 			if (this.life == 0) {
 				mainmodele.launchVocabGameGraphic(this.boxtopic.getAllChoosedTopics(), TypeOfGame.ENGLISH, this.nbwords,
 						this.nbprops, -1);

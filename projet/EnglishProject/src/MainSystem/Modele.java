@@ -205,7 +205,7 @@ public class Modele {
 
 	public void mergeTopicVocabulary() {
 		TopicVocabulary mergedTopic = new TopicVocabulary();
-		for (TopicVocabulary tv : topics) {
+		for (TopicVocabulary tv : this.allSelectedTopics) {
 			for (Word w : tv.getTopicVocabulary()) {
 				mergedTopic.addAWord(w);
 			}
@@ -241,9 +241,6 @@ public class Modele {
 	}
 
 	public void launchVocabGame(ArrayList<String> titlesTopics, TypeOfGame type, int numberOfWords) {
-		for (String s : titlesTopics) {
-			this.addSelectedTopic(s);
-		}
 		this.mergeTopicVocabulary();
 		this.vocabGame = new VocabularyGame(this.selectedTopic, type, numberOfWords, this.modeleLogger);
 		this.modeleLogger.addLog("MODELE A new game is launched.", LogLevel.INFO);
@@ -499,6 +496,7 @@ public class Modele {
 	public void launchVocabGameGraphic(ArrayList<String> titlesTopics, TypeOfGame type, int numberOfWords,
 			int numberOfPropositions, int life) {
 		for (String s : titlesTopics) {
+			System.out.println(s);
 			this.addSelectedTopic(s);
 		}
 		this.mergeTopicVocabulary();
