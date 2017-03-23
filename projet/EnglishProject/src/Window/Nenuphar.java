@@ -33,14 +33,20 @@ public class Nenuphar extends JButton implements MouseListener {
 
 	int p;
 
-	public Nenuphar(String name, Modele mainmodele, PanelLeft left, PanelRight right, int p, int initialPosX, int initialPosY) {
+	public Nenuphar(String name, Modele mainmodele, PanelLeft left, PanelRight right, int p, int initialPosX,
+			int initialPosY) {
 		super(name);
 		this.name = name;
 
 		this.left = left;
 		this.right = right;
 
-		this.initialePosX = (int) ((Main.window.getWidth()/3)*(1 - (1+ 0.5*p)/mainmodele.getAllTheAskedWordsVocabGameGraphic().size()));
+		this.setOpaque(false);
+
+		this.setSize(200, 200);
+
+		this.initialePosX = (int) ((Main.window.getWidth() / 3)
+				* (1 - (1 + 0.5 * p) / mainmodele.getAllTheAskedWordsVocabGameGraphic().size()));
 		this.initialePosY = initialPosY;
 		this.posX = this.initialePosX;
 		this.posY = this.initialePosY;
@@ -77,10 +83,12 @@ public class Nenuphar extends JButton implements MouseListener {
 	}
 
 	public void nextPositionSinus() {
-		//System.out.println((int) ((Main.window.getWidth()/3)*(1 - (1+ 0.5*p)/mainmodele.getAllTheAskedWordsVocabGameGraphic().size())));
-		this.initialePosX = (int) ((Main.window.getWidth()/3)*(1 - (1+ 0.5*p)/mainmodele.getAllTheAskedWordsVocabGameGraphic().size()));
+		// System.out.println((int) ((Main.window.getWidth()/3)*(1 - (1+
+		// 0.5*p)/mainmodele.getAllTheAskedWordsVocabGameGraphic().size())));
+		this.initialePosX = (int) ((Main.window.getWidth() / 3)
+				* (1 - (1 + 0.5 * p) / mainmodele.getAllTheAskedWordsVocabGameGraphic().size()));
 		this.time = this.time + 0.01;
-		this.posY = this.posY + 1 + (int) (0.3 *p);
+		this.posY = this.posY + 1 + (int) (0.3 * p);
 		this.posX = this.initialePosX + (int) (150 * Math.sin(this.freq * (this.time)));
 		// System.out.println(this.posX);
 	}
@@ -93,7 +101,7 @@ public class Nenuphar extends JButton implements MouseListener {
 
 	public void paintComponent(Graphics g) {
 		try {
-			Image img = ImageIO.read(new File("Graphics" + File.separator + "vert.jpg"));
+			Image img = ImageIO.read(new File("Graphics" + File.separator + "Waterlily.png"));
 			g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
 			g.drawString(this.name, 12, 25);
 		} catch (IOException e) {

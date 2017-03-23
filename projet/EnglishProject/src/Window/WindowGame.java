@@ -10,23 +10,22 @@ import Music.BackgroundMusic;
 public class WindowGame extends JFrame {
 
 	private BackgroundMusic music;
-	
+
 	public WindowGame() {
 		this.setTitle("Our English Game");
 		this.setResizable(false);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
 		try {
-			this.music = new BackgroundMusic("Music"+ File.separator + "bgm002.wav");
+			this.music = new BackgroundMusic("Music" + File.separator + "bgm002.wav");
 			this.music.play("infinite");
-		}
-		catch(LineUnavailableException e) {
+		} catch (LineUnavailableException e) {
 			e.printStackTrace();
 		}
-		
+
 		this.setVisible(true);
 	}
-	
+
 	public BackgroundMusic getMusic() {
 		return this.music;
 	}

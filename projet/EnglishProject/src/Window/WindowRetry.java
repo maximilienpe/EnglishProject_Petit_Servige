@@ -25,6 +25,7 @@ public class WindowRetry {
 			Main.window.setContentPane(
 					new PanelGameWindow(mainmodele, mainmodele.getVocabGameGraphicNumberOfPropositions()));
 			Main.window.getContentPane().validate();
+			Main.window.getContentPane().repaint();
 		}
 
 		if (output == 1) {
@@ -32,6 +33,7 @@ public class WindowRetry {
 			Main.window.remove(Main.window.getContentPane());
 			Main.window.setContentPane(new PanelMainMenu(mainmodele));
 			Main.window.getContentPane().validate();
+			Main.window.getContentPane().repaint();
 		}
 	}
 
