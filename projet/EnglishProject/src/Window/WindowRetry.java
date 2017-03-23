@@ -6,7 +6,7 @@ import MainSystem.Modele;
 
 public class WindowRetry {
 
-	Modele mainmodele;
+	private Modele mainmodele;
 
 	public WindowRetry(Modele mainmodele) {
 		this.mainmodele = mainmodele;
@@ -25,6 +25,7 @@ public class WindowRetry {
 			Main.window.setContentPane(
 					new PanelGameWindow(mainmodele, mainmodele.getVocabGameGraphicNumberOfPropositions()));
 			Main.window.getContentPane().validate();
+			System.out.println("End option retry");
 		}
 
 		if (output == 1) {
@@ -32,6 +33,7 @@ public class WindowRetry {
 			Main.window.remove(Main.window.getContentPane());
 			Main.window.setContentPane(new PanelMainMenu(mainmodele));
 			Main.window.getContentPane().validate();
+			System.out.println("End option quit");
 		}
 	}
 

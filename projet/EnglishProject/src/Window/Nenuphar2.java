@@ -14,6 +14,7 @@ public class Nenuphar2 {
 	private int r;
 	private int theta;
 	private int freq;
+	private int alternativeMovement;
 
 	private ArrayList<Double> staticTrajectoryX;
 	private int timeTolive;
@@ -30,13 +31,19 @@ public class Nenuphar2 {
 		this.posX = x;
 		this.posY = y;
 		this.freq = 1;
+		this.alternativeMovement = (int) (Math.random());
 		this.timeLived = 0;
 		this.Alive = true;
 		this.timeTolive = timeToLive;
 		this.staticTrajectoryX = new ArrayList<Double>();
 		for (int i=0; i < this.timeTolive ; i++) {
 			//System.out.println(Math.sin(this.freq*(i)*0.01));
-			this.staticTrajectoryX.add(Math.sin(this.freq * (i)*0.033));
+			if (this.alternativeMovement == 0) {
+				this.staticTrajectoryX.add(Math.sin(this.freq * (i)*0.033));
+			}
+			else {
+				this.staticTrajectoryX.add(- (Math.sin(this.freq * (i)*0.033)) );
+			}
 		}
 	}
 	
