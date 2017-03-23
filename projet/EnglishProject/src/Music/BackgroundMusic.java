@@ -71,10 +71,11 @@ public class BackgroundMusic {
 	}
 	
 	public void stopFondu() {
-		while (this.volume.getValue() > 0) {
-			this.volume.setValue(-1f);
+		while(this.volume.getValue() > -10.0) {
+			this.volume.setValue(-0.1f);
+			System.out.println(this.volume.getValue());
 		}
-		this.stop();	
+		//this.stop();	
 	}
 	
 	public void volumeOnOff() {
