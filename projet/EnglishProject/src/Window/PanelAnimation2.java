@@ -2,6 +2,7 @@ package Window;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -31,6 +32,7 @@ public class PanelAnimation2 extends JPanel implements ActionListener, MouseList
 	private PanelRight right;
 	private ScorePanel score;
 	
+	
 	//ArrayList content
 	private int numberOfNenuphars;
 	private ArrayList<Integer> startFrameNenu;
@@ -43,15 +45,20 @@ public class PanelAnimation2 extends JPanel implements ActionListener, MouseList
 	private int lowerThreshold;
 
 	//image
-	private static final Image IMG_NENUPHAR = ImageLoader.loadImage("Graphics" + File.separator + "vertb.jpg");
+	private static final Image IMG_NENUPHAR = ImageLoader.loadImage("Graphics" + File.separator + "smallWaterlily.png");
 	
 	//Timer
 	private int fps;
 	private int frame;
 	private Timer tempo;
 	
+	//music
+	private boolean isMusicLaunched;
+	private String pathMusic;
+	
 	public PanelAnimation2(Modele mainmodele, PanelLeft left, PanelRight right, ScorePanel score) {
-
+		this.pathMusic = "Music" + File.separator + "bgm017.wav";
+		this.isMusicLaunched = false;
 		this.pane = this;
 		this.left = left;
 		this.right = right;
@@ -131,7 +138,10 @@ public class PanelAnimation2 extends JPanel implements ActionListener, MouseList
 			if (this.nenuphars.get(i).getTimeLived()+1 != this.nenuTimeToLive) {
 				//System.out.println(i + " : Position x : " + this.nenuphars.get(i).getPosX() + " position y : " + this.nenuphars.get(i).getPosY());
 				g.drawImage(this.IMG_NENUPHAR, this.nenuphars.get(i).getPosX(), this.nenuphars.get(i).getPosY(), null);
-				g.drawString(this.nenuphars.get(i).getLabel(), this.nenuphars.get(i).getPosX(), this.nenuphars.get(i).getPosY());
+				
+				Font font = new Font("Verdana", Font.BOLD, 12);
+				drawCenteredText(g, this.nenuphars.get(i).getLabel(), font, this.nenuphars.get(i).getPosX()+50,this.nenuphars.get(i).getPosY()+60 );
+				//g.drawString(this.nenuphars.get(i).getLabel(), this.nenuphars.get(i).getPosX(), this.nenuphars.get(i).getPosY()+50);
 				
 				this.nenuphars.get(i).increaseTimeLived();
 				//System.out.println(this.nenuphars.get(i).getTimeLived() );
@@ -144,6 +154,14 @@ public class PanelAnimation2 extends JPanel implements ActionListener, MouseList
 		}
 	}
 	
+	public void drawCenteredText(Graphics g, String text, Font font, int centerX, int centerY) {
+		FontMetrics metric = g.getFontMetrics(font);
+		int x = centerX - metric.stringWidth(text)/2 ;
+		int y = centerY - metric.getHeight()/2;
+		g.setFont(font);
+		g.drawString(text, x, y);
+	}
+	
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		System.out.println("Click");
@@ -151,13 +169,16 @@ public class PanelAnimation2 extends JPanel implements ActionListener, MouseList
 		if (! this.tempo.isRunning()) {
 			System.out.println("Start tempo");
 			this.tempo.start();
+			Main.window.getMusic().stopMusic();
+			Main.window.getMusic().setMusic(this.pathMusic);
+			Main.window.getMusic().play("infinite");
 		}
 		
 	}
 	
 	public void Handler(MouseEvent e) {
 		for (int i = this.lowerThreshold ; i < this.hupperThreshold ; i++) {
-			if ( (e.getX() - this.nenuphars.get(i).getPosX() < 50) && (e.getY() - this.nenuphars.get(i).getPosY() < 50)) {
+			if ( (e.getX() - this.nenuphars.get(i).getPosX()-50 < 50) && (e.getY() - this.nenuphars.get(i).getPosY()-50 < 50)) {
 				this.selectedNenu = i;
 				int p = this.modele.getAllTheAskedWordsVocabGameGraphic().indexOf(this.nenuphars.get(i).getLabel());
 				left.setProp(p);

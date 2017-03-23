@@ -52,9 +52,9 @@ public class ButtonTopicPlay extends JButton implements MouseListener {
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
 		if (boxtopic.getAllChoosedTopics().size() != 0) {
-			Main.window.getMusic().stopFondu();
-			//Main.window.getMusic().setMusic("Music" + File.separator + "add072.wav");
-			//Main.window.getMusic().play();
+			//Main.window.getMusic().stopFondu();
+			Main.window.getMusic().setMusic("Music" + File.separator + "add072.wav");
+			Main.window.getMusic().play();
 			if (this.life == 0) {
 				mainmodele.launchVocabGameGraphic(this.boxtopic.getAllChoosedTopics(), TypeOfGame.ENGLISH, this.nbwords,
 						this.nbprops, -1);

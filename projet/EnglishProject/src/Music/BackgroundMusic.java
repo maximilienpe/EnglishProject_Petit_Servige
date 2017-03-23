@@ -3,7 +3,7 @@ package Music;
 import java.io.*;
 import javax.sound.sampled.*;
    
-public class BackgroundMusic {
+public class BackgroundMusic extends Thread {
    
 	private File music;
 	private Clip clip;
@@ -11,11 +11,19 @@ public class BackgroundMusic {
 	private FloatControl volume;
 	private float initialVolume;
 	
+	private float currentDB;
+	private float targetDB;
+	private float fadePerStep;
+	private boolean fading = false;
+	
 	// Constructor
 	public BackgroundMusic(String musicPath) throws LineUnavailableException {
 		this.music = new File(musicPath);
 		this.clip = AudioSystem.getClip();
 		this.volume = null;
+		this.currentDB = 0F;
+		this.targetDB = 0F;
+		this.fadePerStep = .1F;
 	}
    
 	public void setMusic(String musicPath) {
@@ -29,11 +37,9 @@ public class BackgroundMusic {
 	 */
 	public void play(String loopOption) {
 		try {
-			audioInput = AudioSystem.getAudioInputStream(this.music);
+			this.audioInput = AudioSystem.getAudioInputStream(this.music);
 			clip.open(audioInput);
 			clip.start();
-			this.volume = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-			this.initialVolume = this.volume.getValue();
 			if (loopOption.equals("infinite")) {
 				this.clip.loop(Clip.LOOP_CONTINUOUSLY);
 			}
@@ -51,7 +57,6 @@ public class BackgroundMusic {
 	 */
 	public void play() {
 		try {
-			this.volume.setValue(initialVolume);
 			audioInput = AudioSystem.getAudioInputStream(this.music);
 			clip.open(audioInput);
 			clip.start();
@@ -64,18 +69,53 @@ public class BackgroundMusic {
 		}
 	}
    
-	public void stop() {
+	public void stopMusic() {
 		if (this.clip.isRunning()) {
 			this.clip.stop();
 		}
 	}
 	
 	public void stopFondu() {
-		while(this.volume.getValue() > -10.0) {
-			this.volume.setValue(-0.1f);
-		}
-		//this.stop();	
+		this.shiftVolumeTo(0.001);
+		//this.stopMusic();	
 	}
+	
+	public void changeMusicFondu(String musicPath) {
+		this.shiftVolumeTo(0.001);
+	}
+	
+	//volume between 0 and 1;
+	public void shiftVolumeTo(double value) {
+		value = (value<=0.0)? 0.0001 : ((value>1.0)? 1.0 : value);
+		this.targetDB = (float)(Math.log(value)/Math.log(10.0)*20.0);
+		System.out.println(this.targetDB);
+	    if (!fading) {
+	        Thread t = new Thread(this); 
+	        t.start();  
+	    }
+	}
+	
+	public void run() {
+		this.fading = true;
+		if (this.currentDB > this.targetDB) {
+	        while (this.currentDB > this.targetDB) {
+	    		System.out.println(this.currentDB);
+	            this.currentDB -= fadePerStep;
+	            this.volume.setValue(this.currentDB);
+	            try {Thread.sleep(1);} catch (Exception e) {}
+	        }
+	    }
+	    else if (this.currentDB < this.targetDB) {
+	        while (this.currentDB < this.targetDB) {
+	            this.currentDB += fadePerStep;
+	            this.volume.setValue(this.currentDB);
+	            try {Thread.sleep(1);} catch (Exception e) {}
+	        }
+	    }
+		this.fading = false;
+		this.currentDB = this.targetDB;
+	}
+	
 	
 	public void volumeOnOff() {
 		if (this.volume.getValue() > 0) {
