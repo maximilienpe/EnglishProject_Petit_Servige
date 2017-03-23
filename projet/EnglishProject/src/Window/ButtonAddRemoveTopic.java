@@ -57,8 +57,8 @@ public class ButtonAddRemoveTopic extends JButton implements MouseListener {
 		} else {
 			this.status = false;
 		}
-		this.setContentAreaFilled(false);
-		this.setText(this.getText());
+		//this.setContentAreaFilled(false);
+		//this.setText(this.getText());
 		this.repaint();
 	}
 

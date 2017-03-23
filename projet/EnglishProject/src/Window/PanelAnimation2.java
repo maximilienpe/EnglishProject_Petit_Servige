@@ -132,7 +132,7 @@ public class PanelAnimation2 extends JPanel implements ActionListener, MouseList
 					(Main.window.getWidth()-2*200)/2,
 					50, 
 					this.nenuTimeToLive)) ;
-			this.startFrameNenu.add(60*i +30);
+			this.startFrameNenu.add(30*i +30);
 		}
 		
 	}

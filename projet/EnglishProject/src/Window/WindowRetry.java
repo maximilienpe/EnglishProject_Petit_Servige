@@ -12,13 +12,13 @@ public class WindowRetry {
 	public WindowRetry(Modele mainmodele, WindowGame main) {
 		this.modele = mainmodele;
 		this.mainwindow = main;
-		Object[] options = { "Retry", "Quit" };
+		Object[] options = { "Quit", "Title Screen", "Retry" };
 		int output = JOptionPane.showOptionDialog(null,
 				"Your score is : " + this.modele.getVocabGameGraphicScore() + "/"
 						+ this.modele.getVocabGameGraphicScoreMax(),
-				"End", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
+				"End", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[2]);
 
-		if (output == 0) {
+		if (output == 2) {
 			this.mainwindow.remove(Main.window.getContentPane());
 			this.mainwindow.setSize(899,600);
 			mainmodele.launchVocabGameGraphic(mainmodele.getAllTitleSelectedTopic(),
@@ -31,7 +31,7 @@ public class WindowRetry {
 			this.mainwindow.getContentPane().repaint();
 		}
 
-		if (output == 1) {
+		else if (output == 1) {
 			this.mainwindow.remove(this.mainwindow.getContentPane());
 			this.mainwindow.validate();
 			this.mainwindow.repaint();
@@ -41,6 +41,10 @@ public class WindowRetry {
 			this.mainwindow.getContentPane().validate();
 			this.mainwindow.getContentPane().repaint();
 		}
+		else if (output == 0){
+			this.mainwindow.dispose();
+		}
+		
 	}
 
 }
