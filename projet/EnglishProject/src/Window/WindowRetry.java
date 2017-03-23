@@ -19,23 +19,25 @@ public class WindowRetry {
 				"End", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
 
 		if (output == 0) {
-			Main.window.remove(Main.window.getContentPane());
+			this.mainwindow.remove(Main.window.getContentPane());
+			this.mainwindow.setSize(899,600);
 			mainmodele.launchVocabGameGraphic(mainmodele.getAllTitleSelectedTopic(),
 					mainmodele.getVocabGameGraphicTypeOfGame(), mainmodele.getVocabGameGraphicNumberOfWords(),
 					mainmodele.getVocabGameGraphicNumberOfPropositions(), mainmodele.getVocabGameGraphicMaxLife());
-			Main.window.setContentPane(
+			this.mainwindow.setContentPane(
 					new PanelGameWindow(mainmodele, mainmodele.getVocabGameGraphicNumberOfPropositions()));
-			Main.window.getContentPane().validate();
-			Main.window.getContentPane().repaint();
+			this.mainwindow.setSize(900,600);
+			this.mainwindow.getContentPane().validate();
+			this.mainwindow.getContentPane().repaint();
 		}
 
 		if (output == 1) {
-			this.mainwindow.removeAll();
+			this.mainwindow.remove(this.mainwindow.getContentPane());
 			this.mainwindow.validate();
 			this.mainwindow.repaint();
-			this.mainwindow.setVisible(true);
+			this.mainwindow.setSize(899,600);
 			this.mainwindow.setContentPane(new PanelMainMenu(mainmodele));
-			this.mainwindow.getContentPane().setVisible(true);
+			this.mainwindow.setSize(900,600);
 			this.mainwindow.getContentPane().validate();
 			this.mainwindow.getContentPane().repaint();
 		}

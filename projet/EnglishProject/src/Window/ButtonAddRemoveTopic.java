@@ -19,11 +19,11 @@ public class ButtonAddRemoveTopic extends JButton implements MouseListener {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	Modele mainmodele;
+	private Modele mainmodele;
 
-	String name;
+	private String name;
 
-	Boolean status;
+	private Boolean status;
 
 	public ButtonAddRemoveTopic(Modele mainmodele, String name) {
 		super(name);
