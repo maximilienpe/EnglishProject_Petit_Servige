@@ -3,7 +3,7 @@ package Music;
 import java.io.*;
 import javax.sound.sampled.*;
    
-public class BackgroundMusic extends Thread {
+public class BackgroundMusic {
    
 	private File music;
 	private Clip clip;
@@ -75,7 +75,7 @@ public class BackgroundMusic extends Thread {
 		}
 	}
 	
-	public void stopFondu() {
+	/*public void stopFondu() {
 		this.shiftVolumeTo(0.001);
 		//this.stopMusic();	
 	}
@@ -115,7 +115,7 @@ public class BackgroundMusic extends Thread {
 		this.fading = false;
 		this.currentDB = this.targetDB;
 	}
-	
+	*/
 	
 	public void volumeOnOff() {
 		if (this.volume.getValue() > 0) {

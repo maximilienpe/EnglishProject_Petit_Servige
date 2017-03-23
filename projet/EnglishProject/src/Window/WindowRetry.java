@@ -6,14 +6,16 @@ import MainSystem.Modele;
 
 public class WindowRetry {
 
-	private Modele mainmodele;
+	private Modele modele;
+	private WindowGame mainwindow;
 
-	public WindowRetry(Modele mainmodele) {
-		this.mainmodele = mainmodele;
+	public WindowRetry(Modele mainmodele, WindowGame main) {
+		this.modele = mainmodele;
+		this.mainwindow = main;
 		Object[] options = { "Retry", "Quit" };
 		int output = JOptionPane.showOptionDialog(null,
-				"Your score is : " + this.mainmodele.getVocabGameGraphicScore() + "/"
-						+ this.mainmodele.getVocabGameGraphicScoreMax(),
+				"Your score is : " + this.modele.getVocabGameGraphicScore() + "/"
+						+ this.modele.getVocabGameGraphicScoreMax(),
 				"End", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
 
 		if (output == 0) {
@@ -28,10 +30,14 @@ public class WindowRetry {
 		}
 
 		if (output == 1) {
-			Main.window.remove(Main.window.getContentPane());
-			Main.window.setContentPane(new PanelMainMenu(mainmodele));
-			Main.window.getContentPane().validate();
-			Main.window.getContentPane().repaint();
+			this.mainwindow.removeAll();
+			this.mainwindow.validate();
+			this.mainwindow.repaint();
+			this.mainwindow.setVisible(true);
+			this.mainwindow.setContentPane(new PanelMainMenu(mainmodele));
+			this.mainwindow.getContentPane().setVisible(true);
+			this.mainwindow.getContentPane().validate();
+			this.mainwindow.getContentPane().repaint();
 		}
 	}
 

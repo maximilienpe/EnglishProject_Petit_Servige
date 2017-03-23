@@ -56,7 +56,10 @@ public class PanelAnimation2 extends JPanel implements ActionListener, MouseList
 	private boolean isMusicLaunched;
 	private String pathMusic;
 	
+	private boolean isFinished;
+	
 	public PanelAnimation2(Modele mainmodele, PanelLeft left, PanelRight right, ScorePanel score) {
+		this.isFinished = false;
 		this.pathMusic = "Music" + File.separator + "bgm017.wav";
 		this.isMusicLaunched = false;
 		this.pane = this;
@@ -86,11 +89,13 @@ public class PanelAnimation2 extends JPanel implements ActionListener, MouseList
 				this.hupperThreshold++;
 			}
 		}	
-		if (this.lowerThreshold == this.numberOfNenuphars || this.modele.getVocabGameGraphicLife() == 0) {
+		if ( (this.lowerThreshold == this.numberOfNenuphars || this.modele.getVocabGameGraphicLife() == 0 ) && !this.isFinished) {
 			//end
+			this.isFinished = true;
 			this.tempo.stop();
+			Main.window.getMusic().stopMusic();
 			this.modele.setVocabGameGraphicEndded(true);
-			new WindowRetry(this.modele);
+			new WindowRetry(this.modele, Main.window);
 		}
 		this.repaint();
 	}
@@ -134,7 +139,7 @@ public class PanelAnimation2 extends JPanel implements ActionListener, MouseList
 	
 	public void drawNenuphars(Graphics g) {
 		for (int i=this.lowerThreshold ; i < this.hupperThreshold ; i++) {
-			System.out.println(this.nenuphars.get(i).getTimeLived()+1);
+			//System.out.println(this.nenuphars.get(i).getTimeLived()+1);
 			if (this.nenuphars.get(i).getTimeLived()+1 != this.nenuTimeToLive) {
 				//System.out.println(i + " : Position x : " + this.nenuphars.get(i).getPosX() + " position y : " + this.nenuphars.get(i).getPosY());
 				g.drawImage(this.IMG_NENUPHAR, this.nenuphars.get(i).getPosX(), this.nenuphars.get(i).getPosY(), null);
@@ -164,10 +169,10 @@ public class PanelAnimation2 extends JPanel implements ActionListener, MouseList
 	
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		System.out.println("Click");
+		//System.out.println("Click");
 		Handler(e);
 		if (! this.tempo.isRunning()) {
-			System.out.println("Start tempo");
+			//System.out.println("Start tempo");
 			this.tempo.start();
 			Main.window.getMusic().stopMusic();
 			Main.window.getMusic().setMusic(this.pathMusic);

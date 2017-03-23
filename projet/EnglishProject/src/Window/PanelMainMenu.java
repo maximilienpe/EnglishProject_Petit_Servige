@@ -34,7 +34,8 @@ public class PanelMainMenu extends JPanel {
 		// initialize the "this panel"
 		this.setLayout(new BorderLayout());
 		this.mainmodele = mainmodele;
-		Main.window.setSize(900, 600);
+		Main.window.setSize(new Dimension(900,600));
+		System.out.println(this.mainmodele.getTopics());
 
 		//flow Panel
 		this.mainLayout = new FlowLayout();

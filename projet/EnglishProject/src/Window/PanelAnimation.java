@@ -107,11 +107,11 @@ public class PanelAnimation extends JPanel {
 		System.out.println(allchoice.size());
 		if (allchoice.size() == 0) {
 			this.mainmodele.setVocabGameGraphicEndded(true);
-			new WindowRetry(mainmodele);
+			new WindowRetry(mainmodele, Main.window);
 			// we have to add some lines to stop the threads
 		}
 		if (this.mainmodele.getVocabGameGraphicLife() == 0) {
-			new WindowRetry(mainmodele);
+			new WindowRetry(mainmodele, Main.window);
 			// we have to add some lines to stop the threads
 		}
 	}
