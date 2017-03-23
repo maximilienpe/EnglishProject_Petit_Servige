@@ -58,7 +58,8 @@ public class PanelGameWindow extends JPanel {
 		this.add(left, BorderLayout.WEST);
 		this.add(right, BorderLayout.EAST);
 
-		this.add(new PanelAnimation(mainmodele, left, right, this.scorepanel), BorderLayout.CENTER);
+		//this.add(new PanelAnimation(mainmodele, left, right, this.scorepanel), BorderLayout.CENTER);
+		this.add(new PanelAnimation2(mainmodele, left, right, this.scorepanel), BorderLayout.CENTER);
 	}
 
 }

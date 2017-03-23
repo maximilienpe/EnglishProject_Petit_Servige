@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.sound.sampled.LineUnavailableException;
 import javax.swing.JButton;
 
 import MainSystem.Modele;
@@ -51,6 +52,9 @@ public class ButtonTopicPlay extends JButton implements MouseListener {
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
 		if (boxtopic.getAllChoosedTopics().size() != 0) {
+			Main.window.getMusic().stopFondu();
+			Main.window.getMusic().setMusic("Music" + File.separator + "add072.wav");
+			Main.window.getMusic().play();
 			if (this.life == 0) {
 				mainmodele.launchVocabGameGraphic(this.boxtopic.getAllChoosedTopics(), TypeOfGame.ENGLISH, this.nbwords,
 						this.nbprops, -1);
@@ -64,6 +68,8 @@ public class ButtonTopicPlay extends JButton implements MouseListener {
 			Main.window.remove(Main.window.getContentPane());
 			Main.window.setContentPane(new PanelGameWindow(mainmodele, nbprops));
 			Main.window.getContentPane().validate();
+			Main.window.getMusic().setMusic("Music" +File.separator + "bgm002.wav");
+			Main.window.getMusic().play("infinite");
 		}
 	}
 

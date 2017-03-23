@@ -74,6 +74,13 @@ public class PanelLeft extends JPanel {
 			allbuttons.get(j).setPanelAnim(anim);
 		}
 	}
+	
+	public void setAllChoice(PanelAnimation2 anim) {
+		for (int j = 0; j < this.allbuttons.size(); j++) {
+			allbuttons.get(j).setPanelAnim2(anim);
+		}
+	}
+
 
 	public void setPanelRight(PanelRight right) {
 		for (int j = 0; j < this.allbuttons.size(); j++) {

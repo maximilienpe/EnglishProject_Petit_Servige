@@ -36,7 +36,8 @@ public class PanelLife extends JPanel {
 		// System.out.println("System of life start");
 		// initialize content
 		this.modele = m;
-		System.out.println("Number of life : " + this.modele.getVocabGameGraphicMaxLife());
+		//System.out.println("Number of life : " + this.modele.getVocabGameGraphicMaxLife());
+		this.setOpaque(false);
 		this.maxLife = this.modele.getVocabGameGraphicMaxLife();
 		this.life = this.maxLife;
 
@@ -51,6 +52,8 @@ public class PanelLife extends JPanel {
 			for (int i = 0; i < this.maxLife; i++) {
 				JPanel lp = new JPanel();
 				JLabel ll = new JLabel();
+				ll.setOpaque(false);
+				lp.setOpaque(false);
 				ll.setIcon((Icon) this.heart);
 				lp.add(ll);
 				this.lifeLabel.add(ll);

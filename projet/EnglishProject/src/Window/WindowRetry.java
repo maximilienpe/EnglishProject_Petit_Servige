@@ -17,6 +17,7 @@ public class WindowRetry {
 				"End", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
 
 		if (output == 0) {
+			System.out.println("testRetry");
 			Main.window.remove(Main.window.getContentPane());
 			mainmodele.launchVocabGameGraphic(mainmodele.getAllTitleSelectedTopic(),
 					mainmodele.getVocabGameGraphicTypeOfGame(), mainmodele.getVocabGameGraphicNumberOfWords(),
@@ -27,6 +28,7 @@ public class WindowRetry {
 		}
 
 		if (output == 1) {
+			System.out.println("TestQuit");
 			Main.window.remove(Main.window.getContentPane());
 			Main.window.setContentPane(new PanelMainMenu(mainmodele));
 			Main.window.getContentPane().validate();

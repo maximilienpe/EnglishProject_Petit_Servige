@@ -6,7 +6,7 @@ import MainSystem.Modele;
 
 public class Main {
 
-	public static JFrame window;
+	public static WindowGame window;
 
 	public static void main(String[] args) {
 		Modele mainmodele = new Modele();

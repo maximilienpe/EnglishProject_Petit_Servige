@@ -1,5 +1,6 @@
 package Window;
 
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
@@ -12,21 +13,46 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 import MainSystem.Modele;
+import Music.BackgroundMusic;
 
 public class PanelMainMenu extends JPanel {
 
 	private Modele mainmodele;
 	private JPanel gridPanel;
 	private Dimension buttonSize;
+	
+	private JPanel mainPanel;
+	private FlowLayout mainLayout;
+	
+	private JPanel volumePanel;
+	private FlowLayout volumeLayout;
+	private BackgroundMusic music;
+	private PanelMusicVolume volumeManager;
 
 	public PanelMainMenu(Modele mainmodele) {
 
 		// initialize the "this panel"
-
-		this.setLayout(new FlowLayout());
+		this.setLayout(new BorderLayout());
 		this.mainmodele = mainmodele;
 		Main.window.setSize(900, 600);
 
+		//flow Panel
+		this.mainLayout = new FlowLayout();
+		this.mainPanel = new JPanel();
+		this.mainPanel.setLayout(this.mainLayout);
+		this.mainPanel.setOpaque(false);
+		
+		/*
+		//volume Panel
+		this.volumeLayout = new FlowLayout(FlowLayout.RIGHT);
+		this.volumePanel = new JPanel();
+		this.volumePanel.setLayout(volumeLayout);
+		this.music = Main.window.getMusic();
+		this.volumeManager = new PanelMusicVolume(this.music);
+		this.volumePanel.add(this.volumeManager);
+		this.mainPanel.add(this.volumePanel);
+		*/
+		
 		// grid Panel
 		this.gridPanel = new JPanel();
 		this.gridPanel.setLayout(new GridLayout(7, 1));
@@ -59,7 +85,9 @@ public class PanelMainMenu extends JPanel {
 		JPanel invi3 = new JPanel();
 		invi3.setOpaque(false);
 		this.gridPanel.add(invi3);
-		this.add(gridPanel);
+		this.mainPanel.add(gridPanel);
+		
+		this.add(mainPanel, BorderLayout.CENTER);
 
 	}
 

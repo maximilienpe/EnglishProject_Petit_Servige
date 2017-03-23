@@ -25,6 +25,7 @@ public class ButtonRight extends JButton implements MouseListener {
 	int rank;
 	PanelAnimation anim;
 
+	private PanelAnimation2 anim2;
 	private PanelLife lifePanel;
 
 	public ButtonRight(Modele mainmodele, int rank, PanelRight right) {
@@ -84,14 +85,20 @@ public class ButtonRight extends JButton implements MouseListener {
 	public void setPanelAnim(PanelAnimation anim) {
 		this.anim = anim;
 	}
+	
+	public void setPanelAnim2(PanelAnimation2 anim) {
+		this.anim2 = anim;
+	}
 
 	public void answer() {
-		this.mainmodele.playVocabGameGraphic(this.choice.getText(), this.getText());
-		this.choice.setVisible(false);
+		//this.mainmodele.playVocabGameGraphic(this.choice.getText(), this.getText());
+		//this.choice.setVisible(false);
+		mainmodele.playVocabGameGraphic(this.anim2.getSelectedNenuphar().getLabel(), this.getText());
+		this.anim2.getSelectedNenuphar().setTimeLived(this.anim2.getSelectedNenuphar().getTimeToLive()-1);
 		this.right.setButtonsNull();
 		this.left.setButtonsNull();
-		this.anim.removeNenu(choice);
-		this.anim.WaitEnd();
+		//this.anim.removeNenu(choice);
+		//this.anim.WaitEnd();
 		score.refresh();
 		this.lifePanel.updateLife();
 		Main.window.getContentPane().validate();
