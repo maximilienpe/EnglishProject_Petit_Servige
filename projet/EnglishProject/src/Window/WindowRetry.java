@@ -1,5 +1,7 @@
 package Window;
 
+import java.io.File;
+
 import javax.swing.JOptionPane;
 
 import MainSystem.Modele;
@@ -40,6 +42,8 @@ public class WindowRetry {
 			this.mainwindow.setSize(900,600);
 			this.mainwindow.getContentPane().validate();
 			this.mainwindow.getContentPane().repaint();
+			this.mainwindow.getMusic().setMusic("Music" + File.separator + "bgm002.wav");
+			this.mainwindow.getMusic().play("infinite");
 		}
 		else if (output == 0){
 			this.mainwindow.dispose();
