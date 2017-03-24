@@ -82,8 +82,8 @@ public class PanelLessons extends JPanel {
 		this.right = new JButton("	>>	");
 		this.left.setPreferredSize(new Dimension(50, 25));
 		this.right.setPreferredSize(new Dimension(50, 25));
-		this.listenerLeft = new ListenerLeftButtonLesson(this);
-		this.listenerRight = new ListenerRightButtonLesson(this);
+		//this.listenerLeft = new ListenerLeftButtonLesson(this);
+		//this.listenerRight = new ListenerRightButtonLesson(this);
 		this.left.addActionListener(listenerLeft);
 		this.right.addActionListener(listenerRight);
 		this.buttonPanel.add(this.left);

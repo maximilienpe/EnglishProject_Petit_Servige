@@ -54,6 +54,7 @@ public class BoxTopic extends JPanel {
 		alltruetopics = new ArrayList<String>();
 		for (int j = 0; j < allchoosedtopics.size(); j++) {
 			if (allchoosedtopics.get(j).getStatus()) {
+				//System.out.println(allchoosedtopics.get(j).getNameButton());
 				alltruetopics.add(allchoosedtopics.get(j).getNameButton());
 			}
 		}

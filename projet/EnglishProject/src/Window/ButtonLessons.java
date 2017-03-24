@@ -31,7 +31,7 @@ public class ButtonLessons extends JButton implements MouseListener {
 	public void mouseClicked(MouseEvent arg0) {
 		Main.window.remove(Main.window.getContentPane());
 		Main.window.setSize(899, 600);
-		Main.window.setContentPane(new PanelLessons(mainmodele));
+		Main.window.setContentPane(new PanelLesson2(mainmodele));
 		Main.window.getContentPane().validate();
 	}
 
