@@ -47,7 +47,7 @@ public class PanelAnimation2 extends JPanel implements ActionListener, MouseList
 
 	//images
 	private static final Image IMG_NENUPHAR = ImageLoader.loadImage("Graphics" + File.separator + "smallWaterlily.png");
-	private static final Image IMG_NENU_SELECTED = ImageLoader.loadImage("Graphics" + File.separator + "selectorHalo.png");
+	private static final Image IMG_NENU_SELECTED = ImageLoader.loadImage("Graphics" + File.separator + "selectorHaloVert.png");
 	
 	//Timer
 	private int fps;
@@ -164,7 +164,7 @@ public class PanelAnimation2 extends JPanel implements ActionListener, MouseList
 			if (this.nenuphars.get(i).getTimeLived()+1 != this.nenuTimeToLive) {
 				//System.out.println(i + " : Position x : " + this.nenuphars.get(i).getPosX() + " position y : " + this.nenuphars.get(i).getPosY());
 				if (this.selectedNenu == i) {
-					g.drawImage(this.IMG_NENU_SELECTED, this.nenuphars.get(i).getPosX()-37, this.nenuphars.get(i).getPosY()-37, null);
+					g.drawImage(this.IMG_NENU_SELECTED, this.nenuphars.get(i).getPosX()-38, this.nenuphars.get(i).getPosY()-38, null);
 				}
 				g.drawImage(this.IMG_NENUPHAR, this.nenuphars.get(i).getPosX(), this.nenuphars.get(i).getPosY(), null);
 				
