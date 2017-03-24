@@ -13,6 +13,7 @@ import java.awt.Image;
 import java.awt.Insets;
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
@@ -205,7 +206,8 @@ public class PanelLesson2 extends JPanel {
 			concatenation = concatenation + ef;
 		}
 		concatenation = concatenation + "\n \n";
-		return concatenation;
+		String concatenationUTF8 = new String(concatenation.getBytes(), Charset.forName("UTF-8"));
+		return concatenationUTF8;
 	}
 	
 	private String concatenateWordEnglishOnly(Word w) {
@@ -222,7 +224,8 @@ public class PanelLesson2 extends JPanel {
 		}
 		//concatenation = concatenation + " : ";
 		concatenation = concatenation + "\n \n";
-		return concatenation;
+		String concatenationUTF8 = new String(concatenation.getBytes(), Charset.forName("UTF-8"));
+		return concatenationUTF8;
 	}
 	
 	private String concatenateWordFrenchOnly(Word w) {
@@ -252,7 +255,8 @@ public class PanelLesson2 extends JPanel {
 			concatenation = concatenation + ef;
 		}
 		concatenation = concatenation + "\n \n";
-		return concatenation;
+		String concatenationUTF8 = new String(concatenation.getBytes(), Charset.forName("UTF-8"));
+		return concatenationUTF8;
 	}
 
 	private String getContent(TopicVocabulary tv) {
