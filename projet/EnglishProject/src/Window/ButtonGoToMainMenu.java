@@ -3,6 +3,7 @@ package Window;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -19,7 +20,7 @@ public class ButtonGoToMainMenu extends JButton implements ActionListener {
 
 	private Modele modele;
 
-	String name;
+	private String name;
 
 	public ButtonGoToMainMenu(Modele m, String name) {
 		super(name);
@@ -39,12 +40,21 @@ public class ButtonGoToMainMenu extends JButton implements ActionListener {
 		try {
 			Image img = ImageIO.read(new File("Graphics" + File.separator + "MainMenuButton.jpg"));
 			g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
-			g.setFont(new Font("default", Font.BOLD, 20));
+			Font f = new Font("default",Font.BOLD, 20);
 			g.setColor(Color.black);
-			g.drawString(this.name, this.getWidth() / 2 - (this.getWidth() / 2 / 10), (this.getHeight() / 2) + 6);
+			//g.drawString(this.name, this.getWidth() / 2 - (this.getWidth() / 2 / 10), (this.getHeight() / 2) + 6);
+			drawCenteredText(g, this.name, f, this.getWidth()/2, this.getHeight()/2);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public void drawCenteredText(Graphics g, String text, Font font, int centerX, int centerY) {
+		FontMetrics metric = g.getFontMetrics(font);
+		int x = centerX - metric.stringWidth(text)/2 ;
+		int y = centerY - metric.getHeight()/2;
+		g.setFont(font);
+		g.drawString(text, x, y+20);
 	}
 
 }

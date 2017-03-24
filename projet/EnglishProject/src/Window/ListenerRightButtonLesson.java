@@ -5,9 +5,9 @@ import java.awt.event.ActionListener;
 
 public class ListenerRightButtonLesson implements ActionListener {
 
-	private PanelLessons panel;
+	private PanelLesson2 panel;
 	
-	public ListenerRightButtonLesson(PanelLessons pl) {
+	public ListenerRightButtonLesson(PanelLesson2 pl) {
 		this.panel = pl;
 	}
 	

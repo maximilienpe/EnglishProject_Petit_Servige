@@ -36,6 +36,7 @@ public class PanelAnimation2 extends JPanel implements ActionListener, MouseList
 	//ArrayList content
 	private int numberOfNenuphars;
 	private ArrayList<Integer> startFrameNenu;
+	private ArrayList<Integer> startXNenu;
 	private ArrayList<Nenuphar2> nenuphars;
 	private int nenuTimeToLive;
 	private int selectedNenu;
@@ -76,7 +77,7 @@ public class PanelAnimation2 extends JPanel implements ActionListener, MouseList
 		this.tempo = new Timer(1000/this.fps,this);
 		
 		this.selectedNenu = 0;
-		this.nenuTimeToLive = 150;
+		this.nenuTimeToLive = 450;
 		initializeNenuphars();
 		
 		addMouseListener(this);
@@ -125,14 +126,32 @@ public class PanelAnimation2 extends JPanel implements ActionListener, MouseList
 		this.lowerThreshold = 0;
 		this.nenuphars = new ArrayList<Nenuphar2>();
 		this.startFrameNenu = new ArrayList<Integer>();
-		for (int i=0; i < this.numberOfNenuphars ;i++) {
+		this.startXNenu = new ArrayList<Integer>();
+		int randomNum = 45 + (int)(Math.random() * 30); 
+		this.startFrameNenu.add(randomNum);
+		randomNum = -150 + (int)(Math.random() * 200);
+		this.startXNenu.add(randomNum);
+		this.nenuphars.add(new Nenuphar2(
+				this.modele, 
+				this.modele.getAllTheAskedWordsVocabGameGraphic().get(0),
+				(Main.window.getWidth()-2*200)/2 + randomNum,
+				25, 
+				this.nenuTimeToLive)) ;
+		//System.out.println(this.numberOfNenuphars);
+		
+		for (int i=1; i < this.numberOfNenuphars ;i++) {
+			randomNum = -150 + (int)(Math.random() * 200);
+			System.out.println(randomNum);
+			this.startXNenu.add(randomNum);
 			this.nenuphars.add(new Nenuphar2(
 					this.modele, 
 					this.modele.getAllTheAskedWordsVocabGameGraphic().get(i),
-					(Main.window.getWidth()-2*200)/2,
-					50, 
+					(Main.window.getWidth()-2*200)/2 + randomNum,
+					25, 
 					this.nenuTimeToLive)) ;
-			this.startFrameNenu.add(30*i +30);
+			randomNum = 60 + (int)(Math.random() * 120); 
+			//System.out.println("Rand : " +randomNum);
+			this.startFrameNenu.add(this.startFrameNenu.get(i-1) + randomNum);
 		}
 		
 	}
@@ -150,10 +169,11 @@ public class PanelAnimation2 extends JPanel implements ActionListener, MouseList
 				
 				this.nenuphars.get(i).increaseTimeLived();
 				//System.out.println(this.nenuphars.get(i).getTimeLived() );
-				this.nenuphars.get(i).setPosX(   (int) ((Main.window.getWidth()-2*200)/2 + (150* this.nenuphars.get(i).getStaticTrajectoryX(this.nenuphars.get(i).getTimeLived())) ) );
-				this.nenuphars.get(i).setPosY(this.nenuphars.get(i).getPosY()+3);
+				this.nenuphars.get(i).setPosX(   (int) ((Main.window.getWidth()-2*200)/2 + this.startXNenu.get(i) + (150* this.nenuphars.get(i).getStaticTrajectoryX(this.nenuphars.get(i).getTimeLived())) ) );
+				this.nenuphars.get(i).setPosY(this.nenuphars.get(i).getPosY()+1);
 			}
 			else {
+				System.out.println(this.lowerThreshold);
 				this.lowerThreshold++;
 			}
 		}

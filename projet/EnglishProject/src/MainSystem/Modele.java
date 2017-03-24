@@ -441,7 +441,7 @@ public class Modele {
 			this.modeleLogger.addLog("MODELE Show all grammar topics title.", LogLevel.INFO);
 		}
 		for (TopicGrammar topic : this.grammarTopics) {
-			System.out.println(topic.getTopicTitle());
+			//System.out.println(topic.getTopicTitle());
 		}
 	}
 
@@ -496,7 +496,7 @@ public class Modele {
 	public void launchVocabGameGraphic(ArrayList<String> titlesTopics, TypeOfGame type, int numberOfWords,
 			int numberOfPropositions, int life) {
 		for (String s : titlesTopics) {
-			System.out.println(s);
+			//System.out.println(s);
 			this.addSelectedTopic(s);
 		}
 		this.mergeTopicVocabulary();
