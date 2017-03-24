@@ -206,8 +206,8 @@ public class PanelLesson2 extends JPanel {
 			concatenation = concatenation + ef;
 		}
 		concatenation = concatenation + "\n \n";
-		String concatenationUTF8 = new String(concatenation.getBytes(), Charset.forName("UTF-8"));
-		return concatenationUTF8;
+		//String concatenationUTF8 = new String(concatenation.getBytes(), Charset.forName("UTF-8"));
+		return concatenation;
 	}
 	
 	private String concatenateWordEnglishOnly(Word w) {
@@ -224,8 +224,8 @@ public class PanelLesson2 extends JPanel {
 		}
 		//concatenation = concatenation + " : ";
 		concatenation = concatenation + "\n \n";
-		String concatenationUTF8 = new String(concatenation.getBytes(), Charset.forName("UTF-8"));
-		return concatenationUTF8;
+		//String concatenationUTF8 = new String(concatenation.getBytes(), Charset.forName("UTF-8"));
+		return concatenation;
 	}
 	
 	private String concatenateWordFrenchOnly(Word w) {
@@ -255,8 +255,8 @@ public class PanelLesson2 extends JPanel {
 			concatenation = concatenation + ef;
 		}
 		concatenation = concatenation + "\n \n";
-		String concatenationUTF8 = new String(concatenation.getBytes(), Charset.forName("UTF-8"));
-		return concatenationUTF8;
+		//String concatenationUTF8 = new String(concatenation.getBytes(), Charset.forName("UTF-8"));
+		return concatenation;
 	}
 
 	private String getContent(TopicVocabulary tv) {
