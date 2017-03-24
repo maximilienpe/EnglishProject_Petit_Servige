@@ -45,8 +45,9 @@ public class PanelAnimation2 extends JPanel implements ActionListener, MouseList
 	private int hupperThreshold;
 	private int lowerThreshold;
 
-	//image
+	//images
 	private static final Image IMG_NENUPHAR = ImageLoader.loadImage("Graphics" + File.separator + "smallWaterlily.png");
+	private static final Image IMG_NENU_SELECTED = ImageLoader.loadImage("Graphics" + File.separator + "selectorHalo.png");
 	
 	//Timer
 	private int fps;
@@ -58,6 +59,7 @@ public class PanelAnimation2 extends JPanel implements ActionListener, MouseList
 	private String pathMusic;
 	
 	private boolean isFinished;
+	
 	
 	public PanelAnimation2(Modele mainmodele, PanelLeft left, PanelRight right, ScorePanel score) {
 		this.isFinished = false;
@@ -76,7 +78,7 @@ public class PanelAnimation2 extends JPanel implements ActionListener, MouseList
 		this.fps = 30;
 		this.tempo = new Timer(1000/this.fps,this);
 		
-		this.selectedNenu = 0;
+		this.selectedNenu = -1;
 		this.nenuTimeToLive = 450;
 		initializeNenuphars();
 		
@@ -161,6 +163,9 @@ public class PanelAnimation2 extends JPanel implements ActionListener, MouseList
 			//System.out.println(this.nenuphars.get(i).getTimeLived()+1);
 			if (this.nenuphars.get(i).getTimeLived()+1 != this.nenuTimeToLive) {
 				//System.out.println(i + " : Position x : " + this.nenuphars.get(i).getPosX() + " position y : " + this.nenuphars.get(i).getPosY());
+				if (this.selectedNenu == i) {
+					g.drawImage(this.IMG_NENU_SELECTED, this.nenuphars.get(i).getPosX()-37, this.nenuphars.get(i).getPosY()-37, null);
+				}
 				g.drawImage(this.IMG_NENUPHAR, this.nenuphars.get(i).getPosX(), this.nenuphars.get(i).getPosY(), null);
 				
 				Font font = new Font("Verdana", Font.BOLD, 12);

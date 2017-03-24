@@ -46,6 +46,9 @@ public class PanelLesson2 extends JPanel {
 	private JButton right;
 	private ListenerLeftButtonLesson listenerLeft;
 	private ListenerRightButtonLesson listenerRight;
+	private ButtonEnglishLesson englishButton;
+	private ButtonFrenchLesson frenchButton;
+	private ButtonBothLanguageLesson bothButton;
 		
 	private JScrollPane scrollContent;
 	private JTextArea contentTextArea;
@@ -54,8 +57,12 @@ public class PanelLesson2 extends JPanel {
 	//Main layout
 	private GridBagLayout mainLayout;
 	
+	private int typeOfScreen;
+
+	
 	public PanelLesson2(Modele m) {
 		
+		this.typeOfScreen = 0;
 		
 		// content variables initialisation
 		this.modele = m;
@@ -73,10 +80,20 @@ public class PanelLesson2 extends JPanel {
 		this.titleLabel.setPreferredSize(new Dimension(Main.window.getWidth()/2,50));
 		
 		// Button
+		this.englishButton = new ButtonEnglishLesson(this.modele, this);
+		this.englishButton.setPreferredSize(new Dimension(50, 50));
+		this.englishButton.setText("E");
+		this.frenchButton = new ButtonFrenchLesson(this.modele,this);
+		this.frenchButton.setPreferredSize(new Dimension(50, 50));
+		this.frenchButton.setText("F");
+		this.bothButton = new ButtonBothLanguageLesson(this.modele,this);
+		this.bothButton.setPreferredSize(new Dimension(50, 50));
+		this.bothButton.setText("E/F");
+		
 		this.buttonPanel = new JPanel();
 		this.buttonPanel.setOpaque(false);
-		this.gridlayout = new GridLayout(1, 2);
-		this.gridlayout.setHgap(300);
+		this.gridlayout = new GridLayout(1, 5);
+		this.gridlayout.setHgap(50);
 		this.buttonPanel.setLayout(this.gridlayout);
 		this.left = new JButton("	<<	");
 		this.right = new JButton("	>>	");
@@ -87,6 +104,9 @@ public class PanelLesson2 extends JPanel {
 		this.left.addActionListener(listenerLeft);
 		this.right.addActionListener(listenerRight);
 		this.buttonPanel.add(this.left);
+		this.buttonPanel.add(this.englishButton);
+		this.buttonPanel.add(this.bothButton);
+		this.buttonPanel.add(this.frenchButton);
 		this.buttonPanel.add(this.right);
 		
 		// initialize content
@@ -187,11 +207,74 @@ public class PanelLesson2 extends JPanel {
 		concatenation = concatenation + "\n \n";
 		return concatenation;
 	}
+	
+	private String concatenateWordEnglishOnly(Word w) {
+		String concatenation = "";
+		Boolean first = true;
+		for (String ew : w.getEnglishWords()) {
+			if (!first) {
+				concatenation = concatenation + ", ";
+			} else {
+				first = false;
+				concatenation = concatenation + "     ";
+			}
+			concatenation = concatenation + ew;
+		}
+		//concatenation = concatenation + " : ";
+		concatenation = concatenation + "\n \n";
+		return concatenation;
+	}
+	
+	private String concatenateWordFrenchOnly(Word w) {
+		String concatenation = "     ";
+		Boolean first = true;
+		/*for (String ew : w.getEnglishWords()) {
+			if (!first) {
+				concatenation = concatenation + "  ";
+			} else {
+				first = false;
+				concatenation = concatenation + "     ";
+			}
+			String ew_blanck = "";
+			for (int i=0; i< ew.length() ; i++) {
+				ew_blanck = ew_blanck + " "; 
+			}
+			concatenation = concatenation + ew_blanck;
+		}
+		concatenation = concatenation + " : ";
+		first = true;*/
+		for (String ef : w.getFrenchWords()) {
+			if (!first) {
+				concatenation = concatenation + ", ";
+			} else {
+				first = false;
+			}
+			concatenation = concatenation + ef;
+		}
+		concatenation = concatenation + "\n \n";
+		return concatenation;
+	}
 
 	private String getContent(TopicVocabulary tv) {
 		String content = "\n";
 		for (Word w : tv.getTopicVocabulary()) {
 			content = content + concatenatedWord(w);
+		}
+		return content;
+	}
+	
+	private String getContentEnglish(TopicVocabulary tv) {
+		String content = "\n";
+		for (Word w : tv.getTopicVocabulary()) {
+			content = content + concatenateWordEnglishOnly(w);
+		}
+		return content;
+	}
+	
+	private String getContentFrench(TopicVocabulary tv) {
+		String content = "\n";
+		for (Word w : tv.getTopicVocabulary()) {
+			content = content + concatenateWordFrenchOnly(w);
 		}
 		return content;
 	}
@@ -210,9 +293,22 @@ public class PanelLesson2 extends JPanel {
 
 	public void update() {
 		this.titleLabel.setText("          " + this.topics.get(this.currentTopicIndex).getTitleTopic() + "          ");
-		this.contentVocabulary = getContent(this.topics.get(currentTopicIndex));
-		this.contentTextArea.setText(contentVocabulary);
 
+		if (this.typeOfScreen == 0) {
+			this.contentVocabulary = getContent(this.topics.get(currentTopicIndex));
+			this.contentTextArea.setText(contentVocabulary);
+			System.out.println("Both");
+		}
+		else if (this.typeOfScreen == 1) {
+			this.contentVocabulary = getContentEnglish(this.topics.get(currentTopicIndex));
+			this.contentTextArea.setText(contentVocabulary);
+			System.out.println("English");
+		}
+		else if (this.typeOfScreen == 2) {
+			this.contentVocabulary = getContentFrench(this.topics.get(currentTopicIndex));
+			this.contentTextArea.setText(contentVocabulary);
+			System.out.println("French");
+		}
 		this.contentTextArea.setCaretPosition(0);
 		this.contentTextArea.repaint();
 		this.contentTextArea.revalidate();
@@ -222,9 +318,16 @@ public class PanelLesson2 extends JPanel {
 
 		this.repaint();
 		this.revalidate();
-
 	}
 
+	public void setTypeOfScreen(int type) {
+		this.typeOfScreen = type;
+	}
+	
+	public int gettypeOfScreen() {
+		return this.typeOfScreen;
+	}
+	
 	public void paintComponent(Graphics g) {
 		try {
 			Image img = ImageIO.read(new File("Graphics" + File.separator + "MainMenu.jpg"));
