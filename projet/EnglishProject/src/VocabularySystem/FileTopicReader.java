@@ -1,6 +1,7 @@
 package VocabularySystem;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
@@ -60,10 +61,12 @@ public class FileTopicReader implements TopicReader {
 					frenchWords = words[1].split(";");
 					
 					for (String Eexp : englishWords) {
-						englishExpressions.add(Eexp.trim());
+						String EexpUTF8 = new String(Eexp.getBytes(), Charset.forName("UTF-8"));
+						englishExpressions.add(EexpUTF8.trim());
 					}
 					for (String Fexp : frenchWords) {
-						frenchExpressions.add(Fexp.trim());
+						String FexpUTF8 = new String(Fexp.getBytes(), Charset.forName("UTF-8"));
+						frenchExpressions.add(FexpUTF8.trim());
 					}
 					Word newWord = new Word(englishExpressions,frenchExpressions);
 					this.topic.addAWord(newWord);
