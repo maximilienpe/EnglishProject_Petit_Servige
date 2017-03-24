@@ -6,6 +6,8 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -36,10 +38,10 @@ public class PanelTopicPlay extends JPanel {
 	private JPanel optionPanel;
 	private JPanel buttonTopicPanel;
 	private JPanel topicPanel;
-	private JPanel gridPanel;
-	private GridLayout gridPanelLayout;
-	private JPanel encapsulateGridPanel;
-	private GridLayout encapsulateGridLayout;
+	final JPanel gridPanel;
+	final GridLayout gridPanelLayout;
+	final JPanel encapsulateGridPanel;
+	final GridLayout encapsulateGridLayout;
 	private JPanel returnMainMenuPanel;
 	private GridLayout returnMainMenuGridLayout;
 
@@ -71,12 +73,12 @@ public class PanelTopicPlay extends JPanel {
 		this.topicPanel.setLayout(new FlowLayout());
 		// this.gridPanel.setLayout(new GridLayout(1,2));
 		this.gridPanelLayout = new GridLayout(1, 2);
-		this.gridPanelLayout.setHgap(150);
+		this.gridPanelLayout.setHgap(0);
 		this.gridPanel.setLayout(this.gridPanelLayout);
 		this.gridPanel.setOpaque(false);
 		// this.encapsulateGridPanel.setLayout(new GridLayout(2,1));
 		this.encapsulateGridLayout = new GridLayout(3, 1);
-		this.encapsulateGridLayout.setVgap(200);
+		this.encapsulateGridLayout.setVgap(0);
 		this.encapsulateGridPanel.setLayout(this.encapsulateGridLayout);
 		//
 		this.returnMainMenuPanel = new JPanel();
@@ -149,6 +151,21 @@ public class PanelTopicPlay extends JPanel {
 		this.encapsulateGridPanel.add(this.buttonTopicPanel);
 
 		this.add(this.encapsulateGridPanel);
+
+		Main.window.addComponentListener(new ComponentAdapter() {
+			public void componentResized(ComponentEvent e) {
+				System.out.println(Main.window.getWidth());
+				System.out.println(Main.window.getHeight());
+				gridPanelLayout.setHgap(100);
+				encapsulateGridLayout.setVgap(100);
+				gridPanel.repaint();
+				encapsulateGridPanel.repaint();
+				gridPanel.validate();
+				encapsulateGridPanel.validate();
+				Main.window.revalidate();
+				Main.window.repaint();
+			}
+		});
 
 	}
 

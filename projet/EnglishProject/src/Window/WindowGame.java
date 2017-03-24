@@ -24,6 +24,7 @@ public class WindowGame extends JFrame {
 		}
 
 		this.setVisible(true);
+
 	}
 
 	public BackgroundMusic getMusic() {

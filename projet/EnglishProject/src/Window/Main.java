@@ -1,6 +1,7 @@
 package Window;
 
-import javax.swing.JFrame;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 
 import MainSystem.Modele;
 
@@ -16,6 +17,7 @@ public class Main {
 		window.validate();
 		window.setResizable(true);
 		window.setLocationRelativeTo(null);
+
 	}
 
 }
