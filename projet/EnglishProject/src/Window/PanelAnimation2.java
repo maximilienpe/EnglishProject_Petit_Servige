@@ -38,16 +38,19 @@ public class PanelAnimation2 extends JPanel implements ActionListener, MouseList
 	private ArrayList<Integer> startFrameNenu;
 	private ArrayList<Integer> startXNenu;
 	private ArrayList<Nenuphar2> nenuphars;
+	private ArrayList<Nenuphar2> onFrameNenuphars;
 	private int nenuTimeToLive;
 	private int selectedNenu;
 	
 	//nenuphar selector
-	private int hupperThreshold;
+	private int upperThreshold;
 	private int lowerThreshold;
 
 	//images
 	private static final Image IMG_NENUPHAR = ImageLoader.loadImage("Graphics" + File.separator + "smallWaterlily.png");
+	private static final Image IMG_NENUPHAR_Yelow = ImageLoader.loadImage("Graphics" + File.separator + "smallYellowWaterlily.png");	
 	private static final Image IMG_NENU_SELECTED = ImageLoader.loadImage("Graphics" + File.separator + "selectorHaloVert.png");
+	private static final Image IMG_NENU_SELECTED_Yellow = ImageLoader.loadImage("Graphics" + File.separator + "selectorHaloYellow.png");
 	
 	//Timer
 	private int fps;
@@ -59,9 +62,11 @@ public class PanelAnimation2 extends JPanel implements ActionListener, MouseList
 	private String pathMusic;
 	
 	private boolean isFinished;
+	private boolean hasStarted;
 	
 	
 	public PanelAnimation2(Modele mainmodele, PanelLeft left, PanelRight right, ScorePanel score) {
+		this.hasStarted = false;
 		this.isFinished = false;
 		this.pathMusic = "Music" + File.separator + "bgm017.wav";
 		this.isMusicLaunched = false;
@@ -87,12 +92,14 @@ public class PanelAnimation2 extends JPanel implements ActionListener, MouseList
 
 	public void nextFrame() {
 		this.frame++;
-		if (this.hupperThreshold < this.numberOfNenuphars) {
-			if (this.frame == this.startFrameNenu.get(this.hupperThreshold)) {
-				this.hupperThreshold++;
+		if (this.upperThreshold < this.numberOfNenuphars) {
+			if (this.frame == this.startFrameNenu.get(this.upperThreshold)) {
+				this.onFrameNenuphars.add(this.nenuphars.get(this.upperThreshold));
+				this.upperThreshold++;
+				this.hasStarted = true;
 			}
 		}	
-		if ( (this.lowerThreshold == this.numberOfNenuphars || this.modele.getVocabGameGraphicLife() == 0 ) && !this.isFinished) {
+		if ( (this.onFrameNenuphars.size() == 0 && this.hasStarted && this.lowerThreshold == this.numberOfNenuphars|| this.modele.getVocabGameGraphicLife() == 0 ) && !this.isFinished) {
 			//end
 			this.isFinished = true;
 			this.tempo.stop();
@@ -117,14 +124,15 @@ public class PanelAnimation2 extends JPanel implements ActionListener, MouseList
 		drawNenuphars(g);
 		
 		if (!this.tempo.isRunning()) {
-			g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 32));
+			g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 20));
 			g.setColor(Color.WHITE);
 			g.drawString("Click here !", (Main.window.getWidth()-400)/2-100, (Main.window.getHeight()-50)/2-50);
 		}
 	}
 
 	public void initializeNenuphars() {
-		this.hupperThreshold = 0;
+		this.onFrameNenuphars = new ArrayList<Nenuphar2>();
+		this.upperThreshold = 0;
 		this.lowerThreshold = 0;
 		this.nenuphars = new ArrayList<Nenuphar2>();
 		this.startFrameNenu = new ArrayList<Integer>();
@@ -159,26 +167,32 @@ public class PanelAnimation2 extends JPanel implements ActionListener, MouseList
 	}
 	
 	public void drawNenuphars(Graphics g) {
-		for (int i=this.lowerThreshold ; i < this.hupperThreshold ; i++) {
+		for (int i=0 ; i < this.onFrameNenuphars.size() ; i++) {
 			//System.out.println(this.nenuphars.get(i).getTimeLived()+1);
-			if (this.nenuphars.get(i).getTimeLived()+1 != this.nenuTimeToLive) {
-				//System.out.println(i + " : Position x : " + this.nenuphars.get(i).getPosX() + " position y : " + this.nenuphars.get(i).getPosY());
-				if (this.selectedNenu == i) {
-					g.drawImage(this.IMG_NENU_SELECTED, this.nenuphars.get(i).getPosX()-38, this.nenuphars.get(i).getPosY()-38, null);
+			if (this.onFrameNenuphars.get(i).getTimeLived()+1 != this.nenuTimeToLive) {
+				if (this.onFrameNenuphars.get(i).isSuperNenu()) {
+					if (this.selectedNenu == this.nenuphars.indexOf(this.onFrameNenuphars.get(i))) {
+						g.drawImage(this.IMG_NENU_SELECTED_Yellow, this.onFrameNenuphars.get(i).getPosX()-38, this.onFrameNenuphars.get(i).getPosY()-38, null);
+					}
+					g.drawImage(this.IMG_NENUPHAR_Yelow, this.onFrameNenuphars.get(i).getPosX(), this.onFrameNenuphars.get(i).getPosY(), null);
+				} else  {
+					if (this.selectedNenu == this.nenuphars.indexOf(this.onFrameNenuphars.get(i))) {
+						g.drawImage(this.IMG_NENU_SELECTED, this.onFrameNenuphars.get(i).getPosX()-38, this.onFrameNenuphars.get(i).getPosY()-38, null);
+					}
+					g.drawImage(this.IMG_NENUPHAR, this.onFrameNenuphars.get(i).getPosX(), this.onFrameNenuphars.get(i).getPosY(), null);
 				}
-				g.drawImage(this.IMG_NENUPHAR, this.nenuphars.get(i).getPosX(), this.nenuphars.get(i).getPosY(), null);
 				
-				Font font = new Font("Verdana", Font.BOLD, 12);
-				drawCenteredText(g, this.nenuphars.get(i).getLabel(), font, this.nenuphars.get(i).getPosX()+50,this.nenuphars.get(i).getPosY()+60 );
+				Font font = new Font("Verdana", Font.BOLD, 18);
+				drawCenteredText(g, this.onFrameNenuphars.get(i).getLabel(), font, this.onFrameNenuphars.get(i).getPosX()+50,this.onFrameNenuphars.get(i).getPosY()+60 );
 				//g.drawString(this.nenuphars.get(i).getLabel(), this.nenuphars.get(i).getPosX(), this.nenuphars.get(i).getPosY()+50);
 				
-				this.nenuphars.get(i).increaseTimeLived();
+				this.onFrameNenuphars.get(i).increaseTimeLived();
 				//System.out.println(this.nenuphars.get(i).getTimeLived() );
-				this.nenuphars.get(i).setPosX(   (int) ((Main.window.getWidth()-2*200)/2 + this.startXNenu.get(i) + (150* this.nenuphars.get(i).getStaticTrajectoryX(this.nenuphars.get(i).getTimeLived())) ) );
-				this.nenuphars.get(i).setPosY(this.nenuphars.get(i).getPosY()+1);
+				this.onFrameNenuphars.get(i).setPosX(   (int) ((Main.window.getWidth()-2*200)/2 + this.startXNenu.get(this.nenuphars.indexOf(this.onFrameNenuphars.get(i))) + (150* this.onFrameNenuphars.get(i).getStaticTrajectoryX(this.onFrameNenuphars.get(i).getTimeLived())) ) );
+				this.onFrameNenuphars.get(i).setPosY(this.onFrameNenuphars.get(i).getPosY()+1);
 			}
 			else {
-				System.out.println(this.lowerThreshold);
+				this.onFrameNenuphars.remove(i);
 				this.lowerThreshold++;
 			}
 		}
@@ -207,10 +221,10 @@ public class PanelAnimation2 extends JPanel implements ActionListener, MouseList
 	}
 	
 	public void Handler(MouseEvent e) {
-		for (int i = this.lowerThreshold ; i < this.hupperThreshold ; i++) {
-			if ( (e.getX() - this.nenuphars.get(i).getPosX()-50 < 50) && (e.getY() - this.nenuphars.get(i).getPosY()-50 < 50)) {
-				this.selectedNenu = i;
-				int p = this.modele.getAllTheAskedWordsVocabGameGraphic().indexOf(this.nenuphars.get(i).getLabel());
+		for (int i = 0 ; i < this.onFrameNenuphars.size() ; i++) {
+			if ( (e.getX() - this.onFrameNenuphars.get(i).getPosX()-50 < 50) && (e.getY() - this.onFrameNenuphars.get(i).getPosY()-50 < 50)) {
+				this.selectedNenu = this.nenuphars.indexOf(this.onFrameNenuphars.get(i));
+				int p = this.modele.getAllTheAskedWordsVocabGameGraphic().indexOf(this.onFrameNenuphars.get(i).getLabel());
 				left.setProp(p);
 				right.setProp(p);
 				left.validate();

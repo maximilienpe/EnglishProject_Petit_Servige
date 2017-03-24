@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring accessors="true" comment="Delete element from project &apos;EnglishProject&apos;&#x0A;- Original project: &apos;EnglishProject&apos;&#x0A;- Original element: &apos;Flag_of_Shimabara,_Nagasaki.png&apos;" description="Delete element" element1="Graphics/Flag_of_Shimabara,_Nagasaki.png" elements="0" flags="589830" id="org.eclipse.jdt.ui.delete" resources="1" stamp="1489679507273" subPackages="false" version="1.0"/>
+</session>

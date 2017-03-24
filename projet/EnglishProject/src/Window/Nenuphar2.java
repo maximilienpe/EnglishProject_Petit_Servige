@@ -21,6 +21,7 @@ public class Nenuphar2 {
 	private int timeLived;
 	
 	private Boolean Alive;
+	private Boolean isSuperNenu;
 	
 	private String label;
 	
@@ -46,6 +47,11 @@ public class Nenuphar2 {
 			else {
 				this.staticTrajectoryX.add(- (Math.sin(this.freq * (i)*0.02)) );
 			}
+		}
+		if (this.alternativeMovement*10 <= 1) {
+			this.isSuperNenu = true;
+		} else  {
+			this.isSuperNenu = false;
 		}
 	}
 	
@@ -98,6 +104,10 @@ public class Nenuphar2 {
 	
 	public int getTimeToLive() {
 		return this.timeTolive;
+	}
+	
+	public Boolean isSuperNenu() {
+		return this.isSuperNenu;
 	}
 	
 }

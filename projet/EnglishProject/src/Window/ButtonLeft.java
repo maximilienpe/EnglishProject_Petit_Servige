@@ -92,8 +92,11 @@ public class ButtonLeft extends JButton implements MouseListener {
 	}
 	
 	public void answer() {
-		//mainmodele.playVocabGameGraphic(choice.getText(), this.getText());
-		mainmodele.playVocabGameGraphic(this.anim2.getSelectedNenuphar().getLabel(), this.getText());
+		if (this.anim2.getSelectedNenuphar().isSuperNenu()) {
+			mainmodele.playVocabGameGraphic(this.anim2.getSelectedNenuphar().getLabel(), this.getText(),"SuperNenu");
+		} else {
+			mainmodele.playVocabGameGraphic(this.anim2.getSelectedNenuphar().getLabel(), this.getText());
+		}
 		this.anim2.getSelectedNenuphar().setTimeLived(this.anim2.getSelectedNenuphar().getTimeToLive()-1);
 		//choice.setVisible(false);
 		right.setButtonsNull();

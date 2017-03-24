@@ -79,6 +79,12 @@ public class PanelLife extends JPanel {
 			// System.out.println(this.life);
 			// this.lifeLabel.get(this.life).setText("");
 		}
+		if (this.life < this.modele.getVocabGameGraphicLife()) {
+			this.lifeLabel.get(this.life).setIcon(this.heart);
+			this.life = this.modele.getVocabGameGraphicLife();
+			// System.out.println(this.life);
+			// this.lifeLabel.get(this.life).setText("");
+		}
 	}
 
 	public void paintComponent(Graphics g) {

@@ -1,0 +1,66 @@
+package Window;
+
+import java.util.ArrayList;
+
+import MainSystem.Modele;
+
+public class Nenuphar2 {
+
+	
+	private Modele modele;
+	
+	private int posX;
+	private int posY;
+	private int r;
+	private int theta;
+	private int freq;
+
+	private ArrayList<Double> staticTrajectoryX;
+	private int timeTolive;
+	
+	private String label;
+	
+	public Nenuphar2(Modele m,String label, int x, int y, int timeToLive) {
+		
+		this.modele = m;
+		this.label = label;
+		this.posX = x;
+		this.posY = y;
+		this.freq = 1;
+		this.timeTolive = timeToLive;
+		this.staticTrajectoryX = new ArrayList<Double>();
+		for (int i=0; i < this.timeTolive ; i++) {
+			this.staticTrajectoryX.add(Math.sin(this.freq * (i)));
+		}
+	}
+	
+	public void setFreq(int f) {
+		this.freq = f;
+	}
+	
+	public void setPosX(int x) {
+		this.posX = x;
+	}
+	
+	public int getPosX(int x) {
+		return this.posX;
+	}
+	
+	public void setPosY(int y) {
+		this.posY = y;
+	}
+	
+	public int getPosY() {
+		return this.posX;
+	}
+	
+	public double getStaticTrajectoryX(int time) {
+		return this.staticTrajectoryX.get(time-1);
+	}
+	
+	public String getLabel() {
+		return this.label;
+	}
+	
+	
+}

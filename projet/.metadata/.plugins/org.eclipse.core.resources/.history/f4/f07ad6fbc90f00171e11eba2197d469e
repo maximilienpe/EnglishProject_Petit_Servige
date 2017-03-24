@@ -1,0 +1,130 @@
+package Music;
+
+import java.io.*;
+import javax.sound.sampled.*;
+   
+public class BackgroundMusic extends Thread {
+   
+	private File music;
+	private Clip clip;
+	private AudioInputStream audioInput;
+	private FloatControl volume;
+	private float initialVolume;
+	
+	private float currentDB;
+	private float targetDB;
+	private float fadePerStep;
+	private boolean fading = false;
+	
+	// Constructor
+	public BackgroundMusic(String musicPath) throws LineUnavailableException {
+		this.music = new File(musicPath);
+		this.clip = AudioSystem.getClip();
+		this.volume = null;
+		this.currentDB = 0F;
+		this.targetDB = 0F;
+		this.fadePerStep = .1F;
+	}
+   
+	public void setMusic(String musicPath) {
+		this.clip.close();
+		this.music = new File(musicPath);
+	}
+	
+	/**
+	 * play launch the music in music file
+	 * @param loopOption if equals to infinite, the music will restart until stop
+	 */
+	public void play(String loopOption) {
+		try {
+			audioInput = AudioSystem.getAudioInputStream(this.music);
+			clip.open(audioInput);
+			clip.start();
+			this.volume = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+			this.initialVolume = this.volume.getValue();
+			if (loopOption.equals("infinite")) {
+				this.clip.loop(Clip.LOOP_CONTINUOUSLY);
+			}
+		} catch (UnsupportedAudioFileException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (LineUnavailableException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * Just play a music load in file music
+	 */
+	public void play() {
+		try {
+			this.volume.setValue(initialVolume);
+			audioInput = AudioSystem.getAudioInputStream(this.music);
+			clip.open(audioInput);
+			clip.start();
+		} catch (UnsupportedAudioFileException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (LineUnavailableException e) {
+			e.printStackTrace();
+		}
+	}
+   
+	public void stopMusic() {
+		if (this.clip.isRunning()) {
+			this.clip.stop();
+		}
+	}
+	
+	public void stopFondu() {
+		this.shiftVolumeTo(0.001);
+		//this.stopMusic();	
+	}
+	
+	//volume between 0 and 1;
+	public void shiftVolumeTo(double value) {
+		value = (value<=0.0)? 0.0001 : ((value>1.0)? 1.0 : value);
+		this.targetDB = (float)(Math.log(value)/Math.log(10.0)*20.0);
+		System.out.println(this.targetDB);
+	    if (!fading) {
+	        Thread t = new Thread(this);  // start a thread to fade volume
+	        t.start();  // calls run() below
+	    }
+	}
+	
+	public void run() {
+		this.fading = true;
+		if (this.currentDB > this.targetDB) {
+	        while (this.currentDB > this.targetDB) {
+	    		System.out.println(this.currentDB);
+	            this.currentDB -= fadePerStep;
+	            this.volume.setValue(this.currentDB);
+	            try {Thread.sleep(1);} catch (Exception e) {}
+	        }
+	    }
+	    else if (this.currentDB < this.targetDB) {
+	        while (this.currentDB < this.targetDB) {
+	            this.currentDB += fadePerStep;
+	            this.volume.setValue(this.currentDB);
+	            try {Thread.sleep(1);} catch (Exception e) {}
+	        }
+	    }
+		this.fading = false;
+		this.currentDB = this.targetDB;
+	}
+	
+	
+	public void volumeOnOff() {
+		if (this.volume.getValue() > 0) {
+			this.volume.setValue(0);
+		} else {
+			this.volume.setValue(initialVolume);
+		}
+	}
+	
+	public float getVolume() {
+		return this.volume.getValue();
+	}
+ }

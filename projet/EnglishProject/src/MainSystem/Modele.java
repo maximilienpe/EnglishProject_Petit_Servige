@@ -531,6 +531,15 @@ public class Modele {
 			return null;
 		}
 	}
+	
+	public Boolean playVocabGameGraphic(String word, String answer, String typeOfNenu) {
+		if (!(this.vocabGameGraphic == null)) {
+			return this.vocabGameGraphic.playVocabGame(word, answer, typeOfNenu);
+		} else {
+			this.modeleLogger.addLog("MODELE There is no vocabulary game graphic launched.", LogLevel.ERROR);
+			return null;
+		}
+	}
 
 	public int getVocabGameGraphicScore() {
 		if (!(this.vocabGameGraphic == null)) {
@@ -575,7 +584,14 @@ public class Modele {
 			this.modeleLogger.addLog("MODELE There is no vocabulary game graphic launched.", LogLevel.ERROR);
 			return -1;
 		}
-
+	}
+	
+	public void increaseVocabGameGraphicLife() {
+		if (!(this.vocabGameGraphic == null)) {
+			this.vocabGameGraphic.increaseLife();
+		} else {
+			this.modeleLogger.addLog("MODELE There is no vocabulary game graphic launched.", LogLevel.ERROR);
+		}
 	}
 	
 	public int getVocabGameGraphicMaxLife() {

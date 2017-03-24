@@ -297,17 +297,17 @@ public class PanelLesson2 extends JPanel {
 		if (this.typeOfScreen == 0) {
 			this.contentVocabulary = getContent(this.topics.get(currentTopicIndex));
 			this.contentTextArea.setText(contentVocabulary);
-			System.out.println("Both");
+			//System.out.println("Both");
 		}
 		else if (this.typeOfScreen == 1) {
 			this.contentVocabulary = getContentEnglish(this.topics.get(currentTopicIndex));
 			this.contentTextArea.setText(contentVocabulary);
-			System.out.println("English");
+			//System.out.println("English");
 		}
 		else if (this.typeOfScreen == 2) {
 			this.contentVocabulary = getContentFrench(this.topics.get(currentTopicIndex));
 			this.contentTextArea.setText(contentVocabulary);
-			System.out.println("French");
+			//System.out.println("French");
 		}
 		this.contentTextArea.setCaretPosition(0);
 		this.contentTextArea.repaint();

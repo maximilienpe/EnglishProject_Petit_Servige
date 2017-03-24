@@ -180,6 +180,34 @@ public class VocabularyGame2 {
 			return false;
 		}
 	}
+	
+	public boolean playVocabGame(String words, String selectedProposition, String typeOfNenu) {
+		if (!this.VocabGameEnd) {
+			//System.out.println("Start to compare the expressions : " + selectedProposition + " et " + this.allAnswer.get(0));
+			// while the game hasn't finished yet
+			if (selectedProposition.equals(this.allAnswer.get(this.allAskedWords.indexOf(words))) && typeOfNenu.equals("SuperNenu")) {
+				System.out.println("Good answer.");
+				this.VocabScore++;
+				if (this.life < this.maxLife) {
+					this.increaseLife();
+				}
+				this.indexOfWordsOff.add(this.allAskedWords.indexOf(words));
+				return true;
+			} else {
+				// what should we do if he choose a bad answer ?
+				System.out.println("Bad answer !");
+				if (this.life > 0) {
+					this.life--;
+					if (this.life == 0) {
+						this.VocabGameEnd = true;
+					}
+				}
+				return false;
+			}
+		} else {
+			return false;
+		}
+	}
 
 	public ArrayList<String> getLeftPropositions(int indexOfTheWord) {
 		ArrayList<String> leftPropositions = new ArrayList<String>();
@@ -260,6 +288,10 @@ public class VocabularyGame2 {
 	
 	public TypeOfGame getTypeOfGame() {
 		return this.type;
+	}
+	
+	public void increaseLife() {
+		this.life++;
 	}
 
 }
