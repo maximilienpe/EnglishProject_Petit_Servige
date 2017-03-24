@@ -73,12 +73,12 @@ public class PanelTopicPlay extends JPanel {
 		this.topicPanel.setLayout(new FlowLayout());
 		// this.gridPanel.setLayout(new GridLayout(1,2));
 		this.gridPanelLayout = new GridLayout(1, 2);
-		this.gridPanelLayout.setHgap(0);
+		this.gridPanelLayout.setHgap(Main.window.getHeight() / 4);
 		this.gridPanel.setLayout(this.gridPanelLayout);
 		this.gridPanel.setOpaque(false);
 		// this.encapsulateGridPanel.setLayout(new GridLayout(2,1));
 		this.encapsulateGridLayout = new GridLayout(3, 1);
-		this.encapsulateGridLayout.setVgap(0);
+		this.encapsulateGridLayout.setVgap(Main.window.getWidth() / 4);
 		this.encapsulateGridPanel.setLayout(this.encapsulateGridLayout);
 		//
 		this.returnMainMenuPanel = new JPanel();
@@ -156,8 +156,10 @@ public class PanelTopicPlay extends JPanel {
 			public void componentResized(ComponentEvent e) {
 				System.out.println(Main.window.getWidth());
 				System.out.println(Main.window.getHeight());
-				gridPanelLayout.setHgap(100);
-				encapsulateGridLayout.setVgap(100);
+				gridPanelLayout.setHgap(Main.window.getHeight() / 4);
+				encapsulateGridLayout.setVgap(Main.window.getHeight() / 4);
+				gridPanel.setLayout(gridPanelLayout);
+				encapsulateGridPanel.setLayout(encapsulateGridLayout);
 				gridPanel.repaint();
 				encapsulateGridPanel.repaint();
 				gridPanel.validate();
