@@ -48,6 +48,7 @@ public class PanelTopicPlay extends JPanel {
 	public PanelTopicPlay(Modele mainmodele) {
 		this.mainmodele = mainmodele;
 		this.alltopics = new BoxTopic(mainmodele);
+		this.alltopics.setOpaque(false);
 
 		Main.window.setSize(899, 600);
 
@@ -62,7 +63,6 @@ public class PanelTopicPlay extends JPanel {
 		this.topicPanel = new JPanel();
 		this.topicPanel.setOpaque(false);
 		this.gridPanel = new JPanel();
-		this.gridPanel.setOpaque(false);
 		this.encapsulateGridPanel = new JPanel();
 		this.encapsulateGridPanel.setOpaque(false);
 
@@ -73,6 +73,7 @@ public class PanelTopicPlay extends JPanel {
 		this.gridPanelLayout = new GridLayout(1, 2);
 		this.gridPanelLayout.setHgap(150);
 		this.gridPanel.setLayout(this.gridPanelLayout);
+		this.gridPanel.setOpaque(false);
 		// this.encapsulateGridPanel.setLayout(new GridLayout(2,1));
 		this.encapsulateGridLayout = new GridLayout(3, 1);
 		this.encapsulateGridLayout.setVgap(200);

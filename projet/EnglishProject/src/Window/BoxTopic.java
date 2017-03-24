@@ -35,12 +35,17 @@ public class BoxTopic extends JPanel {
 		layout.setHgap(5);
 		this.setLayout(layout);
 
-		this.add(new JLabel("Choose topics"), BorderLayout.WEST);
+		JLabel text = new JLabel("Choose topics");
+
+		text.setOpaque(false);
+
+		this.add(text, BorderLayout.WEST);
 
 		allchoosedtopics = new ArrayList<ButtonAddRemoveTopic>();
 
 		for (int f = 0; f < topics.size() - 1; f++) {
 			ButtonAddRemoveTopic toadd = new ButtonAddRemoveTopic(mainmodele, topics.get(f));
+			toadd.setOpaque(false);
 			this.add(toadd);
 			this.allchoosedtopics.add(toadd);
 		}
@@ -54,7 +59,7 @@ public class BoxTopic extends JPanel {
 		alltruetopics = new ArrayList<String>();
 		for (int j = 0; j < allchoosedtopics.size(); j++) {
 			if (allchoosedtopics.get(j).getStatus()) {
-				//System.out.println(allchoosedtopics.get(j).getNameButton());
+				// System.out.println(allchoosedtopics.get(j).getNameButton());
 				alltruetopics.add(allchoosedtopics.get(j).getNameButton());
 			}
 		}
