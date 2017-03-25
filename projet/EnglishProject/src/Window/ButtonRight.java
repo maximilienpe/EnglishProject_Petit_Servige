@@ -110,10 +110,10 @@ public class ButtonRight extends JButton implements MouseListener {
 
 	public void paintComponent(Graphics g) {
 		try {
-			Image img = ImageIO.read(new File("Graphics" + File.separator + "PanelGame.jpg"));
+			Image img = ImageIO.read(new File("Graphics" + File.separator + "PanelGame2.jpg"));
 			g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
 			g.setFont(new Font("default", Font.BOLD, 12));
-			g.setColor(Color.white);
+			g.setColor(Color.black);
 			if (this.getText() != null) {
 				g.drawString(this.getText(), this.getWidth() / 2 - (this.getWidth() / 2 - 10),
 						(this.getHeight() / 2) + 6);
