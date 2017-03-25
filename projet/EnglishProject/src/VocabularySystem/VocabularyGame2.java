@@ -53,6 +53,7 @@ public class VocabularyGame2 {
 			this.VocabGameEnd = false;
 			this.VocabScore = 0;
 			this.VocabScoreMax = Math.min(numberOfWords, this.selectedTopic.getTopicVocabulary().size());
+			System.out.println(this.VocabScoreMax);
 			this.type = typeOfGame;
 			this.selectedIndex = 0;
 			this.selectedWord = null;
@@ -74,6 +75,7 @@ public class VocabularyGame2 {
 			}
 			// choix des expressions de chaques mots
 			this.englishWordsIndex = generateRandomListOfIndex(this.wordsToPlay, "ENGLISH");
+
 			this.frenchWordsIndex = generateRandomListOfIndex(this.wordsToPlay, "FRENCH");
 			this.propositionsIndex = new ArrayList<ArrayList<Integer>>();
 			for (ArrayList<Word> lw : this.wordsPropositions) {
@@ -101,7 +103,7 @@ public class VocabularyGame2 {
 		ArrayList<Word> randomWord = new ArrayList<Word>();
 		// generate a list of random number between 0 and the number of word in
 		// the topic -1 which size is numberOfWord
-		while (randomIndex.size() < numberOfWord) {
+		while (randomIndex.size() < numberOfWord && randomIndex.size() != this.selectedTopic.getTopicVocabulary().size()-1) {
 			int randomNumber = (int) (Math.random() * ((targetTopic.getTopicVocabulary().size() - 1)));
 			if (!(randomIndex.contains(randomNumber)) && !(avoidingIndex == randomNumber)) {
 				randomIndex.add(randomNumber);

@@ -26,13 +26,20 @@ public class OptionsGamePanel extends JPanel {
 		this.setLayout(new GridLayout(6, 1));
 
 
-		this.add(new JLabel("Choose nb words"));
+		JLabel nbwordsLabel = new JLabel("Choose number of words :");
+		this.nbwords.setToolTipText("If the number of words asked exceed "
+				+ "\nthe number of words in the selected topics, "
+				+ "\nthe minimum of both of thoses numbers will be taken.");
+		this.add(nbwordsLabel);
 		this.add(nbwords);
 
-		this.add(new JLabel("Choose nb prop"));
+		this.add(new JLabel("Choose number propositions :"));
+		this.nbprops.setToolTipText("Set 8 propositions risk to slow the game. : still in progress.");
 		this.add(nbprops);
 
-		this.add(new JLabel("Choose nb life"));
+		JLabel nblifeLabel = new JLabel("Choose number of hearts :");
+		this.nblife.setToolTipText("If 0 is selected, the game launch the infinite life mode !");
+		this.add(nblifeLabel);
 		this.add(nblife);
 	}
 

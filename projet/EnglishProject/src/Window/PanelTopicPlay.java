@@ -89,40 +89,40 @@ public class PanelTopicPlay extends JPanel {
 		this.gridPanel.add(new JScrollPane(this.alltopics, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
 				JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED));
 
-		String[] choosewords = { "5", "10", "20" };
+		String[] choosewords = { "5", "10", "20", "50", "75", "100"};
 		nbwordsComboBox = new JComboBox<String>(choosewords);
 		nbwordsComboBox.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				nbwords = Integer.parseInt((String) nbwordsComboBox.getSelectedItem());
-				System.out.println("nbwords is now of : " + nbwords);
+				//System.out.println("nbwords is now of : " + nbwords);
 				buttonPlay.setNbWords(nbwords);
 			}
 
 		});
 
-		String[] chooseprops = { "2", "4", "6" };
+		String[] chooseprops = { "2", "4", "6", "8"};
 		nbpropsComboBox = new JComboBox<String>(chooseprops);
 		nbpropsComboBox.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				nbprops = Integer.parseInt((String) nbpropsComboBox.getSelectedItem());
-				System.out.println("nbprops is now of : " + nbprops);
+				//System.out.println("nbprops is now of : " + nbprops);
 				buttonPlay.setNbProps(nbprops);
 			}
 
 		});
 
-		String[] chooselife = { "0", "3", "5" };
+		String[] chooselife = { "0", "1", "3", "5", "7", "9"};
 		nblifeComboBox = new JComboBox<String>(chooselife);
 		nblifeComboBox.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				nblife = Integer.parseInt((String) nblifeComboBox.getSelectedItem());
-				System.out.println("nblife is now of : " + nblife);
+				//System.out.println("nblife is now of : " + nblife);
 				buttonPlay.setNbLife(nblife);
 			}
 

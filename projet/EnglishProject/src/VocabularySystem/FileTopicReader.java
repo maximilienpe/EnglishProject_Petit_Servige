@@ -41,6 +41,7 @@ public class FileTopicReader implements TopicReader {
 		try {
 			sc = new Scanner(topicFile);
 			buffer = sc.nextLine();
+			System.out.println(buffer);
 			this.topic.setTitleTopic(buffer.trim());
 			while (sc.hasNextLine()) {
 				buffer = sc.nextLine();
