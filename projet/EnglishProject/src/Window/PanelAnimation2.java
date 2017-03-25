@@ -124,9 +124,9 @@ public class PanelAnimation2 extends JPanel implements ActionListener, MouseList
 		drawNenuphars(g);
 		
 		if (!this.tempo.isRunning()) {
-			g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 20));
-			g.setColor(Color.WHITE);
-			g.drawString("Click here !", (Main.window.getWidth()-400)/2-100, (Main.window.getHeight()-50)/2-50);
+			g.setFont(new Font(Font.SERIF, Font.BOLD, 45));
+			g.setColor(Color.GREEN);
+			g.drawString("Click here !", (Main.window.getWidth()-400)/2-90, (Main.window.getHeight()-50)/2-40);
 		}
 	}
 
@@ -171,14 +171,14 @@ public class PanelAnimation2 extends JPanel implements ActionListener, MouseList
 			//System.out.println(this.nenuphars.get(i).getTimeLived()+1);
 			if (this.onFrameNenuphars.get(i).getTimeLived()+1 != this.nenuTimeToLive) {
 				if (this.onFrameNenuphars.get(i).isSuperNenu()) {
-					if (this.selectedNenu == this.nenuphars.indexOf(this.onFrameNenuphars.get(i))) {
+					/*if (this.selectedNenu == this.nenuphars.indexOf(this.onFrameNenuphars.get(i))) {
 						g.drawImage(this.IMG_NENU_SELECTED_Yellow, this.onFrameNenuphars.get(i).getPosX()-38, this.onFrameNenuphars.get(i).getPosY()-38, null);
-					}
+					}*/
 					g.drawImage(this.IMG_NENUPHAR_Yelow, this.onFrameNenuphars.get(i).getPosX(), this.onFrameNenuphars.get(i).getPosY(), null);
 				} else  {
-					if (this.selectedNenu == this.nenuphars.indexOf(this.onFrameNenuphars.get(i))) {
+					/*if (this.selectedNenu == this.nenuphars.indexOf(this.onFrameNenuphars.get(i))) {
 						g.drawImage(this.IMG_NENU_SELECTED, this.onFrameNenuphars.get(i).getPosX()-38, this.onFrameNenuphars.get(i).getPosY()-38, null);
-					}
+					}*/
 					g.drawImage(this.IMG_NENUPHAR, this.onFrameNenuphars.get(i).getPosX(), this.onFrameNenuphars.get(i).getPosY(), null);
 				}
 				
