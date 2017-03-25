@@ -25,7 +25,6 @@ public class OptionsGamePanel extends JPanel {
 		// this.setBounds(175, 25, 150, 200);
 		this.setLayout(new GridLayout(6, 1));
 
-		this.setOpaque(false);
 
 		this.add(new JLabel("Choose nb words"));
 		this.add(nbwords);
@@ -39,7 +38,7 @@ public class OptionsGamePanel extends JPanel {
 
 	public void paintComponent(Graphics g) {
 		try {
-			Image img = ImageIO.read(new File("Graphics" + File.separator + "white.jpg"));
+			Image img = ImageIO.read(new File("Graphics" + File.separator + "WoodTopicBox.png"));
 			g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
 		} catch (IOException e) {
 			e.printStackTrace();

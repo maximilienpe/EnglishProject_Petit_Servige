@@ -29,7 +29,6 @@ public class BoxTopic extends JPanel {
 	public BoxTopic(Modele mainmodele) {
 		this.mainmodele = mainmodele;
 		this.topics = mainmodele.getAllTopics();
-		this.setBounds(25, 25, 125, 200);
 		this.setOpaque(false);
 		GridLayout layout = new GridLayout(topics.size() + 1, 1);
 		layout.setHgap(5);
@@ -68,7 +67,7 @@ public class BoxTopic extends JPanel {
 
 	public void paintComponent(Graphics g) {
 		try {
-			Image img = ImageIO.read(new File("Graphics" + File.separator + "white.jpg"));
+			Image img = ImageIO.read(new File("Graphics" + File.separator + "WoodTopicBox.png"));
 			g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
 		} catch (IOException e) {
 			e.printStackTrace();

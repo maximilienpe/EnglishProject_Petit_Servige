@@ -54,7 +54,7 @@ public class PanelTopicPlay extends JPanel {
 
 		Main.window.setSize(899, 600);
 
-		this.setBorder(BorderFactory.createEmptyBorder(20, 25, 10, 10));
+		this.setBorder(BorderFactory.createEmptyBorder(60, 25, 10, 10));
 		this.setLayout(new FlowLayout());
 		// this.setLayout(null);
 
@@ -73,12 +73,12 @@ public class PanelTopicPlay extends JPanel {
 		this.topicPanel.setLayout(new FlowLayout());
 		// this.gridPanel.setLayout(new GridLayout(1,2));
 		this.gridPanelLayout = new GridLayout(1, 2);
-		this.gridPanelLayout.setHgap(Main.window.getHeight() / 4);
+		this.gridPanelLayout.setHgap(Main.window.getHeight() / 3 - 40);
 		this.gridPanel.setLayout(this.gridPanelLayout);
 		this.gridPanel.setOpaque(false);
 		// this.encapsulateGridPanel.setLayout(new GridLayout(2,1));
 		this.encapsulateGridLayout = new GridLayout(3, 1);
-		this.encapsulateGridLayout.setVgap(Main.window.getWidth() / 4);
+		this.encapsulateGridLayout.setVgap(Main.window.getWidth() / 3);
 		this.encapsulateGridPanel.setLayout(this.encapsulateGridLayout);
 		//
 		this.returnMainMenuPanel = new JPanel();
@@ -156,8 +156,8 @@ public class PanelTopicPlay extends JPanel {
 			public void componentResized(ComponentEvent e) {
 				System.out.println(Main.window.getWidth());
 				System.out.println(Main.window.getHeight());
-				gridPanelLayout.setHgap(Main.window.getHeight() / 4);
-				encapsulateGridLayout.setVgap(Main.window.getHeight() / 4);
+				gridPanelLayout.setHgap(Main.window.getWidth() / 3 - 40);
+				encapsulateGridLayout.setVgap(Main.window.getHeight() / 3);
 				gridPanel.setLayout(gridPanelLayout);
 				encapsulateGridPanel.setLayout(encapsulateGridLayout);
 				gridPanel.repaint();
