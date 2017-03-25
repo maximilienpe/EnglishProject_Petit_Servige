@@ -31,6 +31,7 @@ public class PanelLife extends JPanel {
 	private String imageDirPath = "Graphics";
 	private ImageIcon heart;
 	private ImageIcon deadheart;
+	private ImageIcon infiniteLife;
 
 	public PanelLife(Modele m) {
 		// System.out.println("System of life start");
@@ -64,8 +65,13 @@ public class PanelLife extends JPanel {
 			this.mainGridLayout = new GridLayout(1, this.maxLife);
 			JPanel lp = new JPanel();
 			lp.setOpaque(false);
-			JLabel ll = new JLabel("INFINI");
+			this.infiniteLife = new ImageIcon(imageDirPath + File.separator + "infiniteLife.png");
+			JLabel ll = new JLabel();
+			ll.setIcon((Icon) this.infiniteLife);
+			ll.setOpaque(false);
 			lp.add(ll);
+			lp.setOpaque(false);
+			this.setOpaque(false);
 			this.lifeLabel.add(ll);
 			this.lifePanels.add(lp);
 			this.add(lp);

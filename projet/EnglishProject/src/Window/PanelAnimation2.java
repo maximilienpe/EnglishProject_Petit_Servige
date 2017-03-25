@@ -192,7 +192,7 @@ public class PanelAnimation2 extends JPanel implements ActionListener, MouseList
 					}
 					g.drawImage(this.IMG_NENUPHAR, this.onFrameNenuphars.get(i).getPosX(), this.onFrameNenuphars.get(i).getPosY(), null);
 				}
-				System.out.println("The nenuphar number " + i + " is repaint.");
+				//System.out.println("The nenuphar number " + i + " is repaint.");
 				Font font = new Font("Verdana", Font.BOLD, 18);
 				drawCenteredText(g, this.onFrameNenuphars.get(i).getLabel(), font, this.onFrameNenuphars.get(i).getPosX()+50,this.onFrameNenuphars.get(i).getPosY()+60 );
 				//g.drawString(this.nenuphars.get(i).getLabel(), this.nenuphars.get(i).getPosX(), this.nenuphars.get(i).getPosY()+50);
