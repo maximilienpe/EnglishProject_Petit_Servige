@@ -18,6 +18,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.border.Border;
 
 import MainSystem.Modele;
 
@@ -45,6 +46,7 @@ public class PanelTopicPlay extends JPanel {
 	final GridLayout encapsulateGridLayout;
 	private JPanel returnMainMenuPanel;
 	private GridLayout returnMainMenuGridLayout;
+	private Border border;
 
 	ArrayList<String> topics = new ArrayList<String>();
 
@@ -54,8 +56,10 @@ public class PanelTopicPlay extends JPanel {
 		this.alltopics.setOpaque(false);
 
 		Main.window.setSize(899, 600);
+		
+		this.border = BorderFactory.createEmptyBorder(Main.window.getHeight() / 10, 25, 10, 10);
 
-		this.setBorder(BorderFactory.createEmptyBorder(60, 25, 10, 10));
+		this.setBorder(this.border);
 		this.setLayout(new FlowLayout());
 		// this.setLayout(null);
 
@@ -85,8 +89,7 @@ public class PanelTopicPlay extends JPanel {
 		this.returnMainMenuPanel = new JPanel();
 		this.returnMainMenuPanel.setOpaque(false);
 		this.returnMainMenuGridLayout = new GridLayout(1, 3);
-		
-		this.gridPanel.setSize(50, 50);
+
 		this.gridPanel.add(this.alltopics);
 		this.gridPanel.add(new JScrollPane(this.alltopics, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
 				JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED));
@@ -159,6 +162,8 @@ public class PanelTopicPlay extends JPanel {
 			public void componentResized(ComponentEvent e) {
 				gridPanelLayout.setHgap(Main.window.getWidth() / 5);
 				encapsulateGridLayout.setVgap(Main.window.getHeight() / 3 - 90);
+				border = BorderFactory.createEmptyBorder(Main.window.getHeight() / 10, 25, 10, 10);
+				setBorder(border);
 				gridPanel.setLayout(gridPanelLayout);
 				encapsulateGridPanel.setLayout(encapsulateGridLayout);
 				gridPanel.repaint();
