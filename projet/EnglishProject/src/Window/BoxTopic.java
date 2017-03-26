@@ -42,7 +42,7 @@ public class BoxTopic extends JPanel {
 
 		allchoosedtopics = new ArrayList<ButtonAddRemoveTopic>();
 
-		for (int f = 0; f < topics.size() - 1; f++) {
+		for (int f = 0; f < topics.size() ; f++) {
 			ButtonAddRemoveTopic toadd = new ButtonAddRemoveTopic(mainmodele, topics.get(f));
 			toadd.setOpaque(false);
 			this.add(toadd);

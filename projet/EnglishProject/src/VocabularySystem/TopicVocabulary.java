@@ -5,9 +5,11 @@ import java.util.Map.Entry;
 
 public class TopicVocabulary {
 
-	String title;
+	private String title;
 	//private HashMap<String,String> englishToFrench;
 	private ArrayList<Word> englishToFrench;
+	
+	//private int test;
 	
 	public TopicVocabulary() {
 		//this.englishToFrench = new HashMap<String,String>();

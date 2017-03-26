@@ -9,6 +9,8 @@
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
 			<item value="merge"/>
+			<item value="selectedNenu"/>
+			<item value="hupper"/>
 			<item value="System.out."/>
 			<item value="val"/>
 			<item value="validate"/>
@@ -16,6 +18,7 @@
 			<item value="move"/>
 		</list>
 		<list key="replacehistory">
+			<item value="upper"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
