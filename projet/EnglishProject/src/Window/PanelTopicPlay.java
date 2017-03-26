@@ -73,12 +73,12 @@ public class PanelTopicPlay extends JPanel {
 		this.topicPanel.setLayout(new FlowLayout());
 		// this.gridPanel.setLayout(new GridLayout(1,2));
 		this.gridPanelLayout = new GridLayout(1, 2);
-		this.gridPanelLayout.setHgap(Main.window.getHeight() / 3 - 40);
+		this.gridPanelLayout.setHgap(Main.window.getWidth() / 5);
 		this.gridPanel.setLayout(this.gridPanelLayout);
 		this.gridPanel.setOpaque(false);
 		// this.encapsulateGridPanel.setLayout(new GridLayout(2,1));
 		this.encapsulateGridLayout = new GridLayout(3, 1);
-		this.encapsulateGridLayout.setVgap(Main.window.getWidth() / 3);
+		this.encapsulateGridLayout.setVgap(Main.window.getHeight() / 3 - 90);
 		this.encapsulateGridPanel.setLayout(this.encapsulateGridLayout);
 		//
 		this.returnMainMenuPanel = new JPanel();
@@ -89,40 +89,40 @@ public class PanelTopicPlay extends JPanel {
 		this.gridPanel.add(new JScrollPane(this.alltopics, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
 				JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED));
 
-		String[] choosewords = { "5", "10", "20", "50", "75", "100"};
+		String[] choosewords = { "5", "10", "20", "50", "75", "100" };
 		nbwordsComboBox = new JComboBox<String>(choosewords);
 		nbwordsComboBox.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				nbwords = Integer.parseInt((String) nbwordsComboBox.getSelectedItem());
-				//System.out.println("nbwords is now of : " + nbwords);
+				// System.out.println("nbwords is now of : " + nbwords);
 				buttonPlay.setNbWords(nbwords);
 			}
 
 		});
 
-		String[] chooseprops = { "2", "4", "6", "8"};
+		String[] chooseprops = { "2", "4", "6", "8" };
 		nbpropsComboBox = new JComboBox<String>(chooseprops);
 		nbpropsComboBox.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				nbprops = Integer.parseInt((String) nbpropsComboBox.getSelectedItem());
-				//System.out.println("nbprops is now of : " + nbprops);
+				// System.out.println("nbprops is now of : " + nbprops);
 				buttonPlay.setNbProps(nbprops);
 			}
 
 		});
 
-		String[] chooselife = { "0", "1", "3", "5", "7", "9"};
+		String[] chooselife = { "0", "1", "3", "5", "7", "9" };
 		nblifeComboBox = new JComboBox<String>(chooselife);
 		nblifeComboBox.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				nblife = Integer.parseInt((String) nblifeComboBox.getSelectedItem());
-				//System.out.println("nblife is now of : " + nblife);
+				// System.out.println("nblife is now of : " + nblife);
 				buttonPlay.setNbLife(nblife);
 			}
 
@@ -154,10 +154,8 @@ public class PanelTopicPlay extends JPanel {
 
 		Main.window.addComponentListener(new ComponentAdapter() {
 			public void componentResized(ComponentEvent e) {
-				System.out.println(Main.window.getWidth());
-				System.out.println(Main.window.getHeight());
-				gridPanelLayout.setHgap(Main.window.getWidth() / 3 - 40);
-				encapsulateGridLayout.setVgap(Main.window.getHeight() / 3);
+				gridPanelLayout.setHgap(Main.window.getWidth() / 5);
+				encapsulateGridLayout.setVgap(Main.window.getHeight() / 3 - 90);
 				gridPanel.setLayout(gridPanelLayout);
 				encapsulateGridPanel.setLayout(encapsulateGridLayout);
 				gridPanel.repaint();
