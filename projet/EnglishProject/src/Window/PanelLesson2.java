@@ -84,12 +84,15 @@ public class PanelLesson2 extends JPanel {
 		this.englishButton = new ButtonEnglishLesson(this.modele, this);
 		this.englishButton.setPreferredSize(new Dimension(50, 50));
 		this.englishButton.setText("E");
+		this.englishButton.setToolTipText("Hide all the French expressions.");
 		this.frenchButton = new ButtonFrenchLesson(this.modele,this);
 		this.frenchButton.setPreferredSize(new Dimension(50, 50));
 		this.frenchButton.setText("F");
+		this.frenchButton.setToolTipText("Hide all the English expressions.");
 		this.bothButton = new ButtonBothLanguageLesson(this.modele,this);
 		this.bothButton.setPreferredSize(new Dimension(50, 50));
 		this.bothButton.setText("E/F");
+		this.bothButton.setToolTipText("Show the expressions both in english and in french.");
 		
 		this.buttonPanel = new JPanel();
 		this.buttonPanel.setOpaque(false);
