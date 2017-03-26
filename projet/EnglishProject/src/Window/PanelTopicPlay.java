@@ -1,5 +1,6 @@
 package Window;
 
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.GridLayout;
@@ -84,7 +85,8 @@ public class PanelTopicPlay extends JPanel {
 		this.returnMainMenuPanel = new JPanel();
 		this.returnMainMenuPanel.setOpaque(false);
 		this.returnMainMenuGridLayout = new GridLayout(1, 3);
-
+		
+		this.gridPanel.setSize(50, 50);
 		this.gridPanel.add(this.alltopics);
 		this.gridPanel.add(new JScrollPane(this.alltopics, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
 				JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED));

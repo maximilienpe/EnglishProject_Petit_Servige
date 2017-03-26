@@ -1,6 +1,7 @@
 package Window;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.Image;
@@ -29,6 +30,7 @@ public class BoxTopic extends JPanel {
 	public BoxTopic(Modele mainmodele) {
 		this.mainmodele = mainmodele;
 		this.topics = mainmodele.getAllTopics();
+		this.setSize(50, 50);
 		this.setOpaque(false);
 		GridLayout layout = new GridLayout(topics.size() + 1, 1);
 		layout.setHgap(5);
@@ -42,7 +44,7 @@ public class BoxTopic extends JPanel {
 
 		allchoosedtopics = new ArrayList<ButtonAddRemoveTopic>();
 
-		for (int f = 0; f < topics.size() ; f++) {
+		for (int f = 0; f < topics.size(); f++) {
 			ButtonAddRemoveTopic toadd = new ButtonAddRemoveTopic(mainmodele, topics.get(f));
 			toadd.setOpaque(false);
 			this.add(toadd);
