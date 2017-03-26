@@ -90,6 +90,7 @@ public class PanelTopicPlay extends JPanel {
 		this.gridPanel.add(this.alltopics);
 		this.gridPanel.add(new JScrollPane(this.alltopics, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
 				JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED));
+		this.gridPanel.setPreferredSize(new Dimension(750, 250));
 
 		String[] choosewords = { "5", "10", "20", "50", "75", "100" };
 		nbwordsComboBox = new JComboBox<String>(choosewords);
